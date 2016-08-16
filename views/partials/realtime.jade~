@@ -1,0 +1,48 @@
+p#Nuoc This page is real time info
+.row
+    .col-lg-12
+        .panel.panel-default
+          .panel-heading
+            i.fa.fa-bar-chart-o.fa-fw		  
+            |  Moving real time Chart
+            .pull-right
+             .btn-group
+                button.btn.btn-default.btn-xs.dropdown-toggle(type='button', data-toggle='dropdown')
+                  | Actions
+                  span.caret
+                ul.dropdown-menu.pull-right(role='menu')
+                  li
+                    a(href='dashboard#') Action
+                  li
+                    a(href='dashboard#') Another action
+                  li
+                    a(href='dashboard#') Something else here
+                  li.divider
+                  li
+                    a(href='dashboard#') Separated link			 
+          .panel-body
+            #moving-chart.flot-chart-content(style='height:600px;')
+            #select-options
+            #value-section
+//        .panel.panel-default
+//          .panel-heading
+//            i.fa.fa-bar-chart-o.fa-fw
+//            |  Realtime scanning report
+//            .pull-right
+//             .btn-group
+//                button.btn.btn-default.btn-xs.dropdown-toggle(type='button', data-toggle='dropdown')
+//                  | Actions
+//                  span.caret
+//                ul.dropdown-menu.pull-right(role='menu')
+//                  li
+//                    a(href='dashboard#') Action
+//                  li
+//                    a(href='dashboard#') Another action
+//                  li
+//                    a(href='dashboard#') Something else here
+//                  li.divider
+//                  li
+//                    a(href='dashboard#') Separated link
+//          .panel-body
+//            #area-chart-test1
+//            #demo1

@@ -1,0 +1,13 @@
+#install nodejs and node package manage
+sudo apt-get install nodejs npm
+
+#install web packages, listed in packet.json
+npm install 
+
+#install socket for npm
+npm install socket:io
+
+#start server 
+nodejs app
+
+

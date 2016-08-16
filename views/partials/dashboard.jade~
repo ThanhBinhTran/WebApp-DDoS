@@ -1,0 +1,78 @@
+.row
+    .col-lg-3.col-md-6
+        .panel.panel-primary
+          .panel-heading
+            .row
+              .col-xs-3
+                i.fa.fa-th-list.fa-5x
+              .col-xs-9.text-right
+                .huge 76
+                div New Events!
+          a(href='dashboard#')
+            .panel-footer
+              span.pull-left View Details
+              span.pull-right
+                i.fa.fa-arrow-circle-right
+              .clearfix
+      .col-lg-3.col-md-6
+        .panel.panel-green
+          .panel-heading
+            .row
+              .col-xs-3
+                i.fa.fa-calendar.fa-5x
+              .col-xs-9.text-right
+                #new_schedule.huge 22
+                div New Tasks!
+          a(href='schedule#')
+            .panel-footer
+              span.pull-left View Details
+              span.pull-right
+                i.fa.fa-arrow-circle-right
+              .clearfix
+      .col-lg-3.col-md-6
+        .panel.panel-yellow
+          .panel-heading
+            .row
+              .col-xs-3
+                i.fa.fa-bullhorn.fa-5x
+              .col-xs-9.text-right
+                .huge 11
+                div New Notifications!
+          a(href='dashboard#')
+            .panel-footer
+              span.pull-left View Details
+              span.pull-right
+                i.fa.fa-arrow-circle-right
+              .clearfix
+      .col-lg-3.col-md-6
+        .panel.panel-red
+          .panel-heading
+            .row
+              .col-xs-3
+                i.fa.fa-bell.fa-5x
+              .col-xs-9.text-right
+                #dashboard_scan.huge 9
+                div New threats!
+          a(href='scansummary#')
+            .panel-footer
+              span.pull-left View Details
+              span.pull-right
+                i.fa.fa-arrow-circle-right
+              .clearfix 
+    .row
+      .col-lg-8
+        .panel.panel-default
+          .panel-heading
+            i.fa.fa-bar-chart-o.fa-fw
+            |  Realtime scanning report
+          .panel-body
+            #moving-chart.flot-chart-content(style='height:600px;')
+            #select-options
+            #value-section 
+      .col-lg-4
+        .panel.panel-default
+          .panel-heading
+            i.fa.fa-bullhorn.fa-fw
+            |  Notifications Panel
+          .panel-body
+            .list-group#notificationDashBoard

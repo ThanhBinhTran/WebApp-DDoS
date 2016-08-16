@@ -1,0 +1,21 @@
+html
+  head
+    base(href='/')
+    title Tested by NuocLanh
+    // Bootstrap Core CSS
+    link(rel='stylesheet', href='/sb-admin-2/css/bootstrap.min.css')
+    // MetisMenu CSS
+    link(rel='stylesheet', href='/sb-admin-2/css/plugins/metisMenu/metisMenu.min.css')
+    // Timeline CSS 
+    link(href='/sb-admin-2/css/plugins/timeline.css', rel='stylesheet')
+
+    link(href='/sb-admin-2/css/plugins/social-buttons.css', rel='stylesheet')
+    link(rel='stylesheet', href='/sb-admin-2/css/sb-admin-2.css')
+    link(href='/sb-admin-2/css/plugins/morris.css', rel='stylesheet')
+    link(rel='stylesheet', type='text/css', href='/sb-admin-2/font-awesome-4.1.0/css/font-awesome.min.css')
+    link(rel='stylesheet', href='/css/app.css')
+    link(rel='stylesheet', type='text/css', href='/sb-admin-2/css/app.css')  
+    //link(rel='stylesheet', type='text/css', href='http://cdn.datatables.net/1.10.3/css/jquery.dataTables.min.css')
+
+  body(ng-app="myApp")
+    block body

@@ -1,0 +1,495 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/nodejs', '/usr/bin/npm', 'install' ]
+2 info using npm@1.3.10
+3 info using node@v0.10.25
+4 verbose readDependencies using package.json deps
+5 verbose install where, deps [ '/home/netfpga/WebApp-DDoS',
+5 verbose install   [ 'body-parser',
+5 verbose install     'errorhandler',
+5 verbose install     'express',
+5 verbose install     'jade',
+5 verbose install     'method-override',
+5 verbose install     'morgan',
+5 verbose install     'node-cache',
+5 verbose install     'mysql',
+5 verbose install     'utf8',
+5 verbose install     'node-ffi' ] ]
+6 info preinstall application-name@0.0.1
+7 verbose readDependencies using package.json deps
+8 verbose cache add [ 'body-parser@^1.0.2', null ]
+9 verbose cache add name=undefined spec="body-parser@^1.0.2" args=["body-parser@^1.0.2",null]
+10 verbose parsed url { protocol: null,
+10 verbose parsed url   slashes: null,
+10 verbose parsed url   auth: null,
+10 verbose parsed url   host: null,
+10 verbose parsed url   port: null,
+10 verbose parsed url   hostname: null,
+10 verbose parsed url   hash: null,
+10 verbose parsed url   search: null,
+10 verbose parsed url   query: null,
+10 verbose parsed url   pathname: 'body-parser@^1.0.2',
+10 verbose parsed url   path: 'body-parser@^1.0.2',
+10 verbose parsed url   href: 'body-parser@^1.0.2' }
+11 verbose cache add name="body-parser" spec="^1.0.2" args=["body-parser","^1.0.2"]
+12 verbose parsed url { protocol: null,
+12 verbose parsed url   slashes: null,
+12 verbose parsed url   auth: null,
+12 verbose parsed url   host: null,
+12 verbose parsed url   port: null,
+12 verbose parsed url   hostname: null,
+12 verbose parsed url   hash: null,
+12 verbose parsed url   search: null,
+12 verbose parsed url   query: null,
+12 verbose parsed url   pathname: '^1.0.2',
+12 verbose parsed url   path: '^1.0.2',
+12 verbose parsed url   href: '^1.0.2' }
+13 verbose addNamed [ 'body-parser', '^1.0.2' ]
+14 verbose addNamed [ null, '>=1.0.2-0 <2.0.0-0' ]
+15 verbose cache add [ 'errorhandler@^1.0.0', null ]
+16 verbose cache add name=undefined spec="errorhandler@^1.0.0" args=["errorhandler@^1.0.0",null]
+17 verbose parsed url { protocol: null,
+17 verbose parsed url   slashes: null,
+17 verbose parsed url   auth: null,
+17 verbose parsed url   host: null,
+17 verbose parsed url   port: null,
+17 verbose parsed url   hostname: null,
+17 verbose parsed url   hash: null,
+17 verbose parsed url   search: null,
+17 verbose parsed url   query: null,
+17 verbose parsed url   pathname: 'errorhandler@^1.0.0',
+17 verbose parsed url   path: 'errorhandler@^1.0.0',
+17 verbose parsed url   href: 'errorhandler@^1.0.0' }
+18 verbose cache add name="errorhandler" spec="^1.0.0" args=["errorhandler","^1.0.0"]
+19 verbose parsed url { protocol: null,
+19 verbose parsed url   slashes: null,
+19 verbose parsed url   auth: null,
+19 verbose parsed url   host: null,
+19 verbose parsed url   port: null,
+19 verbose parsed url   hostname: null,
+19 verbose parsed url   hash: null,
+19 verbose parsed url   search: null,
+19 verbose parsed url   query: null,
+19 verbose parsed url   pathname: '^1.0.0',
+19 verbose parsed url   path: '^1.0.0',
+19 verbose parsed url   href: '^1.0.0' }
+20 verbose addNamed [ 'errorhandler', '^1.0.0' ]
+21 verbose addNamed [ null, '>=1.0.0-0 <2.0.0-0' ]
+22 silly lockFile 6eea3351-body-parser-1-0-2 body-parser@^1.0.2
+23 verbose lock body-parser@^1.0.2 /home/netfpga/.npm/6eea3351-body-parser-1-0-2.lock
+24 verbose cache add [ 'express@~4.1.1', null ]
+25 verbose cache add name=undefined spec="express@~4.1.1" args=["express@~4.1.1",null]
+26 verbose parsed url { protocol: null,
+26 verbose parsed url   slashes: null,
+26 verbose parsed url   auth: null,
+26 verbose parsed url   host: null,
+26 verbose parsed url   port: null,
+26 verbose parsed url   hostname: null,
+26 verbose parsed url   hash: null,
+26 verbose parsed url   search: null,
+26 verbose parsed url   query: null,
+26 verbose parsed url   pathname: 'express@~4.1.1',
+26 verbose parsed url   path: 'express@~4.1.1',
+26 verbose parsed url   href: 'express@~4.1.1' }
+27 verbose cache add name="express" spec="~4.1.1" args=["express","~4.1.1"]
+28 verbose parsed url { protocol: null,
+28 verbose parsed url   slashes: null,
+28 verbose parsed url   auth: null,
+28 verbose parsed url   host: null,
+28 verbose parsed url   port: null,
+28 verbose parsed url   hostname: null,
+28 verbose parsed url   hash: null,
+28 verbose parsed url   search: null,
+28 verbose parsed url   query: null,
+28 verbose parsed url   pathname: '~4.1.1',
+28 verbose parsed url   path: '~4.1.1',
+28 verbose parsed url   href: '~4.1.1' }
+29 verbose addNamed [ 'express', '~4.1.1' ]
+30 verbose addNamed [ null, '>=4.1.1-0 <4.2.0-0' ]
+31 silly lockFile d2a80f76-express-4-1-1 express@~4.1.1
+32 verbose lock express@~4.1.1 /home/netfpga/.npm/d2a80f76-express-4-1-1.lock
+33 verbose cache add [ 'jade@~0.31.2', null ]
+34 verbose cache add name=undefined spec="jade@~0.31.2" args=["jade@~0.31.2",null]
+35 verbose parsed url { protocol: null,
+35 verbose parsed url   slashes: null,
+35 verbose parsed url   auth: null,
+35 verbose parsed url   host: null,
+35 verbose parsed url   port: null,
+35 verbose parsed url   hostname: null,
+35 verbose parsed url   hash: null,
+35 verbose parsed url   search: null,
+35 verbose parsed url   query: null,
+35 verbose parsed url   pathname: 'jade@~0.31.2',
+35 verbose parsed url   path: 'jade@~0.31.2',
+35 verbose parsed url   href: 'jade@~0.31.2' }
+36 verbose cache add name="jade" spec="~0.31.2" args=["jade","~0.31.2"]
+37 verbose parsed url { protocol: null,
+37 verbose parsed url   slashes: null,
+37 verbose parsed url   auth: null,
+37 verbose parsed url   host: null,
+37 verbose parsed url   port: null,
+37 verbose parsed url   hostname: null,
+37 verbose parsed url   hash: null,
+37 verbose parsed url   search: null,
+37 verbose parsed url   query: null,
+37 verbose parsed url   pathname: '~0.31.2',
+37 verbose parsed url   path: '~0.31.2',
+37 verbose parsed url   href: '~0.31.2' }
+38 verbose addNamed [ 'jade', '~0.31.2' ]
+39 verbose addNamed [ null, '>=0.31.2-0 <0.32.0-0' ]
+40 silly lockFile 950216ff-jade-0-31-2 jade@~0.31.2
+41 verbose lock jade@~0.31.2 /home/netfpga/.npm/950216ff-jade-0-31-2.lock
+42 silly lockFile 0a4ce42c-errorhandler-1-0-0 errorhandler@^1.0.0
+43 verbose lock errorhandler@^1.0.0 /home/netfpga/.npm/0a4ce42c-errorhandler-1-0-0.lock
+44 verbose cache add [ 'method-override@^1.0.0', null ]
+45 verbose cache add name=undefined spec="method-override@^1.0.0" args=["method-override@^1.0.0",null]
+46 verbose parsed url { protocol: null,
+46 verbose parsed url   slashes: null,
+46 verbose parsed url   auth: null,
+46 verbose parsed url   host: null,
+46 verbose parsed url   port: null,
+46 verbose parsed url   hostname: null,
+46 verbose parsed url   hash: null,
+46 verbose parsed url   search: null,
+46 verbose parsed url   query: null,
+46 verbose parsed url   pathname: 'method-override@^1.0.0',
+46 verbose parsed url   path: 'method-override@^1.0.0',
+46 verbose parsed url   href: 'method-override@^1.0.0' }
+47 verbose cache add name="method-override" spec="^1.0.0" args=["method-override","^1.0.0"]
+48 verbose parsed url { protocol: null,
+48 verbose parsed url   slashes: null,
+48 verbose parsed url   auth: null,
+48 verbose parsed url   host: null,
+48 verbose parsed url   port: null,
+48 verbose parsed url   hostname: null,
+48 verbose parsed url   hash: null,
+48 verbose parsed url   search: null,
+48 verbose parsed url   query: null,
+48 verbose parsed url   pathname: '^1.0.0',
+48 verbose parsed url   path: '^1.0.0',
+48 verbose parsed url   href: '^1.0.0' }
+49 verbose addNamed [ 'method-override', '^1.0.0' ]
+50 verbose addNamed [ null, '>=1.0.0-0 <2.0.0-0' ]
+51 silly lockFile 8e11df7c-method-override-1-0-0 method-override@^1.0.0
+52 verbose lock method-override@^1.0.0 /home/netfpga/.npm/8e11df7c-method-override-1-0-0.lock
+53 verbose cache add [ 'morgan@^1.0.0', null ]
+54 verbose cache add name=undefined spec="morgan@^1.0.0" args=["morgan@^1.0.0",null]
+55 verbose parsed url { protocol: null,
+55 verbose parsed url   slashes: null,
+55 verbose parsed url   auth: null,
+55 verbose parsed url   host: null,
+55 verbose parsed url   port: null,
+55 verbose parsed url   hostname: null,
+55 verbose parsed url   hash: null,
+55 verbose parsed url   search: null,
+55 verbose parsed url   query: null,
+55 verbose parsed url   pathname: 'morgan@^1.0.0',
+55 verbose parsed url   path: 'morgan@^1.0.0',
+55 verbose parsed url   href: 'morgan@^1.0.0' }
+56 verbose cache add name="morgan" spec="^1.0.0" args=["morgan","^1.0.0"]
+57 verbose parsed url { protocol: null,
+57 verbose parsed url   slashes: null,
+57 verbose parsed url   auth: null,
+57 verbose parsed url   host: null,
+57 verbose parsed url   port: null,
+57 verbose parsed url   hostname: null,
+57 verbose parsed url   hash: null,
+57 verbose parsed url   search: null,
+57 verbose parsed url   query: null,
+57 verbose parsed url   pathname: '^1.0.0',
+57 verbose parsed url   path: '^1.0.0',
+57 verbose parsed url   href: '^1.0.0' }
+58 verbose addNamed [ 'morgan', '^1.0.0' ]
+59 verbose addNamed [ null, '>=1.0.0-0 <2.0.0-0' ]
+60 silly lockFile 6bd81862-morgan-1-0-0 morgan@^1.0.0
+61 verbose lock morgan@^1.0.0 /home/netfpga/.npm/6bd81862-morgan-1-0-0.lock
+62 silly addNameRange { name: 'body-parser',
+62 silly addNameRange   range: '>=1.0.2-0 <2.0.0-0',
+62 silly addNameRange   hasData: false }
+63 silly addNameRange { name: 'express', range: '>=4.1.1-0 <4.2.0-0', hasData: false }
+64 verbose cache add [ 'node-cache@>= 1.0.0', null ]
+65 verbose cache add name=undefined spec="node-cache@>= 1.0.0" args=["node-cache@>= 1.0.0",null]
+66 verbose parsed url { protocol: null,
+66 verbose parsed url   slashes: null,
+66 verbose parsed url   auth: null,
+66 verbose parsed url   host: null,
+66 verbose parsed url   port: null,
+66 verbose parsed url   hostname: null,
+66 verbose parsed url   hash: null,
+66 verbose parsed url   search: null,
+66 verbose parsed url   query: null,
+66 verbose parsed url   pathname: 'node-cache@%3E=%201.0.0',
+66 verbose parsed url   path: 'node-cache@%3E=%201.0.0',
+66 verbose parsed url   href: 'node-cache@%3E=%201.0.0' }
+67 verbose cache add name="node-cache" spec=">= 1.0.0" args=["node-cache",">= 1.0.0"]
+68 verbose parsed url { protocol: null,
+68 verbose parsed url   slashes: null,
+68 verbose parsed url   auth: null,
+68 verbose parsed url   host: null,
+68 verbose parsed url   port: null,
+68 verbose parsed url   hostname: null,
+68 verbose parsed url   hash: null,
+68 verbose parsed url   search: null,
+68 verbose parsed url   query: null,
+68 verbose parsed url   pathname: '%3E=%201.0.0',
+68 verbose parsed url   path: '%3E=%201.0.0',
+68 verbose parsed url   href: '%3E=%201.0.0' }
+69 verbose addNamed [ 'node-cache', '>= 1.0.0' ]
+70 verbose addNamed [ null, '>=1.0.0' ]
+71 silly lockFile 688f5df2-node-cache-1-0-0 node-cache@>= 1.0.0
+72 verbose lock node-cache@>= 1.0.0 /home/netfpga/.npm/688f5df2-node-cache-1-0-0.lock
+73 verbose cache add [ 'mysql@>= 2.4.0', null ]
+74 verbose cache add name=undefined spec="mysql@>= 2.4.0" args=["mysql@>= 2.4.0",null]
+75 verbose parsed url { protocol: null,
+75 verbose parsed url   slashes: null,
+75 verbose parsed url   auth: null,
+75 verbose parsed url   host: null,
+75 verbose parsed url   port: null,
+75 verbose parsed url   hostname: null,
+75 verbose parsed url   hash: null,
+75 verbose parsed url   search: null,
+75 verbose parsed url   query: null,
+75 verbose parsed url   pathname: 'mysql@%3E=%202.4.0',
+75 verbose parsed url   path: 'mysql@%3E=%202.4.0',
+75 verbose parsed url   href: 'mysql@%3E=%202.4.0' }
+76 verbose cache add name="mysql" spec=">= 2.4.0" args=["mysql",">= 2.4.0"]
+77 verbose parsed url { protocol: null,
+77 verbose parsed url   slashes: null,
+77 verbose parsed url   auth: null,
+77 verbose parsed url   host: null,
+77 verbose parsed url   port: null,
+77 verbose parsed url   hostname: null,
+77 verbose parsed url   hash: null,
+77 verbose parsed url   search: null,
+77 verbose parsed url   query: null,
+77 verbose parsed url   pathname: '%3E=%202.4.0',
+77 verbose parsed url   path: '%3E=%202.4.0',
+77 verbose parsed url   href: '%3E=%202.4.0' }
+78 verbose addNamed [ 'mysql', '>= 2.4.0' ]
+79 verbose addNamed [ null, '>=2.4.0' ]
+80 silly lockFile b2ff649b-mysql-2-4-0 mysql@>= 2.4.0
+81 verbose lock mysql@>= 2.4.0 /home/netfpga/.npm/b2ff649b-mysql-2-4-0.lock
+82 silly addNameRange { name: 'jade', range: '>=0.31.2-0 <0.32.0-0', hasData: false }
+83 silly addNameRange { name: 'errorhandler',
+83 silly addNameRange   range: '>=1.0.0-0 <2.0.0-0',
+83 silly addNameRange   hasData: false }
+84 silly addNameRange { name: 'method-override',
+84 silly addNameRange   range: '>=1.0.0-0 <2.0.0-0',
+84 silly addNameRange   hasData: false }
+85 verbose cache add [ 'utf8@>= 2.0.0', null ]
+86 verbose cache add name=undefined spec="utf8@>= 2.0.0" args=["utf8@>= 2.0.0",null]
+87 verbose parsed url { protocol: null,
+87 verbose parsed url   slashes: null,
+87 verbose parsed url   auth: null,
+87 verbose parsed url   host: null,
+87 verbose parsed url   port: null,
+87 verbose parsed url   hostname: null,
+87 verbose parsed url   hash: null,
+87 verbose parsed url   search: null,
+87 verbose parsed url   query: null,
+87 verbose parsed url   pathname: 'utf8@%3E=%202.0.0',
+87 verbose parsed url   path: 'utf8@%3E=%202.0.0',
+87 verbose parsed url   href: 'utf8@%3E=%202.0.0' }
+88 verbose cache add name="utf8" spec=">= 2.0.0" args=["utf8",">= 2.0.0"]
+89 verbose parsed url { protocol: null,
+89 verbose parsed url   slashes: null,
+89 verbose parsed url   auth: null,
+89 verbose parsed url   host: null,
+89 verbose parsed url   port: null,
+89 verbose parsed url   hostname: null,
+89 verbose parsed url   hash: null,
+89 verbose parsed url   search: null,
+89 verbose parsed url   query: null,
+89 verbose parsed url   pathname: '%3E=%202.0.0',
+89 verbose parsed url   path: '%3E=%202.0.0',
+89 verbose parsed url   href: '%3E=%202.0.0' }
+90 verbose addNamed [ 'utf8', '>= 2.0.0' ]
+91 verbose addNamed [ null, '>=2.0.0' ]
+92 silly lockFile 23e42398-utf8-2-0-0 utf8@>= 2.0.0
+93 verbose lock utf8@>= 2.0.0 /home/netfpga/.npm/23e42398-utf8-2-0-0.lock
+94 silly addNameRange { name: 'morgan', range: '>=1.0.0-0 <2.0.0-0', hasData: false }
+95 silly addNameRange { name: 'node-cache', range: '>=1.0.0', hasData: false }
+96 verbose cache add [ 'node-ffi@>= 0.5.7', null ]
+97 verbose cache add name=undefined spec="node-ffi@>= 0.5.7" args=["node-ffi@>= 0.5.7",null]
+98 verbose parsed url { protocol: null,
+98 verbose parsed url   slashes: null,
+98 verbose parsed url   auth: null,
+98 verbose parsed url   host: null,
+98 verbose parsed url   port: null,
+98 verbose parsed url   hostname: null,
+98 verbose parsed url   hash: null,
+98 verbose parsed url   search: null,
+98 verbose parsed url   query: null,
+98 verbose parsed url   pathname: 'node-ffi@%3E=%200.5.7',
+98 verbose parsed url   path: 'node-ffi@%3E=%200.5.7',
+98 verbose parsed url   href: 'node-ffi@%3E=%200.5.7' }
+99 verbose cache add name="node-ffi" spec=">= 0.5.7" args=["node-ffi",">= 0.5.7"]
+100 verbose parsed url { protocol: null,
+100 verbose parsed url   slashes: null,
+100 verbose parsed url   auth: null,
+100 verbose parsed url   host: null,
+100 verbose parsed url   port: null,
+100 verbose parsed url   hostname: null,
+100 verbose parsed url   hash: null,
+100 verbose parsed url   search: null,
+100 verbose parsed url   query: null,
+100 verbose parsed url   pathname: '%3E=%200.5.7',
+100 verbose parsed url   path: '%3E=%200.5.7',
+100 verbose parsed url   href: '%3E=%200.5.7' }
+101 verbose addNamed [ 'node-ffi', '>= 0.5.7' ]
+102 verbose addNamed [ null, '>=0.5.7' ]
+103 silly lockFile b92ab36c-node-ffi-0-5-7 node-ffi@>= 0.5.7
+104 verbose lock node-ffi@>= 0.5.7 /home/netfpga/.npm/b92ab36c-node-ffi-0-5-7.lock
+105 silly addNameRange { name: 'mysql', range: '>=2.4.0', hasData: false }
+106 silly addNameRange { name: 'utf8', range: '>=2.0.0', hasData: false }
+107 silly addNameRange { name: 'node-ffi', range: '>=0.5.7', hasData: false }
+108 verbose url raw body-parser
+109 verbose url resolving [ 'https://registry.npmjs.org/', './body-parser' ]
+110 verbose url resolved https://registry.npmjs.org/body-parser
+111 info trying registry request attempt 1 at 09:55:23
+112 verbose etag "2Z3MRRW3UTD2PGDGVXU6ZKF4D"
+113 http GET https://registry.npmjs.org/body-parser
+114 verbose url raw express
+115 verbose url resolving [ 'https://registry.npmjs.org/', './express' ]
+116 verbose url resolved https://registry.npmjs.org/express
+117 info trying registry request attempt 1 at 09:55:23
+118 verbose etag "8OG1BVMIGJF38EWJ5REWUSUOF"
+119 http GET https://registry.npmjs.org/express
+120 verbose url raw node-ffi
+121 verbose url resolving [ 'https://registry.npmjs.org/', './node-ffi' ]
+122 verbose url resolved https://registry.npmjs.org/node-ffi
+123 info trying registry request attempt 1 at 09:55:23
+124 http GET https://registry.npmjs.org/node-ffi
+125 verbose url raw errorhandler
+126 verbose url resolving [ 'https://registry.npmjs.org/', './errorhandler' ]
+127 verbose url resolved https://registry.npmjs.org/errorhandler
+128 info trying registry request attempt 1 at 09:55:23
+129 verbose etag "D08J2E8T0DKWLISZLRS4WYLUE"
+130 http GET https://registry.npmjs.org/errorhandler
+131 info retry will retry, error on last attempt: Error: tunneling socket could not be established, cause=connect EHOSTUNREACH
+132 verbose url raw method-override
+133 verbose url resolving [ 'https://registry.npmjs.org/', './method-override' ]
+134 verbose url resolved https://registry.npmjs.org/method-override
+135 info trying registry request attempt 1 at 09:55:23
+136 verbose etag "BK8UJ3NUZL6F7AUM9I9CBU9KK"
+137 http GET https://registry.npmjs.org/method-override
+138 verbose url raw jade
+139 verbose url resolving [ 'https://registry.npmjs.org/', './jade' ]
+140 verbose url resolved https://registry.npmjs.org/jade
+141 info trying registry request attempt 1 at 09:55:23
+142 verbose etag "4WVVDIHDPV4GJZDVFUHF9M5WY"
+143 http GET https://registry.npmjs.org/jade
+144 verbose url raw morgan
+145 verbose url resolving [ 'https://registry.npmjs.org/', './morgan' ]
+146 verbose url resolved https://registry.npmjs.org/morgan
+147 info trying registry request attempt 1 at 09:55:23
+148 verbose etag "8ELLH52SOJI9QYW7H7RPI0VL0"
+149 http GET https://registry.npmjs.org/morgan
+150 info retry will retry, error on last attempt: Error: tunneling socket could not be established, cause=connect EHOSTUNREACH
+151 info retry will retry, error on last attempt: Error: tunneling socket could not be established, cause=connect EHOSTUNREACH
+152 info retry will retry, error on last attempt: Error: tunneling socket could not be established, cause=connect EHOSTUNREACH
+153 verbose url raw node-cache
+154 verbose url resolving [ 'https://registry.npmjs.org/', './node-cache' ]
+155 verbose url resolved https://registry.npmjs.org/node-cache
+156 info trying registry request attempt 1 at 09:55:23
+157 verbose etag "3S05OS1J6BH7ZRV62UQFU7M5U"
+158 http GET https://registry.npmjs.org/node-cache
+159 verbose url raw mysql
+160 verbose url resolving [ 'https://registry.npmjs.org/', './mysql' ]
+161 verbose url resolved https://registry.npmjs.org/mysql
+162 info trying registry request attempt 1 at 09:55:23
+163 verbose etag "B5EFNDHP96JHBVWTWUUD37TP8"
+164 http GET https://registry.npmjs.org/mysql
+165 info retry will retry, error on last attempt: Error: tunneling socket could not be established, cause=connect EHOSTUNREACH
+166 info retry will retry, error on last attempt: Error: tunneling socket could not be established, cause=connect EHOSTUNREACH
+167 verbose url raw utf8
+168 verbose url resolving [ 'https://registry.npmjs.org/', './utf8' ]
+169 verbose url resolved https://registry.npmjs.org/utf8
+170 info trying registry request attempt 1 at 09:55:23
+171 verbose etag "4LTYYXOPY2TB3MK6GT03CQDHT"
+172 http GET https://registry.npmjs.org/utf8
+173 info retry will retry, error on last attempt: Error: tunneling socket could not be established, cause=connect EHOSTUNREACH
+174 info retry will retry, error on last attempt: Error: tunneling socket could not be established, cause=connect EHOSTUNREACH
+175 info retry will retry, error on last attempt: Error: tunneling socket could not be established, cause=connect EHOSTUNREACH
+176 info retry will retry, error on last attempt: Error: tunneling socket could not be established, cause=connect EHOSTUNREACH
+177 info trying registry request attempt 2 at 09:55:33
+178 verbose etag "2Z3MRRW3UTD2PGDGVXU6ZKF4D"
+179 http GET https://registry.npmjs.org/body-parser
+180 info retry will retry, error on last attempt: Error: tunneling socket could not be established, cause=connect EHOSTUNREACH
+181 info trying registry request attempt 2 at 09:55:33
+182 verbose etag "8OG1BVMIGJF38EWJ5REWUSUOF"
+183 http GET https://registry.npmjs.org/express
+184 info trying registry request attempt 2 at 09:55:33
+185 http GET https://registry.npmjs.org/node-ffi
+186 info retry will retry, error on last attempt: Error: tunneling socket could not be established, cause=connect EHOSTUNREACH
+187 info retry will retry, error on last attempt: Error: tunneling socket could not be established, cause=connect EHOSTUNREACH
+188 info trying registry request attempt 2 at 09:55:33
+189 verbose etag "D08J2E8T0DKWLISZLRS4WYLUE"
+190 http GET https://registry.npmjs.org/errorhandler
+191 info trying registry request attempt 2 at 09:55:33
+192 verbose etag "BK8UJ3NUZL6F7AUM9I9CBU9KK"
+193 http GET https://registry.npmjs.org/method-override
+194 info trying registry request attempt 2 at 09:55:33
+195 verbose etag "4WVVDIHDPV4GJZDVFUHF9M5WY"
+196 http GET https://registry.npmjs.org/jade
+197 info retry will retry, error on last attempt: Error: tunneling socket could not be established, cause=connect EHOSTUNREACH
+198 info retry will retry, error on last attempt: Error: tunneling socket could not be established, cause=connect EHOSTUNREACH
+199 info retry will retry, error on last attempt: Error: tunneling socket could not be established, cause=connect EHOSTUNREACH
+200 info trying registry request attempt 2 at 09:55:34
+201 verbose etag "8ELLH52SOJI9QYW7H7RPI0VL0"
+202 http GET https://registry.npmjs.org/morgan
+203 info retry will retry, error on last attempt: Error: tunneling socket could not be established, cause=connect EHOSTUNREACH
+204 info trying registry request attempt 2 at 09:55:36
+205 verbose etag "3S05OS1J6BH7ZRV62UQFU7M5U"
+206 http GET https://registry.npmjs.org/node-cache
+207 info trying registry request attempt 2 at 09:55:36
+208 verbose etag "B5EFNDHP96JHBVWTWUUD37TP8"
+209 http GET https://registry.npmjs.org/mysql
+210 info retry will retry, error on last attempt: Error: tunneling socket could not be established, cause=connect EHOSTUNREACH
+211 info retry will retry, error on last attempt: Error: tunneling socket could not be established, cause=connect EHOSTUNREACH
+212 info trying registry request attempt 2 at 09:55:40
+213 verbose etag "4LTYYXOPY2TB3MK6GT03CQDHT"
+214 http GET https://registry.npmjs.org/utf8
+215 info retry will retry, error on last attempt: Error: tunneling socket could not be established, cause=connect EHOSTUNREACH
+216 info trying registry request attempt 3 at 09:56:33
+217 verbose etag "2Z3MRRW3UTD2PGDGVXU6ZKF4D"
+218 http GET https://registry.npmjs.org/body-parser
+219 info trying registry request attempt 3 at 09:56:33
+220 verbose etag "8OG1BVMIGJF38EWJ5REWUSUOF"
+221 http GET https://registry.npmjs.org/express
+222 info trying registry request attempt 3 at 09:56:33
+223 http GET https://registry.npmjs.org/node-ffi
+224 info trying registry request attempt 3 at 09:56:33
+225 verbose etag "D08J2E8T0DKWLISZLRS4WYLUE"
+226 http GET https://registry.npmjs.org/errorhandler
+227 info trying registry request attempt 3 at 09:56:33
+228 verbose etag "BK8UJ3NUZL6F7AUM9I9CBU9KK"
+229 http GET https://registry.npmjs.org/method-override
+230 info trying registry request attempt 3 at 09:56:33
+231 verbose etag "4WVVDIHDPV4GJZDVFUHF9M5WY"
+232 http GET https://registry.npmjs.org/jade
+233 silly registry.get cb [ 304, undefined ]
+234 verbose etag body-parser from cache
+235 silly registry.get cb [ 304, undefined ]
+236 verbose etag express from cache
+237 silly lockFile b92ab36c-node-ffi-0-5-7 node-ffi@>= 0.5.7
+238 silly lockFile b92ab36c-node-ffi-0-5-7 node-ffi@>= 0.5.7
+239 silly registry.get cb [ 304, undefined ]
+240 verbose etag errorhandler from cache
+241 silly registry.get cb [ 304, undefined ]
+242 verbose etag method-override from cache
+243 silly registry.get cb [ 304, undefined ]
+244 verbose etag jade from cache
+245 error network tunneling socket could not be established, cause=connect EHOSTUNREACH
+245 error network This is most likely not a problem with npm itself
+245 error network and is related to network connectivity.
+245 error network In most cases you are behind a proxy or have bad network settings.
+245 error network
+245 error network If you are behind a proxy, please make sure that the
+245 error network 'proxy' config is set properly.  See: 'npm help config'
+246 error System Linux 3.13.0-32-generic
+247 error command "/usr/bin/nodejs" "/usr/bin/npm" "install"
+248 error cwd /home/netfpga/WebApp-DDoS
+249 error node -v v0.10.25
+250 error npm -v 1.3.10
+251 error code ECONNRESET
+252 verbose exit [ 1, true ]
