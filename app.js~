@@ -197,7 +197,7 @@ io.on('connection', function(socket){
 
         var interval_timer = 1000
 
-        // through-put *8*16/(1000*1000*1000) <=> 16 000 000 clock *8bit *160Mhz /1G
+        // through-put *8*10/(1000*1000*1000) <=> 16 000 000 clock *8bit *160Mhz /1G
         var GbpS_ratio = 8*10/(1000*1000*1000)
         //GET SERVER TIME
         setInterval(function() {
@@ -651,7 +651,7 @@ io.on('connection', function(socket){
         console.log(data);
         if(data == 'ver1') {
             console.log("Ver1 is updating...")
-        bitfile = exec('/home/netfpga/HungVu/Nodejs_test___/apps/manage_bitfile/program_with_bitfile.sh',
+        bitfile = exec('./apps/manage_bitfile/program_with_bitfile.sh',
             function (error, stdout, stderr) {
                 console.log(stdout);
                 if (error !== null) {
@@ -667,7 +667,7 @@ io.on('connection', function(socket){
 
         } else if( data == 'ver2') {
             console.log("Ver2 is updating...")
-        bitfile = exec('/home/netfpga/HungVu/Nodejs_test___/apps/manage_bitfile/program_without_bitfile.sh',
+        bitfile = exec('./apps/manage_bitfile/program_without_bitfile.sh',
             function (error, stdout, stderr) {
                 console.log(stdout);
                 if (error !== null) {
@@ -681,7 +681,7 @@ io.on('connection', function(socket){
 
         } else if( data == 'ver3') {
             console.log("Ver3 is updating...")
-                bitfile = exec('/home/netfpga/HungVu/Nodejs_test___/apps/manage_bitfile/program_speed_measure.sh',
+                bitfile = exec('./apps/manage_bitfile/program_speed_measure.sh',
                         function (error, stdout, stderr) {
                             console.log(stdout);
                             if (error !== null) {

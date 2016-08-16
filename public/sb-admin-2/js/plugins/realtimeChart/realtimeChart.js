@@ -60,11 +60,6 @@ $(function() {
     var timeInterval_Tx = 1000;	
     //var maximum_Tx = parseInt(Math.floor(maximum/(timeInterval_Tx/timeInterval_FPGA)));
     var maximum_Tx = parseInt(maximum); 
-    //Tins
-    console.log("Tin");
-    console.log(maximum_Tx);
-
-    var time_server;
 
     function initArray(array,new_data) {
        var temp;

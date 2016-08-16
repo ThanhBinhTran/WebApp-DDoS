@@ -651,11 +651,12 @@ io.on('connection', function(socket){
         console.log(data);
         if(data == 'ver1') {
             console.log("Ver1 is updating...")
-        bitfile = exec('/home/netfpga/HungVu/Nodejs_test___/apps/manage_bitfile/program_with_bitfile.sh',
+        bitfile = exec('./apps/manage_bitfile/program_with_bitfile.sh',
             function (error, stdout, stderr) {
                 console.log(stdout);
                 if (error !== null) {
                     console.log('exec error: ' + error);
+                    socket.emit('update bitfile client', "error");
                 } else {
                     var query = 'INSERT INTO notification (name,link,time,date) VALUES ("New Update","/update","'+getTimeNow() +'","'+getDateNow()+'")';
                     db.query(query);		
@@ -667,11 +668,12 @@ io.on('connection', function(socket){
 
         } else if( data == 'ver2') {
             console.log("Ver2 is updating...")
-        bitfile = exec('/home/netfpga/HungVu/Nodejs_test___/apps/manage_bitfile/program_without_bitfile.sh',
+        bitfile = exec('./apps/manage_bitfile/program_without_bitfile.sh',
             function (error, stdout, stderr) {
                 console.log(stdout);
                 if (error !== null) {
                     console.log('exec error: ' + error);
+                    socket.emit('update bitfile client', "error");
                 } else {
                     var query = 'INSERT INTO notification (name,link,time,date) VALUES ("New Update","/update","'+getTimeNow() +'","'+getDateNow()+'")';
                     db.query(query);
@@ -681,11 +683,12 @@ io.on('connection', function(socket){
 
         } else if( data == 'ver3') {
             console.log("Ver3 is updating...")
-                bitfile = exec('/home/netfpga/HungVu/Nodejs_test___/apps/manage_bitfile/program_speed_measure.sh',
+                bitfile = exec('./apps/manage_bitfile/program_speed_measure.sh',
                         function (error, stdout, stderr) {
                             console.log(stdout);
                             if (error !== null) {
                                 console.log('exec error: ' + error);
+                                socket.emit('update bitfile client', "error");
                             } else {
                                 var query = 'INSERT INTO notification (name,link,time,date) VALUES ("New Update","/update","'+getTimeNow() +'","'+getDateNow()+'")';
                                 db.query(query);
