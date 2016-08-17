@@ -60,7 +60,7 @@
                 i.fa.fa-arrow-circle-right
               .clearfix 
     .row
-      .col-lg-8
+      .col-lg-12
         .panel.panel-default
           .panel-heading
             i.fa.fa-bar-chart-o.fa-fw

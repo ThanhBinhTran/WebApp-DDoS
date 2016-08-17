@@ -5,8 +5,7 @@ nav.navbar.navbar-default.navbar-static-top(role='navigation', style='margin-bot
           span.icon-bar
           span.icon-bar
           span.icon-bar
-        a.navbar-brand(href='dashboard') 
-                                           HCMUT DDoS COUNTERING MECHANISM 
+        a.navbar-brand(href='dashboard') HCMUT DDoS COUNTERING MECHANISM 
       ul.nav.navbar-top-links.navbar-right
         li.dropdown
           a.dropdown-toggle(data-toggle='dropdown', style='cursor:pointer;')
