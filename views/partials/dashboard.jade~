@@ -66,9 +66,10 @@
             i.fa.fa-bar-chart-o.fa-fw
             |  Realtime scanning report
           .panel-body
+            #select-options
             #moving-chart.flot-chart-content(style='height:600px;')
             #value-section
-            #select-options
+            
 
       
 //      .col-lg-4

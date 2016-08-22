@@ -31,6 +31,9 @@ value_section += '</table></fieldset><br>';
 
 $('#value-section').html(value_section);
 
+var scroll_bar = '<p>30s<\p> <p align="right"> 30min<\p><input id="slider1" type="range" min="100" max="500" step="10" value="10" />'
+$('#scroll-bar').html(scroll_bar);
+
 $(function() {
     var container = $("#moving-chart");
 
