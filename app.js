@@ -194,7 +194,8 @@ io.on('connection', function(socket){
         var nf1_tx_reg = '77600024'
         var nf2_tx_reg = '77600028'
         var nf3_tx_reg = '7760002a'
-
+       
+        //set interval of data query
         var interval_timer = 1000
 
         // through-put *8*10/(1000*1000*1000) <=> 16 000 000 clock *8bit *160Mhz /1G
@@ -218,7 +219,7 @@ io.on('connection', function(socket){
                     var sub_string = stdout.split('=');
                     if(sub_string.length < 2){
                         console.log("No data to send!!!")
-                            var send_data = [1,new Date().getTime(),0];
+                            var send_data = [1,new Date().getTime(),new Date().getTime()%10];
                         io.emit('realtime Chart', send_data);
                     } else {
                         var sub_string1 = sub_string[1].split('\n');

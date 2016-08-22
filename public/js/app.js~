@@ -80,7 +80,13 @@ config(function ($routeProvider, $locationProvider) {
       templateUrl: 'partials/schedule',
       controller: 'scheduleCtrl'
     }).
-			
+
+//added event page
+    when('/events',{
+      templateUrl: 'partials/events',
+      controller: 'eventsCtrl'
+    }).
+	
     when('/manga/test',{
       templateUrl: 'manga/list/1',
       controller: 'adminCtrl'

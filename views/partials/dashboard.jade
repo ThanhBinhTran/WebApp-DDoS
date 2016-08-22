@@ -8,7 +8,7 @@
               .col-xs-9.text-right
                 .huge 00
                 div New Events!
-          a(href='dashboard#')
+          a(href='events#')
             .panel-footer
               span.pull-left View Details
               span.pull-right
@@ -38,7 +38,7 @@
               .col-xs-9.text-right
                 .huge 00
                 div New Notifications!
-          a(href='dashboard#')
+          a(href='notifications#')
             .panel-footer
               span.pull-left View Details
               span.pull-right
@@ -59,17 +59,19 @@
               span.pull-right
                 i.fa.fa-arrow-circle-right
               .clearfix 
-    .row
-      .col-lg-12
-        .panel.panel-default
-          .panel-heading
-            i.fa.fa-bar-chart-o.fa-fw
-            |  Realtime scanning report
-          .panel-body
-            #select-options
-            #moving-chart.flot-chart-content(style='height:600px;')
-            #scroll-bar
-            #value-section
+    include realtime.jade
+//Binh edited here
+//    .row
+//      .col-lg-12
+//        .panel.panel-default
+//          .panel-heading
+//            i.fa.fa-bar-chart-o.fa-fw
+//            |  Realtime scanning report
+//          .panel-body
+//            #select-options
+//            #moving-chart.flot-chart-content(style='height:600px;')
+//            #scroll-bar
+//            #value-section
             
 
       

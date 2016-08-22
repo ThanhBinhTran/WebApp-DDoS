@@ -1,4 +1,5 @@
 
+
 var socket = io();
 var select_option = '<fieldset>	<legend style="font-size: 15px" >Network Interface</legend>'; 
 select_option += '<table style="width:50%"><tr> <td>NF0: </td>';
@@ -31,8 +32,28 @@ value_section += '</table></fieldset><br>';
 
 $('#value-section').html(value_section);
 
-var scroll_bar = '30s align="right" 30min<input id="slider1" type="range" min="100" max="500" step="10" value="10" />'
+//var scroll_bar = '<p>30s<\p> <p align="right"> 30min<\p><input id="slider1" type="range" min="100" max="500" step="10" value="10" />'
+//var scroll_bar = '<input id="example_ID" type="text" name="example_name" value="0" />'
+
+var scroll_bar = '<input id="datetimepicker" type="text" >';
 $('#scroll-bar').html(scroll_bar);
+
+//button 
+
+//$('#datetimepicker').datepicker();
+
+//$("#example_id").ionRangeSlider();
+//$('#scroll-bar').html(scroll_bar);
+
+//button 
+//increase time pool
+
+var time_line =  '<button type="button" onclick="decrease();">decrease time</button>';
+    time_line += '<input type="text" id="data_length" value="30">' ;
+    time_line += '<button type="button" onclick="increase();">increase time</button>';
+
+$('#time-line').html(time_line);
+
 
 $(function() {
     var container = $("#moving-chart");
@@ -43,9 +64,12 @@ $(function() {
     //var maximum = container.outerWidth() / 2 || 300;
     var maximum = container.outerWidth() ;
     //
-    if ( maximum > 120) {
-        maximum = 30;
-    }
+    //if ( maximum > 120) {
+     //   maximum = 30;
+    //}
+    var minimum_data = 30;
+    var maximum_data = 180;
+
 
     var NF0_TX_data = [];   
     var NF1_TX_data = [];   
@@ -62,7 +86,7 @@ $(function() {
     var timeInterval_FPGA = 1000;		
     var timeInterval_Tx = 1000;	
     //var maximum_Tx = parseInt(Math.floor(maximum/(timeInterval_Tx/timeInterval_FPGA)));
-    var maximum_Tx = parseInt(maximum); 
+    var maximum_Tx = parseInt(minimum_data); 
 
     function initArray(array,new_data) {
        var temp;
@@ -311,3 +335,24 @@ var options = {
 };
 
 });
+
+function decrease(){
+   maximum_Tx = document.getElementById("data_length").value;
+   console.log("VVVVVVVVVVVVVVTest 3: " + maximum_Tx);
+   if(maximum_Tx >30){
+      maximum_Tx = maximum_Tx - 10;
+      console.log("Tesssssssssssssssssssssssssssbbbbbbbbbbbbst 3: " + maximum_Tx);
+   }
+   document.getElementById("data_length").value = maximum_Tx;
+}
+
+function increase(){
+   maximum_Tx = document.getElementById("data_length").value;
+   console.log("Tebbbbbbbbbbbbst 3: " + maximum_Tx);
+   if(maximum_Tx < 180){
+      maximum_Tx = maximum_Tx + 10;
+      console.log("Tesssssssssssssssssssssssssssbbbbbbbbbbbbst 3: " + maximum_Tx);
+   }
+   document.getElementById("data_length").value = maximum_Tx;
+}
+
