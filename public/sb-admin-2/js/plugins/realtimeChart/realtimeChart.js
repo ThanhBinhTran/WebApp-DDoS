@@ -32,27 +32,47 @@ value_section += '</table></fieldset><br>';
 
 $('#value-section').html(value_section);
 
-//var scroll_bar = '<p>30s<\p> <p align="right"> 30min<\p><input id="slider1" type="range" min="100" max="500" step="10" value="10" />'
-//var scroll_bar = '<input id="example_ID" type="text" name="example_name" value="0" />'
-
-var scroll_bar = '<input id="datetimepicker" type="text" >';
-$('#scroll-bar').html(scroll_bar);
-
-//button 
-   $("#datetimepicker1").datepicker();
+// date time picker
+var date_time_picker = '<input id="datetimepicker" type="text" value="" >';
+$('#date-time-picker').html(date_time_picker);
+$("#datetimepicker").datetimepicker();
 
 
-//$("#example_id").ionRangeSlider();
-//$('#scroll-bar').html(scroll_bar);
+//range slide
+//var time_line =  '<button type="button" onclick="decrease();">decrease time</button>';
+//    time_line += '<input type="text" id="data_length" value="30">' ;
+//    time_line += '<button type="button" onclick="increase();">increase time</button>';
+//$('#time-line').html(time_line);
 
-//button 
-//increase time pool
+//var time_line = '<input type="text" id="example_id" name="example_name" value="30" />';
 
-var time_line =  '<button type="button" onclick="decrease();">decrease time</button>';
-    time_line += '<input type="text" id="data_length" value="30">' ;
-    time_line += '<button type="button" onclick="increase();">increase time</button>';
-
+var time_line = '<form oninput="x.value=parseInt(display_time.value)"><input type="range" id="display_time"  min="30" max="180" step="10" value="30"><br><h1 style="text-align: center"><output name="x" value="30"></output></h1></form>';
 $('#time-line').html(time_line);
+$('input[type="range"]').rangeslider({
+
+    // Feature detection the default is `true`.
+    // Set this to `false` if you want to use
+    // the polyfill also in Browsers which support
+    // the native <input type="range"> element.
+    polyfill: false,
+
+    // Default CSS classes
+    rangeClass: 'rangeslider',
+    disabledClass: 'rangeslider--disabled',
+    horizontalClass: 'rangeslider--horizontal',
+    verticalClass: 'rangeslider--vertical',
+    fillClass: 'rangeslider__fill',
+    handleClass: 'rangeslider__handle',
+
+    // Callback function
+    onInit: function() {},
+
+    // Callback function
+    onSlide: function(position, value) {},
+
+    // Callback function
+    onSlideEnd: function(position, value) {}
+});
 
 
 $(function() {
@@ -99,6 +119,18 @@ $(function() {
     }
 
     function pushData(array, time, data) {
+        if(array.length == 30){
+            array.shift();
+        }
+        else if(array.length > 30){
+            while(array.length > 30){
+               array.shift();
+            }
+        }
+        var temp = [time,data];
+        array.push(temp);
+    }
+    function pushData1(array, time, data) {
         if(array.length == document.getElementById("data_length").value){
             array.shift();
         }
@@ -110,7 +142,6 @@ $(function() {
         var temp = [time,data];
         array.push(temp);
     }
-
     initArray(NF0_TX_data);
     initArray(NF0_RX_data);
     initArray(NF1_TX_data);
@@ -315,29 +346,6 @@ var options = {
 
 });
 
-function decrease(){
-   maximum_Tx = parseInt(document.getElementById("data_length").value);
-   if(maximum_Tx >30){
-      maximum_Tx = maximum_Tx - 10;
-   }
-   else
-   {
-      maximum_Tx =30;
-   }
-   document.getElementById("data_length").value = maximum_Tx;
-}
-
-function increase(){
-   maximum_Tx = parseInt(document.getElementById("data_length").value);
-   if(maximum_Tx < 180){
-      maximum_Tx = maximum_Tx + 10;
-   }
-   else
-   {
-      maximum_Tx = 180;
-   }
-   document.getElementById("data_length").value = maximum_Tx;
-}
 
 
 
