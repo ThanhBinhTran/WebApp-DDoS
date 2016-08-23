@@ -1,6 +1,5 @@
-//<link rel="stylesheet" type="text/css" href="/jquery.datetimepicker.css"/ >
-//<script src="/jquery.js"></script>
-//<script src="/build/jquery.datetimepicker.full.min.js"></script>
+
+
 .row
   .col-lg-12
     .panel.panel-default
@@ -10,9 +9,7 @@
       .panel-body
         #select-options
         #moving-chart.flot-chart-content(style='height:600px;')
-        #button-decrease-time
-        #display-time
-        #button-increase-time
+        #time-line
         #scroll-bar
         #value-section
 

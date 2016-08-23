@@ -39,8 +39,8 @@ var scroll_bar = '<input id="datetimepicker" type="text" >';
 $('#scroll-bar').html(scroll_bar);
 
 //button 
+   $("#datetimepicker1").datepicker();
 
-//$('#datetimepicker').datepicker();
 
 //$("#example_id").ionRangeSlider();
 //$('#scroll-bar').html(scroll_bar);
@@ -88,21 +88,7 @@ $(function() {
     //var maximum_Tx = parseInt(Math.floor(maximum/(timeInterval_Tx/timeInterval_FPGA)));
     var maximum_Tx = parseInt(minimum_data); 
 
-    function initArray(array,new_data) {
-       var temp;
-       if(new_data[0] == 0){   //server time
-          temp = new_data[1] - timeInterval_Tx*maximum_Tx;
-       }else {
-          temp = new Date().getTime() - timeInterval_Tx*maximum_Tx;
-       }
-        while(array.length < maximum_Tx) {
-            temp += timeInterval_Tx;
-            var tmp = [temp, 0];
-            array.push(tmp);
-        }	
-    }
-
-    function initArray1(array) {
+    function initArray(array) {
        var temp;
        temp = new Date().getTime() - timeInterval_Tx*maximum_Tx;
        while(array.length < maximum_Tx) {
@@ -113,28 +99,26 @@ $(function() {
     }
 
     function pushData(array, time, data) {
-        array.shift();
+        if(array.length == document.getElementById("data_length").value){
+            array.shift();
+        }
+        else if(array.length > document.getElementById("data_length").value){
+            while(array.length > document.getElementById("data_length").value){
+               array.shift();
+            }
+        }
         var temp = [time,data];
         array.push(temp);
     }
-/*
-    initArray(NF0_TX_data,new_data);
-    initArray(NF0_RX_data,new_data);
-    initArray(NF1_TX_data,new_data);
-    initArray(NF1_RX_data,new_data);
-    initArray(NF2_TX_data,new_data);
-    initArray(NF2_RX_data,new_data);
-    initArray(NF3_TX_data,new_data);
-    initArray(NF3_RX_data,new_data);
-*/
-    initArray1(NF0_TX_data);
-    initArray1(NF0_RX_data);
-    initArray1(NF1_TX_data);
-    initArray1(NF1_RX_data);
-    initArray1(NF2_TX_data);
-    initArray1(NF2_RX_data);
-    initArray1(NF3_TX_data);
-    initArray1(NF3_RX_data);
+
+    initArray(NF0_TX_data);
+    initArray(NF0_RX_data);
+    initArray(NF1_TX_data);
+    initArray(NF1_RX_data);
+    initArray(NF2_TX_data);
+    initArray(NF2_RX_data);
+    initArray(NF3_TX_data);
+    initArray(NF3_RX_data);
 
 socket.on('realtime Chart',function(new_data) {
 
@@ -177,18 +161,13 @@ socket.on('realtime Chart',function(new_data) {
 
     //NF0 TX
     if($('#cb_NF0_TX').prop('checked')) {
-        console.log("Test 1");
-        //console.log(NF0_TX_data);
         data_set.push({
             label:"NF0 TX",
             data: NF0_TX_data, 
             color: "#093145", 
         });
         var arr = NF0_TX_data[maximum_Tx-1];
-        console.log("Test 2: " + NF0_TX_data.length);
-        console.log("Test 3: " + arr.length);
         var data = NF0_TX_data[maximum_Tx-1][1];
-//        var data = 1;
         $('#NF0_TX_Speed').html(data + ' Gbps' );	
         
     }
@@ -338,21 +317,27 @@ var options = {
 
 function decrease(){
    maximum_Tx = parseInt(document.getElementById("data_length").value);
-   console.log("VVVVVVVVVVVVVVTest 3: " + maximum_Tx);
    if(maximum_Tx >30){
       maximum_Tx = maximum_Tx - 10;
-      console.log("Tesssssssssssssssssssssssssssbbbbbbbbbbbbst 3: " + maximum_Tx);
+   }
+   else
+   {
+      maximum_Tx =30;
    }
    document.getElementById("data_length").value = maximum_Tx;
 }
 
 function increase(){
    maximum_Tx = parseInt(document.getElementById("data_length").value);
-   console.log("Tebbbbbbbbbbbbst 3: " + maximum_Tx);
    if(maximum_Tx < 180){
       maximum_Tx = maximum_Tx + 10;
-      console.log("Tesssssssssssssssssssssssssssbbbbbbbbbbbbst 3: " + maximum_Tx);
+   }
+   else
+   {
+      maximum_Tx = 180;
    }
    document.getElementById("data_length").value = maximum_Tx;
 }
+
+
 
