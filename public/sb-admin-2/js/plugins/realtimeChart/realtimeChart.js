@@ -3,50 +3,46 @@
 var socket = io();
 var select_option = '<fieldset>	<legend style="font-size: 15px" >Network Interface</legend>'; 
 select_option += '<table style="width:50%"><tr> <td>NF0: </td>';
-select_option += '<td><input type="checkbox" value="cb_NF0_TX" id="cb_NF0_TX" checked="checked" > TX </td>';
 select_option += '<td><input type="checkbox" value="cb_NF0_RX" id="cb_NF0_RX" checked="checked" > RX </td>';
+select_option += '<td><input type="checkbox" value="cb_NF0_TX" id="cb_NF0_TX"  > TX </td>';
+select_option += '<td><input type="checkbox" value="cb_NF0_DROP" id="cb_NF0_DROP"  > RX drop </td>';
 
 select_option += '<td>NF1: </td>';
-select_option += '<td><input type="checkbox" value="cb_NF1_TX" id="cb_NF1_TX" checked="checked"> TX </td>';
-select_option += '<td><input type="checkbox" value="cb_NF1_RX" id="cb_NF1_RX" checked="checked"> RX </td></tr>';
+select_option += '<td><input type="checkbox" value="cb_NF1_RX" id="cb_NF1_RX" > RX </td>';
+select_option += '<td><input type="checkbox" value="cb_NF1_TX" id="cb_NF1_TX" > TX </td>';
+select_option += '<td><input type="checkbox" value="cb_NF1_DROP" id="cb_NF1_DROP"  > RX drop</td></tr>';
 
 select_option += '<tr><td>NF2: </td>';
-select_option += '<td><input type="checkbox" value="cb_NF2_TX" id="cb_NF2_TX" checked="checked"> TX </td>';
-select_option += '<td><input type="checkbox" value="cb_NF2_RX" id="cb_NF2_RX" checked="checked"> RX </td>';
+select_option += '<td><input type="checkbox" value="cb_NF2_RX" id="cb_NF2_RX" > RX </td>';
+select_option += '<td><input type="checkbox" value="cb_NF2_TX" id="cb_NF2_TX" > TX </td>';
+select_option += '<td><input type="checkbox" value="cb_NF2_DROP" id="cb_NF2_DROP"  > RX drop </td>';
 
 select_option += '<td>NF3: </td>';
-select_option += '<td><input type="checkbox" value="cb_NF3_TX" id="cb_NF3_TX" checked="checked"> TX </td>';
-select_option += '<td><input type="checkbox" value="cb_NF3_RX" id="cb_NF3_RX" checked="checked"> RX </td></tr>';
-
+select_option += '<td><input type="checkbox" value="cb_NF3_RX" id="cb_NF3_RX" > RX </td>';
+select_option += '<td><input type="checkbox" value="cb_NF3_TX" id="cb_NF3_TX" > TX </td>';
+select_option += '<td><input type="checkbox" value="cb_NF3_DROP" id="cb_NF3_DROP"  > RX drop </td></tr>';
 select_option += '</table></fieldset><br>';
 $('#select-options').html(select_option);
 
 var value_section = '<fieldset>	<legend style="font-size: 15px" >Network history</legend>';
 value_section += '<table border="1" style="width:50%; border: 1px solid black">';
-value_section += '<tr> <th> Interface </th> <th> TX Speed </th> <th> RX Speed </th></tr>';
-value_section += '<tr> <td>NF0</td>  <td id="NF0_TX_Speed"> </td>  <td id="NF0_RX_Speed"> </td></tr>';
-value_section += '<tr> <td>NF1</td>  <td id="NF1_TX_Speed"> </td>  <td id="NF1_RX_Speed"> </td></tr>';
-value_section += '<tr> <td>NF2</td>  <td id="NF2_TX_Speed"> </td>  <td id="NF2_RX_Speed"> </td></tr>';
-value_section += '<tr> <td>NF3</td>  <td id="NF3_TX_Speed"> </td>  <td id="NF3_RX_Speed"> </td></tr>';	
+value_section += '<tr> <th> Interface </th> <th> RX Speed </th> <th> TX Speed </th> <th> RX DROP Speed </th></tr>';
+value_section += '<tr> <td>NF0</td>  <td id="NF0_RX_Speed"> </td>  <td id="NF0_TX_Speed"> </td> <td id="NF0_RX_DROP_Speed"> </td></tr>';
+value_section += '<tr> <td>NF1</td>  <td id="NF1_RX_Speed"> </td>  <td id="NF1_TX_Speed"> </td> <td id="NF1_RX_DROP_Speed"> </td></tr>';
+value_section += '<tr> <td>NF2</td>  <td id="NF2_RX_Speed"> </td>  <td id="NF2_TX_Speed"> </td> <td id="NF2_RX_DROP_Speed"> </td></tr>';
+value_section += '<tr> <td>NF3</td>  <td id="NF3_RX_Speed"> </td>  <td id="NF3_TX_Speed"> </td> <td id="NF3_RX_DROP_Speed"> </td></tr>';	
 value_section += '</table></fieldset><br>';
 
 $('#value-section').html(value_section);
 
 // date time picker
-var date_time_picker = '<input id="datetimepicker" type="text" value="" >';
-$('#date-time-picker').html(date_time_picker);
-$("#datetimepicker").datetimepicker();
+//var date_time_picker = '<input id="datetimepicker" type="text" value="" >';
+//$('#date-time-picker').html(date_time_picker);
+//$("#datetimepicker").datetimepicker();
 
-
-//range slide
-//var time_line =  '<button type="button" onclick="decrease();">decrease time</button>';
-//    time_line += '<input type="text" id="data_length" value="30">' ;
-//    time_line += '<button type="button" onclick="increase();">increase time</button>';
-//$('#time-line').html(time_line);
-
-//var time_line = '<input type="text" id="example_id" name="example_name" value="30" />';
-
-var time_line = '<form oninput="x.value=parseInt(display_time.value)"><input type="range" id="display_time"  min="30" max="180" step="10" value="30"><br><h1 style="text-align: center"><output name="x" value="30"></output></h1></form>';
+var time_line  = '<form oninput="x.value=parseInt(display_time.value)">';
+    time_line += '<input type="range" id="display_time"  min="30" max="180" step="10" value="40">';
+    time_line += '<br><h3 style="text-align: center"><output name="x" id="time_rangeID" value="40"></output></h3></form>';
 $('#time-line').html(time_line);
 $('input[type="range"]').rangeslider({
 
@@ -54,24 +50,7 @@ $('input[type="range"]').rangeslider({
     // Set this to `false` if you want to use
     // the polyfill also in Browsers which support
     // the native <input type="range"> element.
-    polyfill: false,
-
-    // Default CSS classes
-    rangeClass: 'rangeslider',
-    disabledClass: 'rangeslider--disabled',
-    horizontalClass: 'rangeslider--horizontal',
-    verticalClass: 'rangeslider--vertical',
-    fillClass: 'rangeslider__fill',
-    handleClass: 'rangeslider__handle',
-
-    // Callback function
-    onInit: function() {},
-
-    // Callback function
-    onSlide: function(position, value) {},
-
-    // Callback function
-    onSlideEnd: function(position, value) {}
+    polyfill: false
 });
 
 
@@ -101,12 +80,14 @@ $(function() {
     var NF2_RX_data = [];   
     var NF3_RX_data = [];   
 
-    //var data_set = [];
+    var NF0_RX_DROP_data = [];   
+    var NF1_RX_DROP_data = [];   
+    var NF2_RX_DROP_data = [];   
+    var NF3_RX_DROP_data = [];
 
     var timeInterval_FPGA = 1000;		
     var timeInterval_Tx = 1000;	
-    //var maximum_Tx = parseInt(Math.floor(maximum/(timeInterval_Tx/timeInterval_FPGA)));
-    var maximum_Tx = parseInt(minimum_data); 
+    var maximum_Tx = parseInt(document.getElementById("display_time").value); 
 
     function initArray(array) {
        var temp;
@@ -119,23 +100,12 @@ $(function() {
     }
 
     function pushData(array, time, data) {
-        if(array.length == 30){
+        var data_entries = parseInt(document.getElementById("display_time").value); 
+        if(array.length == data_entries){
             array.shift();
         }
-        else if(array.length > 30){
-            while(array.length > 30){
-               array.shift();
-            }
-        }
-        var temp = [time,data];
-        array.push(temp);
-    }
-    function pushData1(array, time, data) {
-        if(array.length == document.getElementById("data_length").value){
-            array.shift();
-        }
-        else if(array.length > document.getElementById("data_length").value){
-            while(array.length > document.getElementById("data_length").value){
+        else if(array.length > data_entries){
+            while(array.length > data_entries){
                array.shift();
             }
         }
@@ -143,12 +113,13 @@ $(function() {
         array.push(temp);
     }
     initArray(NF0_TX_data);
-    initArray(NF0_RX_data);
     initArray(NF1_TX_data);
-    initArray(NF1_RX_data);
     initArray(NF2_TX_data);
-    initArray(NF2_RX_data);
     initArray(NF3_TX_data);
+
+    initArray(NF0_RX_data);
+    initArray(NF1_RX_data);
+    initArray(NF2_RX_data);
     initArray(NF3_RX_data);
 
 socket.on('realtime Chart',function(new_data) {
@@ -169,9 +140,9 @@ socket.on('realtime Chart',function(new_data) {
      *
      */
 
-    var data_set = [];
-
-    console.log("New data: " + new_data[0]);
+    var data_set  = [];
+    var xticksize = 3;
+    //console.log("New data: " + new_data[0]);
     if(new_data[0] == 1) {
         pushData(NF0_TX_data, new_data[1],new_data[2]);
     }else if(new_data[0] == 2) {
@@ -197,9 +168,7 @@ socket.on('realtime Chart',function(new_data) {
             data: NF0_TX_data, 
             color: "#093145", 
         });
-        var arr = NF0_TX_data[maximum_Tx-1];
-        var data = NF0_TX_data[maximum_Tx-1][1];
-        $('#NF0_TX_Speed').html(data + ' Gbps' );	
+        $('#NF0_TX_Speed').html(NF0_TX_data[NF0_TX_data.length-1][1] + ' Gbps' );	
         
     }
 
@@ -210,7 +179,7 @@ socket.on('realtime Chart',function(new_data) {
             data: NF0_RX_data, 
             color: "#1496bb", 
         });
-        $('#NF0_RX_Speed').html(NF0_RX_data[maximum_Tx-1][1] + ' Gbps' );	
+        $('#NF0_RX_Speed').html(NF0_RX_data[NF0_RX_data.length-1][1] + ' Gbps' );	
     }
 
     //NF1 TX
@@ -220,7 +189,7 @@ socket.on('realtime Chart',function(new_data) {
             data: NF1_TX_data, 
             color: "#829356", 
         });
-        $('#NF1_TX_Speed').html(NF1_TX_data[maximum_Tx-1][1] + ' Gbps' );	
+        $('#NF1_TX_Speed').html(NF1_TX_data[NF1_TX_data.length-1][1] + ' Gbps' );	
     }
 
     //NF1 RX
@@ -230,7 +199,7 @@ socket.on('realtime Chart',function(new_data) {
             data: NF1_RX_data, 
             color: "#bca136", 
         });
-        $('#NF1_RX_Speed').html(NF1_RX_data[maximum_Tx-1][1] + ' Gbps' );	
+        $('#NF1_RX_Speed').html(NF1_RX_data[NF1_RX_data.length-1][1] + ' Gbps' );	
     }
 
     //NF2 TX
@@ -240,7 +209,7 @@ socket.on('realtime Chart',function(new_data) {
             data: NF2_TX_data, 
             color: "#c2571a", 
         });
-        $('#NF2_TX_Speed').html(NF2_TX_data[maximum_Tx-1][1] + ' Gbps' );	
+        $('#NF2_TX_Speed').html(NF2_TX_data[NF2_TX_data.length-1][1] + ' Gbps' );	
     }
 
     //NF2 RX
@@ -250,7 +219,7 @@ socket.on('realtime Chart',function(new_data) {
             data: NF2_RX_data, 
             color: "#9a2617", 
         });
-        $('#NF2_RX_Speed').html(NF2_RX_data[maximum_Tx-1][1] + ' Gbps' );	
+        $('#NF2_RX_Speed').html(NF2_RX_data[NF2_RX_data.length-1][1] + ' Gbps' );	
     }
 
     //NF3 TX
@@ -260,7 +229,7 @@ socket.on('realtime Chart',function(new_data) {
             data: NF3_TX_data, 
             color: "#dfa800", 
         });
-        $('#NF3_TX_Speed').html(NF3_TX_data[maximum_Tx-1][1] + ' Gbps' );	
+        $('#NF3_TX_Speed').html(NF3_TX_data[NF3_TX_data.length-1][1] + ' Gbps' );	
     }
 
     //NF3 RX
@@ -270,9 +239,10 @@ socket.on('realtime Chart',function(new_data) {
             data: NF3_RX_data, 
             color: "#050959", 
         });
-        $('#NF3_RX_Speed').html(NF3_RX_data[maximum_Tx-1][1] + ' Gbps' );	
+        $('#NF3_RX_Speed').html(NF3_RX_data[NF3_RX_data.length-1][1] + ' Gbps' );	
     }
-
+    var data_entries = parseInt(document.getElementById("display_time").value)/15; 
+    options.xaxis.tickSize = [data_entries,"second"];
     $.plot($('#moving-chart'),data_set,options);
 });
 

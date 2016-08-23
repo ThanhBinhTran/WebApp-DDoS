@@ -123,7 +123,7 @@ angular.module('myApp.controllers', []).
   }).controller('scansumaryCtrl', function($scope){
     $scope.$on('$viewContentLoaded', function()
      {
-      $scope.$parent.name = 'SCAN SUMMARY';
+      $scope.$parent.name = 'NETWORK HISTORY';
       $('div#page-wrapper div:last').nextAll('script').remove();
 	  //$('div#top-of-script').append();
       $('div#page-wrapper').append('<script src="/socket.io/socket.io.js"></script>'

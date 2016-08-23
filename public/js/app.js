@@ -86,7 +86,13 @@ config(function ($routeProvider, $locationProvider) {
       templateUrl: 'partials/events',
       controller: 'eventsCtrl'
     }).
-	
+
+//added history page
+    when('/history',{
+      templateUrl: 'partials/history',
+      controller: 'historyCtrl'
+    }).	
+
     when('/manga/test',{
       templateUrl: 'manga/list/1',
       controller: 'adminCtrl'

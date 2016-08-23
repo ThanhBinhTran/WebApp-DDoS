@@ -9,9 +9,10 @@
     "jade": "~0.31.2",
     "method-override": "^1.0.0",
     "morgan": "^1.0.0",
-    "node-cache" : ">= 1.0.0",
-    "mysql" : ">= 2.4.0",
-    "utf8" : ">= 2.0.0",
-	"node-ffi": ">= 0.5.7"
+    "node-cache": ">= 1.0.0",
+    "mysql": ">= 2.4.0",
+    "utf8": ">= 2.0.0",
+    "node-ffi": ">= 0.5.7",
+    "chart.js": "~2.2.1"
   }
 }
