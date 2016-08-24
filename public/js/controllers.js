@@ -21,7 +21,6 @@ angular.module('myApp.controllers', []).
     // write Ctrl
     $scope.$on('$viewContentLoaded', function () 
      {
-       $scope.$parent.name = 'Dashboard';
        // javascript code here
        $('div#page-wrapper div:last').nextAll('script').remove();
        $('div#page-wrapper').append('<script src="/socket.io/socket.io.js"></script>'+

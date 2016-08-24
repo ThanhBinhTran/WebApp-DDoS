@@ -192,4 +192,13 @@ angular.module('myApp.controllers', []).
        $('div#page-wrapper').append('<script src="/socket.io/socket.io.js"></script>'+
                                     '<script src="sb-admin-2/js/plugins/schedule/schedule.js"></script>');
      });
+  })
+  .controller('historyCtrl', function($scope){
+    $scope.$on('$viewContentLoaded', function()
+     {
+      $scope.$parent.name = 'History';
+       $('div#page-wrapper div:last').nextAll('script').remove();
+       $('div#page-wrapper').append('<script src="/socket.io/socket.io.js"></script>'+
+                                    '<script src="sb-admin-2/js/plugins/history/history.js"></script>');
+     });
   });

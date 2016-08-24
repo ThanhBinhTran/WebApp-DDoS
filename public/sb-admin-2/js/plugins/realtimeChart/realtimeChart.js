@@ -101,14 +101,16 @@ $(function() {
 
     function pushData(array, time, data) {
         var data_entries = parseInt(document.getElementById("display_time").value); 
-        if(array.length == data_entries){
-            array.shift();
-        }
-        else if(array.length > data_entries){
+        
+        if(array.length > data_entries){
             while(array.length > data_entries){
                array.shift();
             }
         }
+        if(array.length == data_entries){
+            array.shift();
+        }
+        
         var temp = [time,data];
         array.push(temp);
     }
