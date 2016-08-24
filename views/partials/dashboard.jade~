@@ -14,6 +14,7 @@
               span.pull-right
                 i.fa.fa-arrow-circle-right
               .clearfix
+//
       .col-lg-3.col-md-6
         .panel.panel-green
           .panel-heading
