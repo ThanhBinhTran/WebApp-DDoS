@@ -84,14 +84,18 @@ var io = require('socket.io')(http);
 var mysql = require('mysql')
 // Let's make node/socketio listen on port 3000
 var db = mysql.createConnection({
-    host: '127.0.0.1',
-    port: 3307,
+    host: 'localhost',
+    port: '3306',
     user: 'root',
     pass: '',
     database: 'DDoS_db'
 });
 db.connect(function(err){
-    if(err) console.log(err);
+  if(err){
+    console.log('ERROR: connecting to MySQL database: ' + err);
+    return;
+  }
+  console.log('MySQL: Connection established');
 });
 var notes = []
 var sumary_detail = []
@@ -107,6 +111,7 @@ var d = new Date();
 var today = d.getFullYear()+ "-" + (d.getMonth()+1) + "-" + d.getDate(); // use to query shedule : yyyy-mm-dd
 
 var today_scan = d.getDate()+ "/"+ (d.getMonth()+1)+"/" +d.getFullYear(); // use to query scan_summary: dd/mm/yyyy
+
 io.on('connection', function(socket){
     console.log('a user connected');
     socketCount = 1;
