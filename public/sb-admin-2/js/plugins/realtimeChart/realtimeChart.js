@@ -200,15 +200,6 @@ socket.on('realtime Chart',function(new_data) {
         pushData(NF3_DROP_data, new_data[1],new_data[2]);
     }
 
-    //data_set.shift();
-    //data_set.shift();
-    //data_set.shift();
-    //data_set.shift();
-    //data_set.shift();
-    //data_set.shift();
-    //data_set.shift();
-    //data_set.shift();
-
    pushDataSET(data_set, '#cb_NF0_TX', NF0_TX_data, '#NF0_TX_Speed', "NF0 TX", "#093145");
    pushDataSET(data_set, '#cb_NF1_TX', NF1_TX_data, '#NF1_TX_Speed', "NF1 TX", "#1496bb");
    pushDataSET(data_set, '#cb_NF2_TX', NF2_TX_data, '#NF2_TX_Speed', "NF2 TX", "#829356");

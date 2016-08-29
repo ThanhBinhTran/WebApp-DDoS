@@ -42,7 +42,7 @@ router.param('name', function(req, res, next, name) {
     // once validation is done save the new item in the req
     req.name = name;
     // go to the next thing
-    next();	
+    next();
 });
 
 router.use(function(req, res, next) {
@@ -51,7 +51,7 @@ router.use(function(req, res, next) {
     console.log(req.method, req.url);
 
     // continue doing what we were doing and go to the route
-    next();	
+    next();
 });
 
 router.get('/partials/:name', function(req, res) {
@@ -88,7 +88,7 @@ var db = mysql.createConnection({
     port: 3307,
     user: 'root',
     pass: '',
-    database: 'node'
+    database: 'DDoS_db'
 });
 db.connect(function(err){
     if(err) console.log(err);
@@ -106,14 +106,14 @@ var isSchedule_running = 0;
 var d = new Date();
 var today = d.getFullYear()+ "-" + (d.getMonth()+1) + "-" + d.getDate(); // use to query shedule : yyyy-mm-dd
 
-var today_scan = d.getDate()+ "/"+ (d.getMonth()+1)+"/" +d.getFullYear(); // use to query scan_summary: dd/mm/yyyy 
+var today_scan = d.getDate()+ "/"+ (d.getMonth()+1)+"/" +d.getFullYear(); // use to query scan_summary: dd/mm/yyyy
 io.on('connection', function(socket){
     console.log('a user connected');
     socketCount = 1;
     /*  socket.on('chat message', function(msg){
         console.log('message: ' + msg);
         });
-        */ 
+        */
     socket.on('chat message', function(msg){
         io.emit('chat message', msg);
     });
@@ -137,7 +137,7 @@ io.on('connection', function(socket){
     .on('end', function(){
         // Only emit notes after query has been completed
         socket.emit('initial notes', notes)
-    })			
+    })
     });
     if (! isSeeMore){
         sumary_detail = [];
@@ -172,7 +172,7 @@ io.on('connection', function(socket){
         socket.emit('initial notes', notes)
     }
 
-    if (number_realtimechart == 1) {	
+    if (number_realtimechart == 1) {
 
  //       /* BINH ADDED [START] */
  //       var nf0_rx_reg = '77600054'
@@ -194,7 +194,7 @@ io.on('connection', function(socket){
         var nf1_tx_reg = '77600024'
         var nf2_tx_reg = '77600028'
         var nf3_tx_reg = '7760002a'
-       
+
         //set interval of data query
         var interval_timer = 1000
 
@@ -208,7 +208,7 @@ io.on('connection', function(socket){
                 io.emit('realtime Chart', send_data);
         },interval_timer);
 
-        //nf0 tx 
+        //nf0 tx
         setInterval(function() {
             child = exec('rdaxi ' + nf0_tx_reg,
                 function (error, stdout, stderr) {
@@ -218,7 +218,7 @@ io.on('connection', function(socket){
                     var NF0_TX_byte = 0;
                     var sub_string = stdout.split('=');
                     if(sub_string.length < 2){
-                        console.log("No data to send!!!")
+                        //console.log("No data to send!!!")
                             var send_data = [1,new Date().getTime(),new Date().getTime()%10];
                         io.emit('realtime Chart', send_data);
                     } else {
@@ -247,7 +247,7 @@ io.on('connection', function(socket){
                 });
         },interval_timer);
 
-        //nf1 tx 
+        //nf1 tx
         setInterval(function() {
             child = exec('rdaxi ' + nf1_tx_reg,
                 function (error, stdout, stderr) {
@@ -257,7 +257,7 @@ io.on('connection', function(socket){
                     var NF1_TX_byte = 0;
                     var sub_string = stdout.split('=');
                     if(sub_string.length < 2){
-                        console.log("No data to send!!!")
+                        //console.log("No data to send!!!")
                             var send_data = [2,new Date().getTime(),0];
                         io.emit('realtime Chart', send_data);
                     } else {
@@ -271,7 +271,7 @@ io.on('connection', function(socket){
                             NF1_TX_byte += hex2dec(reverse_value[k])* Math.pow(16,k);
                         }
 
-                        NF1_TX_byte = NF1_TX_byte*GbpS_ratio; 
+                        NF1_TX_byte = NF1_TX_byte*GbpS_ratio;
                         var send_data = [];
                         send_data.push(2);
                         send_data.push(new Date().getTime());
@@ -285,7 +285,7 @@ io.on('connection', function(socket){
                 });
         },interval_timer);
 
-        //nf2 tx 
+        //nf2 tx
         setInterval(function() {
             child = exec('rdaxi ' + nf2_tx_reg,
                 function (error, stdout, stderr) {
@@ -295,7 +295,7 @@ io.on('connection', function(socket){
                     var NF2_TX_byte = 0;
                     var sub_string = stdout.split('=');
                     if(sub_string.length < 2){
-                        console.log("No data to send!!!")
+                        //console.log("No data to send!!!")
                             var send_data = [3,new Date().getTime(),0];
                         io.emit('realtime Chart', send_data);
                     } else {
@@ -322,7 +322,7 @@ io.on('connection', function(socket){
                     }
                 });
         },interval_timer);
-        //nf3 tx 
+        //nf3 tx
         setInterval(function() {
             child = exec('rdaxi ' + nf3_tx_reg,
                 function (error, stdout, stderr) {
@@ -332,7 +332,7 @@ io.on('connection', function(socket){
                     var NF3_TX_byte = 0;
                     var sub_string = stdout.split('=');
                     if(sub_string.length < 2){
-                        console.log("No data to send!!!")
+                        //console.log("No data to send!!!")
                             var send_data = [4,new Date().getTime(),0];
                         io.emit('realtime Chart', send_data);
                     } else {
@@ -360,7 +360,7 @@ io.on('connection', function(socket){
                 });
         },interval_timer);
 
-        //nf0 rx 
+        //nf0 rx
         setInterval(function() {
             child = exec('rdaxi ' + nf0_rx_reg,
                 function (error, stdout, stderr) {
@@ -370,7 +370,7 @@ io.on('connection', function(socket){
                     var NF0_RX_byte = 0;
                     var sub_string = stdout.split('=');
                     if(sub_string.length < 2){
-                        console.log("No data to send!!!")
+                        //console.log("No data to send!!!")
                             var send_data = [5,new Date().getTime(),0];
                         io.emit('realtime Chart', send_data);
                     } else {
@@ -398,7 +398,7 @@ io.on('connection', function(socket){
                 });
         },interval_timer);
 
-        //nf1 rx 
+        //nf1 rx
         setInterval(function() {
             child = exec('rdaxi ' + nf1_rx_reg,
                 function (error, stdout, stderr) {
@@ -408,7 +408,7 @@ io.on('connection', function(socket){
                     var NF1_RX_byte = 0;
                     var sub_string = stdout.split('=');
                     if(sub_string.length < 2){
-                        console.log("No data to send!!!")
+                        //console.log("No data to send!!!")
                             var send_data = [6,new Date().getTime(),0];
                         io.emit('realtime Chart', send_data);
                     } else {
@@ -434,7 +434,7 @@ io.on('connection', function(socket){
                     }
                 });
         },interval_timer);
-        //nf2 rx 
+        //nf2 rx
         setInterval(function() {
             child = exec('rdaxi ' + nf2_rx_reg,
                 function (error, stdout, stderr) {
@@ -444,7 +444,7 @@ io.on('connection', function(socket){
                     var NF2_RX_byte = 0;
                     var sub_string = stdout.split('=');
                     if(sub_string.length < 2){
-                        console.log("No data to send!!!")
+                        //console.log("No data to send!!!")
                             var send_data = [7,new Date().getTime(),0];
                         io.emit('realtime Chart', send_data);
                     } else {
@@ -470,7 +470,7 @@ io.on('connection', function(socket){
                     }
                 });
         },interval_timer);
-        //nf3 rx 
+        //nf3 rx
         setInterval(function() {
             child = exec('rdaxi ' + nf3_rx_reg,
                 function (error, stdout, stderr) {
@@ -480,7 +480,7 @@ io.on('connection', function(socket){
                     var NF3_RX_byte = 0;
                     var sub_string = stdout.split('=');
                     if(sub_string.length < 2){
-                        console.log("No data to send!!!")
+                        //console.log("No data to send!!!")
                             var send_data = [8,new Date().getTime(),0];
                         io.emit('realtime Chart', send_data);
                     } else {
@@ -518,45 +518,45 @@ io.on('connection', function(socket){
         .on('end', function(){
             //console.log("schedule"+data_schedule.length);
             for(var i = 0; i< data_schedule.length; i++) {
-                var now = new Date();	
+                var now = new Date();
                 var schedule_time = new Date(data_schedule[i].date +" "+ data_schedule[i].time);
                 //console.log(schedule_time);
-                //console.log(now);	
+                //console.log(now);
                 if( now >= schedule_time) {
-                    // Run some command to start ClamAV software	
+                    // Run some command to start ClamAV software
                     if(isSchedule_running == 1) {
                         console.log("The schedule is rejected by another schedule is running!!!")
             var query_status_rejected = 'UPDATE schedule SET status="rejected" WHERE id='+data_schedule[i].id;
-        db.query(query_status_rejected); 
+        db.query(query_status_rejected);
         continue;
                     }
 
                     id_schedule = data_schedule[i].id;
                     var query_status_running = 'UPDATE schedule SET status="running" WHERE id='+data_schedule[i].id;
-                    db.query(query_status_running); 
+                    db.query(query_status_running);
 
                     console.log("Schedule is running...")
                         var command = '/home/netfpga/thainguyen/working_space_HW/clamav_bbf/run.sh '+ data_schedule[i].scan_link;
-                    console.log(command); 
+                    console.log(command);
                     schedule = exec(command,
                             //schedule = exec('ls',
                              function (error, stdout, stderr) {
                                  isSchedule_running = 1;
-                                 console.log(stdout);	
+                                 console.log(stdout);
                                  if (error !== null) {
                                      console.log('exec error_schedule: ' + error);
                                  } else {
                                      isSchedule_running = 0;
                                      var query_status_completed = 'UPDATE schedule SET status="completed" WHERE id='+ id_schedule;
-                                     db.query(query_status_completed); 
+                                     db.query(query_status_completed);
 
                                      var query = 'INSERT INTO notification (name,link,time,date) VALUES ("New Scan","/scansummary","'+getTimeNow() +'","'+getDateNow()+'")';
-                                     db.query(query);	
+                                     db.query(query);
 
                                      console.log("Bingo!!!");
                                  }
                              });
-                            } 
+                            }
                             }
                             });
         },interval_timer);
@@ -614,7 +614,7 @@ io.on('connection', function(socket){
 
     // Update feature
 
-    socket.on('check bitfile running',function(checkbit) {	
+    socket.on('check bitfile running',function(checkbit) {
         console.log(checkbit);
         child = exec('rdaxi 0x78200000', function (error, stdout, stderr) {
             var data;
@@ -644,7 +644,7 @@ io.on('connection', function(socket){
             if (error !== null) {
                 console.log('exec error: ' + error);
             }
-        });			
+        });
 
     });
 
@@ -660,11 +660,11 @@ io.on('connection', function(socket){
                     socket.emit('update bitfile client', "error");
                 } else {
                     var query = 'INSERT INTO notification (name,link,time,date) VALUES ("New Update","/update","'+getTimeNow() +'","'+getDateNow()+'")';
-                    db.query(query);		
-                    socket.emit('update bitfile client', "ver1_updated");	
+                    db.query(query);
+                    socket.emit('update bitfile client', "ver1_updated");
                 }
 
-            });			
+            });
 
 
         } else if( data == 'ver2') {
@@ -678,7 +678,7 @@ io.on('connection', function(socket){
                 } else {
                     var query = 'INSERT INTO notification (name,link,time,date) VALUES ("New Update","/update","'+getTimeNow() +'","'+getDateNow()+'")';
                     db.query(query);
-                    socket.emit('update bitfile client', "ver2_updated");	
+                    socket.emit('update bitfile client', "ver2_updated");
                 }
             });
 
@@ -693,7 +693,7 @@ io.on('connection', function(socket){
                             } else {
                                 var query = 'INSERT INTO notification (name,link,time,date) VALUES ("New Update","/update","'+getTimeNow() +'","'+getDateNow()+'")';
                                 db.query(query);
-                                socket.emit('update bitfile client', "ver3_updated");	
+                                socket.emit('update bitfile client', "ver3_updated");
                             }
                         });
         }
@@ -721,46 +721,30 @@ io.on('connection', function(socket){
             socket.emit('new schedule', "success");
         }
 
-    })	
+    })
     });
-    /*
-       var update_number_schedule = [];	
-       socket.on('update number schedule',function(data) {
-       update_number_schedule = [];
-       db.query('SELECT * FROM `schedule` where status="waiting"')
-       .on('result', function(data){
-       update_number_schedule.push(data);
-       })
-       .on('end', function(){
-//console.log(data_schedule.length)
-socket.emit('update number schedule client', update_number_schedule.length)
-})
-});
-*/
-/*
 
-   setInterval(function() {
-   var data_schedule = [];
-   db.query('SELECT * FROM `schedule` where status="waiting"')
-   .on('result', function(data){
-   data_schedule.push(data);
-   })
-   .on('end', function(){
-   console.log(data_schedule.length)
-   socket.emit('view sumary detail', sumary_detail)
-   })
+    //Events Feature
+    socket.on('event', function(data){
+        console.log("events is coming-----------");
+        var result_rows = [];
 
-   },2000)
+        db.query('SELECT * FROM events',function(err,rows){
+        if(err) throw err;
 
-*/
+        console.log('Data received from Db:\n');
+        console.log(rows);
+      });
 
-// run scan by command line 
+    });
+
+// run scan by command line
 if( scan_by_admin == 1) {
     console.log("Run scan by admin");
     //tx = exec('/home/netfpga/thainguyen/working_space_HW/clamav_bbf/run.sh /home/netfpga/thainguyen/test/test_600MB.elf',
     tx = exec('',
             function (error, stdout, stderr) {
-                console.log(stdout);	
+                console.log(stdout);
                 if (error !== null) {
                     console.log('exec error: ' + error);
                 }
@@ -809,4 +793,3 @@ function getDateNow() {
 http.listen(3003, function(){
     console.log('listening on *:3003');
 });
-

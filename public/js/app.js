@@ -71,7 +71,7 @@ config(function ($routeProvider, $locationProvider) {
     when('/statistics',{
       templateUrl: 'partials/statistics',
       controller: 'statisticsCtrl'
-    }).	
+    }).
     when('/update',{
       templateUrl: 'partials/update',
       controller: 'updateCtrl'
@@ -82,16 +82,16 @@ config(function ($routeProvider, $locationProvider) {
     }).
 
 //added event page
-    when('/events',{
-      templateUrl: 'partials/events',
-      controller: 'eventsCtrl'
+    when('/event',{
+      templateUrl: 'partials/event',
+      controller: 'eventCtrl'
     }).
 
 //added history page
     when('/history',{
       templateUrl: 'partials/history',
       controller: 'historyCtrl'
-    }).	
+    }).
 
     when('/manga/test',{
       templateUrl: 'manga/list/1',

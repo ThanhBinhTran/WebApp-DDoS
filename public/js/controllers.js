@@ -15,11 +15,11 @@ angular.module('myApp.controllers', []).
     error(function (data, status, headers, config) {
       $scope.name = 'Error!';
     });
-    
+
   }).
   controller('dashboardCtrl', function ($scope) {
     // write Ctrl
-    $scope.$on('$viewContentLoaded', function () 
+    $scope.$on('$viewContentLoaded', function ()
      {
        // javascript code here
        $('div#page-wrapper div:last').nextAll('script').remove();
@@ -37,7 +37,7 @@ angular.module('myApp.controllers', []).
   }).
   controller('flotCtrl', function ($scope) {
     // write Ctrl here
-    $scope.$on('$viewContentLoaded', function () 
+    $scope.$on('$viewContentLoaded', function ()
      {
        $scope.$parent.name = 'Flottttt';
        // javascript code here
@@ -51,7 +51,7 @@ angular.module('myApp.controllers', []).
      });
   }).
   controller('morrisCtrl', function($scope){
-    $scope.$on('$viewContentLoaded', function () 
+    $scope.$on('$viewContentLoaded', function ()
      {
       $scope.$parent.name = 'Morris.js Charts';
       // javascript code here
@@ -62,7 +62,7 @@ angular.module('myApp.controllers', []).
      });
   }).
   controller('tablesCtrl', function($scope){
-    $scope.$on('$viewContentLoaded', function () 
+    $scope.$on('$viewContentLoaded', function ()
      {
       $scope.$parent.name = 'Tables';
       // javascript code here
@@ -133,7 +133,7 @@ angular.module('myApp.controllers', []).
 								  +'<script src="sb-admin-2/js/plugins/dataTables/jquery.dataTables.js"></script>'
                                   +'<script src="sb-admin-2/js/plugins/dataTables/dataTables.bootstrap.js"></script>'
 								  //+'<script src="http://cdn.datatables.net/1.10.3/js/jquery.dataTables.min.js"></script>'
-								  +'<script src="sb-admin-2/js/plugins/test/test.js" > </script>' 
+								  +'<script src="sb-admin-2/js/plugins/test/test.js" > </script>'
                                   //+'<script>$(document).ready(function() {$("#testTables-example").dataTable();});</script>'
 								  );
      });
@@ -200,4 +200,16 @@ angular.module('myApp.controllers', []).
        $('div#page-wrapper').append('<script src="/socket.io/socket.io.js"></script>'+
                                     '<script src="sb-admin-2/js/plugins/history/history.js"></script>');
      });
+  })
+
+  .controller('eventCtrl', function($scope){
+    $scope.$on('$viewContentLoaded', function()
+     {
+      $scope.$parent.name = 'Event';
+       $('div#page-wrapper div:last').nextAll('script').remove();
+       $('div#page-wrapper').append('<script src="/socket.io/socket.io.js"></script>'+
+                                    '<script src="sb-admin-2/js/plugins/event/event.js"></script>');
+     });
   });
+
+// remember to remove ; before add new controller :D
