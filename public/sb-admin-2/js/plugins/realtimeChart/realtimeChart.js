@@ -27,10 +27,10 @@ $('#select-options').html(select_option);
 var value_section = '<fieldset>	<legend style="font-size: 15px" >Network history</legend>';
 value_section += '<table border="1" style="width:50%; border: 1px solid black">';
 value_section += '<tr> <th> Interface </th> <th> RX Speed </th> <th> TX Speed </th> <th> RX DROP Speed </th></tr>';
-value_section += '<tr> <td>NF0</td>  <td id="NF0_RX_Speed"> </td>  <td id="NF0_TX_Speed"> </td> <td id="NF0_RX_DROP_Speed"> </td></tr>';
-value_section += '<tr> <td>NF1</td>  <td id="NF1_RX_Speed"> </td>  <td id="NF1_TX_Speed"> </td> <td id="NF1_RX_DROP_Speed"> </td></tr>';
-value_section += '<tr> <td>NF2</td>  <td id="NF2_RX_Speed"> </td>  <td id="NF2_TX_Speed"> </td> <td id="NF2_RX_DROP_Speed"> </td></tr>';
-value_section += '<tr> <td>NF3</td>  <td id="NF3_RX_Speed"> </td>  <td id="NF3_TX_Speed"> </td> <td id="NF3_RX_DROP_Speed"> </td></tr>';
+value_section += '<tr> <td>NF0</td>  <td id="NF0_RX_Speed"> </td>  <td id="NF0_TX_Speed"> </td> <td id="NF0_DROP_Speed"> </td></tr>';
+value_section += '<tr> <td>NF1</td>  <td id="NF1_RX_Speed"> </td>  <td id="NF1_TX_Speed"> </td> <td id="NF1_DROP_Speed"> </td></tr>';
+value_section += '<tr> <td>NF2</td>  <td id="NF2_RX_Speed"> </td>  <td id="NF2_TX_Speed"> </td> <td id="NF2_DROP_Speed"> </td></tr>';
+value_section += '<tr> <td>NF3</td>  <td id="NF3_RX_Speed"> </td>  <td id="NF3_TX_Speed"> </td> <td id="NF3_DROP_Speed"> </td></tr>';
 value_section += '</table></fieldset><br>';
 
 $('#value-section').html(value_section);
@@ -71,10 +71,10 @@ $(function() {
     var NF2_RX_data = [];
     var NF3_RX_data = [];
 
-    var NF0_RX_DROP_data = [];
-    var NF1_RX_DROP_data = [];
-    var NF2_RX_DROP_data = [];
-    var NF3_RX_DROP_data = [];
+    var NF0_DROP_data = [];
+    var NF1_DROP_data = [];
+    var NF2_DROP_data = [];
+    var NF3_DROP_data = [];
 
     var timeInterval_FPGA = 1000;
     var timeInterval = 1000;
@@ -104,6 +104,17 @@ $(function() {
         array.push(temp);
     }
 
+    function pushDataSET(data_set, cb_nf_interface, nf_data, nf_speed, nf_label, nf_color) {
+        if($(cb_nf_interface).prop('checked')) {
+            data_set.push({
+                label: nf_label,
+                data: nf_data,
+                color: nf_color,
+            });
+            $(nf_speed).html(nf_data[nf_data.length-1][1] + ' Gbps' );
+        }
+    }
+
     $("#demo").freshslider({
     range: false, // true or false
     step: 10,
@@ -118,6 +129,8 @@ $(function() {
     } // callback function when slider caret's changed, onchange(low, high) for ranged, and onchange(value) for unranged
     });
 
+
+
     //execute function
     initArray(NF0_TX_data);
     initArray(NF1_TX_data);
@@ -129,10 +142,10 @@ $(function() {
     initArray(NF2_RX_data);
     initArray(NF3_RX_data);
 
-    initArray(NF0_RX_DROP_data);
-    initArray(NF1_RX_DROP_data);
-    initArray(NF2_RX_DROP_data);
-    initArray(NF3_RX_DROP_data);
+    initArray(NF0_DROP_data);
+    initArray(NF1_DROP_data);
+    initArray(NF2_DROP_data);
+    initArray(NF3_DROP_data);
 
 socket.on('realtime Chart',function(new_data) {
 
@@ -178,16 +191,15 @@ socket.on('realtime Chart',function(new_data) {
     }else if(new_data[0] == 8) {
         pushData(NF3_RX_data, new_data[1],new_data[2]);
     }else if(new_data[0] == 9) {
-        pushData(NF0_RX_DROP_data, new_data[1],new_data[2]);
+        pushData(NF0_DROP_data, new_data[1],new_data[2]);
     }else if(new_data[0] == 10) {
-        pushData(NF1_RX_DROP_data, new_data[1],new_data[2]);
+        pushData(NF1_DROP_data, new_data[1],new_data[2]);
     }else if(new_data[0] == 11) {
-        pushData(NF2_RX_DROP_data, new_data[1],new_data[2]);
+        pushData(NF2_DROP_data, new_data[1],new_data[2]);
     }else if(new_data[0] == 12) {
-        pushData(NF3_RX_DROP_data, new_data[1],new_data[2]);
+        pushData(NF3_DROP_data, new_data[1],new_data[2]);
     }
 
-    data_set.shift();
     //data_set.shift();
     //data_set.shift();
     //data_set.shift();
@@ -195,87 +207,23 @@ socket.on('realtime Chart',function(new_data) {
     //data_set.shift();
     //data_set.shift();
     //data_set.shift();
+    //data_set.shift();
 
-    //NF0 TX
-    if($('#cb_NF0_TX').prop('checked')) {
+   pushDataSET(data_set, '#cb_NF0_TX', NF0_TX_data, '#NF0_TX_Speed', "NF0 TX", "#093145");
+   pushDataSET(data_set, '#cb_NF1_TX', NF1_TX_data, '#NF1_TX_Speed', "NF1 TX", "#1496bb");
+   pushDataSET(data_set, '#cb_NF2_TX', NF2_TX_data, '#NF2_TX_Speed', "NF2 TX", "#829356");
+   pushDataSET(data_set, '#cb_NF3_TX', NF3_TX_data, '#NF3_TX_Speed', "NF3 TX", "#bca136");
 
-        data_set.push({
-            label:"NF0 TX",
-            data: NF0_TX_data,
-            color: "#093145",
-        });
-        $('#NF0_TX_Speed').html(NF0_TX_data[NF0_TX_data.length-1][1] + ' Gbps' );
-    }
+   pushDataSET(data_set, '#cb_NF0_RX', NF0_RX_data, '#NF0_RX_Speed', "NF0 RX", "#c2571a");
+   pushDataSET(data_set, '#cb_NF1_RX', NF1_RX_data, '#NF1_RX_Speed', "NF1 RX", "#9a2617");
+   pushDataSET(data_set, '#cb_NF2_RX', NF2_RX_data, '#NF2_RX_Speed', "NF2 RX", "#dfa800");
+   pushDataSET(data_set, '#cb_NF3_RX', NF3_RX_data, '#NF3_RX_Speed', "NF3 RX", "#050959");
 
-    //NF0 RX
-    if( $('#cb_NF0_RX').is(':checked')) {
-        data_set.push({
-            label:"NF0 RX",
-            data: NF0_RX_data,
-            color: "#1496bb",
-        });
-        $('#NF0_RX_Speed').html(NF0_RX_data[NF0_RX_data.length-1][1] + ' Gbps' );
-    }
+   pushDataSET(data_set, '#cb_NF0_DROP', NF0_DROP_data, '#NF0_DROP_Speed', "NF0 Drop", "#093145");
+   pushDataSET(data_set, '#cb_NF1_DROP', NF1_DROP_data, '#NF1_DROP_Speed', "NF1 Drop", "#093145");
+   pushDataSET(data_set, '#cb_NF2_DROP', NF2_DROP_data, '#NF2_DROP_Speed', "NF2 Drop", "#093145");
+   pushDataSET(data_set, '#cb_NF3_DROP', NF3_DROP_data, '#NF3_DROP_Speed', "NF3 Drop", "#093145");
 
-    //NF1 TX
-    if( $('#cb_NF1_TX').is(':checked')) {
-        data_set.push({
-            label:"NF1 TX",
-            data: NF1_TX_data,
-            color: "#829356",
-        });
-        $('#NF1_TX_Speed').html(NF1_TX_data[NF1_TX_data.length-1][1] + ' Gbps' );
-    }
-
-    //NF1 RX
-    if( $('#cb_NF1_RX').is(':checked')) {
-        data_set.push({
-            label:"NF1 RX",
-            data: NF1_RX_data,
-            color: "#bca136",
-        });
-        $('#NF1_RX_Speed').html(NF1_RX_data[NF1_RX_data.length-1][1] + ' Gbps' );
-    }
-
-    //NF2 TX
-    if( $('#cb_NF2_TX').is(':checked')) {
-        data_set.push({
-            label:"NF2 TX",
-            data: NF2_TX_data,
-            color: "#c2571a",
-        });
-        $('#NF2_TX_Speed').html(NF2_TX_data[NF2_TX_data.length-1][1] + ' Gbps' );
-    }
-
-    //NF2 RX
-    if( $('#cb_NF2_RX').is(':checked')) {
-        data_set.push({
-            label:"NF2 RX",
-            data: NF2_RX_data,
-            color: "#9a2617",
-        });
-        $('#NF2_RX_Speed').html(NF2_RX_data[NF2_RX_data.length-1][1] + ' Gbps' );
-    }
-
-    //NF3 TX
-    if( $('#cb_NF3_TX').is(':checked')) {
-        data_set.push({
-            label:"NF3 TX",
-            data: NF3_TX_data,
-            color: "#dfa800",
-        });
-        $('#NF3_TX_Speed').html(NF3_TX_data[NF3_TX_data.length-1][1] + ' Gbps' );
-    }
-
-    //NF3 RX
-    if( $('#cb_NF3_RX').is(':checked')) {
-        data_set.push({
-            label:"NF3 RX",
-            data: NF3_RX_data,
-            color: "#050959",
-        });
-        $('#NF3_RX_Speed').html(NF3_RX_data[NF3_RX_data.length-1][1] + ' Gbps' );
-    }
     options.xaxis.tickSize = [data_entries/15,"second"];
     $.plot($('#moving-chart'),data_set,options);
 });
