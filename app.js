@@ -82,14 +82,16 @@ app.use('/', router);
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var mysql = require('mysql')
-// Let's make node/socketio listen on port 3000
+
+
 var db = mysql.createConnection({
     host: 'localhost',
-    port: '3306',
+    port: 3306,
     user: 'root',
-    pass: '',
+    pass: 'root',
     database: 'DDoS_db'
 });
+
 db.connect(function(err){
   if(err){
     console.log('ERROR: connecting to MySQL database: ' + err);
@@ -180,28 +182,38 @@ io.on('connection', function(socket){
     if (number_realtimechart == 1) {
 
  //       /* BINH ADDED [START] */
- //       var nf0_rx_reg = '77600054'
- //       var nf1_rx_reg = '77600058'
- //       var nf2_rx_reg = '7760005c'
- //       var nf3_rx_reg = '77600060'
+ //       var nf0_rx_reg_add = '77600054'
+ //       var nf1_rx_reg_add = '77600058'
+ //       var nf2_rx_reg_add = '7760005c'
+ //       var nf3_rx_reg_add = '77600060'
 //
- //       var nf0_tx_reg = '77600064'
- //       var nf1_tx_reg = '77600068'
- //       var nf2_tx_reg = '7760006c'
-  //      var nf3_tx_reg = '77600070'
+ //       var nf0_tx_reg_add = '77600064'
+ //       var nf1_tx_reg_add = '77600068'
+ //       var nf2_tx_reg_add = '7760006c'
+  //      var nf3_tx_reg_add = '77600070'
 /* BINH ADDED [START] */
-        var nf0_rx_reg = '77600010'
-        var nf1_rx_reg = '77600014'
-        var nf2_rx_reg = '77600018'
-        var nf3_rx_reg = '7760001a'
+        var nf0_rx_reg_add = '77600010'
+        var nf1_rx_reg_add = '77600014'
+        var nf2_rx_reg_add = '77600018'
+        var nf3_rx_reg_add = '7760001a'
 
-        var nf0_tx_reg = '77600020'
-        var nf1_tx_reg = '77600024'
-        var nf2_tx_reg = '77600028'
-        var nf3_tx_reg = '7760002a'
+        var nf0_tx_reg_add = '77600020'
+        var nf1_tx_reg_add = '77600024'
+        var nf2_tx_reg_add = '77600028'
+        var nf3_tx_reg_add = '7760002a'
+
+        var nf0_tx_ID = 1
+        var nf1_tx_ID = 2
+        var nf2_tx_ID = 3
+        var nf3_tx_ID = 4
+
+        var nf0_rx_ID = 5
+        var nf1_rx_ID = 6
+        var nf2_rx_ID = 7
+        var nf3_rx_ID = 8
 
         //set interval of data query
-        var interval_timer = 1000
+        var interval_timer = 1000000
 
         // through-put *8*10/(1000*1000*1000) <=> 16 000 000 clock *8bit *160Mhz /1G
         var GbpS_ratio = 8*10/(1000*1000*1000)
@@ -213,304 +225,18 @@ io.on('connection', function(socket){
                 io.emit('realtime Chart', send_data);
         },interval_timer);
 
-        //nf0 tx
-        setInterval(function() {
-            child = exec('rdaxi ' + nf0_tx_reg,
-                function (error, stdout, stderr) {
-                    //	socket.on('real time Chart', function() {
-                    //		io.emit();
-                    //	}
-                    var NF0_TX_byte = 0;
-                    var sub_string = stdout.split('=');
-                    if(sub_string.length < 2){
-                        //console.log("No data to send!!!")
-                            var send_data = [1,new Date().getTime(),new Date().getTime()%10];
-                        io.emit('realtime Chart', send_data);
-                    } else {
-                        var sub_string1 = sub_string[1].split('\n');
-                        var sub_string2 = sub_string1[0].split('x');
-                        var value = sub_string2[1].split('');
+        //TX
+        setInterval( getDataAxilite(nf0_tx_reg_add, nf0_tx_reg_add ),interval_timer);
+        setInterval( getDataAxilite(nf1_tx_reg_add, nf1_tx_reg_add ),interval_timer);
+        setInterval( getDataAxilite(nf2_tx_reg_add, nf2_tx_reg_add ),interval_timer);
+        setInterval( getDataAxilite(nf3_tx_reg_add, nf3_tx_reg_add ),interval_timer);
 
-                        var reverse_value = value.reverse();
+        //RX
+        setInterval( getDataAxilite(nf0_rx_reg_add, nf0_rx_reg_add ),interval_timer);
+        setInterval( getDataAxilite(nf1_rx_reg_add, nf1_rx_reg_add ),interval_timer);
+        setInterval( getDataAxilite(nf2_rx_reg_add, nf2_rx_reg_add ),interval_timer);
+        setInterval( getDataAxilite(nf3_rx_reg_add, nf3_rx_reg_add ),interval_timer);
 
-                        for (var k = 0; k < reverse_value.length; k++) {
-                            NF0_TX_byte += hex2dec(reverse_value[k])* Math.pow(16,k);
-                        }
-
-                        NF0_TX_byte = NF0_TX_byte*GbpS_ratio;
-                        var send_data = [];
-                        send_data.push(1);
-                        send_data.push(new Date().getTime());
-                        send_data.push(NF0_TX_byte);
-                        io.emit('realtime Chart', send_data);
-                    }
-
-                    //console.log("NF0TX_byte GBpS:" + sub_string);
-                    if (error !== null) {
-                        console.log('exec error: ' + error);
-                    }
-                });
-        },interval_timer);
-
-        //nf1 tx
-        setInterval(function() {
-            child = exec('rdaxi ' + nf1_tx_reg,
-                function (error, stdout, stderr) {
-                    //	socket.on('real time Chart', function() {
-                    //		io.emit();
-                    //	}
-                    var NF1_TX_byte = 0;
-                    var sub_string = stdout.split('=');
-                    if(sub_string.length < 2){
-                        //console.log("No data to send!!!")
-                            var send_data = [2,new Date().getTime(),0];
-                        io.emit('realtime Chart', send_data);
-                    } else {
-                        var sub_string1 = sub_string[1].split('\n');
-                        var sub_string2 = sub_string1[0].split('x');
-                        var value = sub_string2[1].split('');
-
-                        var reverse_value = value.reverse();
-
-                        for (var k = 0; k < reverse_value.length; k++) {
-                            NF1_TX_byte += hex2dec(reverse_value[k])* Math.pow(16,k);
-                        }
-
-                        NF1_TX_byte = NF1_TX_byte*GbpS_ratio;
-                        var send_data = [];
-                        send_data.push(2);
-                        send_data.push(new Date().getTime());
-                        send_data.push(NF1_TX_byte);
-                        io.emit('realtime Chart', send_data);
-                    }
-                    //console.log("NF1TX_byte GBpS:" + sub_string);
-                    if (error !== null) {
-                        console.log('exec error: ' + error);
-                    }
-                });
-        },interval_timer);
-
-        //nf2 tx
-        setInterval(function() {
-            child = exec('rdaxi ' + nf2_tx_reg,
-                function (error, stdout, stderr) {
-                    //	socket.on('real time Chart', function() {
-                    //		io.emit();
-                    //	}
-                    var NF2_TX_byte = 0;
-                    var sub_string = stdout.split('=');
-                    if(sub_string.length < 2){
-                        //console.log("No data to send!!!")
-                            var send_data = [3,new Date().getTime(),0];
-                        io.emit('realtime Chart', send_data);
-                    } else {
-                        var sub_string1 = sub_string[1].split('\n');
-                        var sub_string2 = sub_string1[0].split('x');
-                        var value = sub_string2[1].split('');
-
-                        var reverse_value = value.reverse();
-
-                        for (var k = 0; k < reverse_value.length; k++) {
-                            NF2_TX_byte += hex2dec(reverse_value[k])* Math.pow(16,k);
-                        }
-
-                        NF2_TX_byte = NF2_TX_byte*GbpS_ratio;
-                        var send_data = [];
-                        send_data.push(3);
-                        send_data.push(new Date().getTime());
-                        send_data.push(NF2_TX_byte);
-                        io.emit('realtime Chart', send_data);
-                    }
-                    //console.log("NF2TX_byte GBpS:" + sub_string);
-                    if (error !== null) {
-                        console.log('exec error: ' + error);
-                    }
-                });
-        },interval_timer);
-        //nf3 tx
-        setInterval(function() {
-            child = exec('rdaxi ' + nf3_tx_reg,
-                function (error, stdout, stderr) {
-                    //	socket.on('real time Chart', function() {
-                    //		io.emit();
-                    //	}
-                    var NF3_TX_byte = 0;
-                    var sub_string = stdout.split('=');
-                    if(sub_string.length < 2){
-                        //console.log("No data to send!!!")
-                            var send_data = [4,new Date().getTime(),0];
-                        io.emit('realtime Chart', send_data);
-                    } else {
-                        var sub_string1 = sub_string[1].split('\n');
-                        var sub_string2 = sub_string1[0].split('x');
-                        var value = sub_string2[1].split('');
-
-                        var reverse_value = value.reverse();
-
-                        for (var k = 0; k < reverse_value.length; k++) {
-                            NF3_TX_byte += hex2dec(reverse_value[k])* Math.pow(16,k);
-                        }
-
-                        NF3_TX_byte = NF3_TX_byte*GbpS_ratio;
-                        var send_data = [];
-                        send_data.push(4);
-                        send_data.push(new Date().getTime());
-                        send_data.push(NF3_TX_byte);
-                        io.emit('realtime Chart', send_data);
-                    }
-                    //console.log("NF3TX_byte GBpS:" + sub_string);
-                    if (error !== null) {
-                        console.log('exec error: ' + error);
-                    }
-                });
-        },interval_timer);
-
-        //nf0 rx
-        setInterval(function() {
-            child = exec('rdaxi ' + nf0_rx_reg,
-                function (error, stdout, stderr) {
-                    //	socket.on('real time Chart', function() {
-                    //		io.emit();
-                    //	}
-                    var NF0_RX_byte = 0;
-                    var sub_string = stdout.split('=');
-                    if(sub_string.length < 2){
-                        //console.log("No data to send!!!")
-                            var send_data = [5,new Date().getTime(),0];
-                        io.emit('realtime Chart', send_data);
-                    } else {
-                        var sub_string1 = sub_string[1].split('\n');
-                        var sub_string2 = sub_string1[0].split('x');
-                        var value = sub_string2[1].split('');
-
-                        var reverse_value = value.reverse();
-
-                        for (var k = 0; k < reverse_value.length; k++) {
-                            NF0_RX_byte += hex2dec(reverse_value[k])* Math.pow(16,k);
-                        }
-                        // through-put *8*16/(1000*1000*1000)
-                        NF0_RX_byte = NF0_RX_byte*GbpS_ratio;
-                        var send_data = [];
-                        send_data.push(5);
-                        send_data.push(new Date().getTime());
-                        send_data.push(NF0_RX_byte);
-                        io.emit('realtime Chart', send_data);
-                    }
-                    //console.log("NF0RX_byte GBpS:" + sub_string);
-                    if (error !== null) {
-                        console.log('exec error: ' + error);
-                    }
-                });
-        },interval_timer);
-
-        //nf1 rx
-        setInterval(function() {
-            child = exec('rdaxi ' + nf1_rx_reg,
-                function (error, stdout, stderr) {
-                    //	socket.on('real time Chart', function() {
-                    //		io.emit();
-                    //	}
-                    var NF1_RX_byte = 0;
-                    var sub_string = stdout.split('=');
-                    if(sub_string.length < 2){
-                        //console.log("No data to send!!!")
-                            var send_data = [6,new Date().getTime(),0];
-                        io.emit('realtime Chart', send_data);
-                    } else {
-                        var sub_string1 = sub_string[1].split('\n');
-                        var sub_string2 = sub_string1[0].split('x');
-                        var value = sub_string2[1].split('');
-
-                        var reverse_value = value.reverse();
-
-                        for (var k = 0; k < reverse_value.length; k++) {
-                            NF1_RX_byte += hex2dec(reverse_value[k])* Math.pow(16,k);
-                        }
-                        NF1_RX_byte = NF1_RX_byte*GbpS_ratio;
-                        var send_data = [];
-                        send_data.push(6);
-                        send_data.push(new Date().getTime());
-                        send_data.push(NF1_RX_byte);
-                        io.emit('realtime Chart', send_data);
-                    }
-                    //console.log("NF1RX_byte GBpS:" + sub_string);
-                    if (error !== null) {
-                        console.log('exec error: ' + error);
-                    }
-                });
-        },interval_timer);
-        //nf2 rx
-        setInterval(function() {
-            child = exec('rdaxi ' + nf2_rx_reg,
-                function (error, stdout, stderr) {
-                    //	socket.on('real time Chart', function() {
-                    //		io.emit();
-                    //	}
-                    var NF2_RX_byte = 0;
-                    var sub_string = stdout.split('=');
-                    if(sub_string.length < 2){
-                        //console.log("No data to send!!!")
-                            var send_data = [7,new Date().getTime(),0];
-                        io.emit('realtime Chart', send_data);
-                    } else {
-                        var sub_string1 = sub_string[1].split('\n');
-                        var sub_string2 = sub_string1[0].split('x');
-                        var value = sub_string2[1].split('');
-
-                        var reverse_value = value.reverse();
-
-                        for (var k = 0; k < reverse_value.length; k++) {
-                            NF2_RX_byte += hex2dec(reverse_value[k])* Math.pow(16,k);
-                        }
-                        NF2_RX_byte = NF2_RX_byte*GbpS_ratio;
-                        var send_data = [];
-                        send_data.push(7);
-                        send_data.push(new Date().getTime());
-                        send_data.push(NF2_RX_byte);
-                        io.emit('realtime Chart', send_data);
-                    }
-                    //console.log("NF2RX_byte GBpS:" + sub_string);
-                    if (error !== null) {
-                        console.log('exec error: ' + error);
-                    }
-                });
-        },interval_timer);
-        //nf3 rx
-        setInterval(function() {
-            child = exec('rdaxi ' + nf3_rx_reg,
-                function (error, stdout, stderr) {
-                    //	socket.on('real time Chart', function() {
-                    //		io.emit();
-                    //	}
-                    var NF3_RX_byte = 0;
-                    var sub_string = stdout.split('=');
-                    if(sub_string.length < 2){
-                        //console.log("No data to send!!!")
-                            var send_data = [8,new Date().getTime(),0];
-                        io.emit('realtime Chart', send_data);
-                    } else {
-                        var sub_string1 = sub_string[1].split('\n');
-                        var sub_string2 = sub_string1[0].split('x');
-                        var value = sub_string2[1].split('');
-
-                        var reverse_value = value.reverse();
-
-                        for (var k = 0; k < reverse_value.length; k++) {
-                            NF3_RX_byte += hex2dec(reverse_value[k])* Math.pow(16,k);
-                        }
-                        NF3_RX_byte = NF3_RX_byte*GbpS_ratio;                    //need to be update
-                        var send_data = [];
-                        send_data.push(8);
-                        send_data.push(new Date().getTime());
-                        send_data.push(NF3_RX_byte);
-                        io.emit('realtime Chart', send_data);
-                    }
-                    //console.log("NF3RX_byte GBpS:" + sub_string);
-                    if (error !== null) {
-                        console.log('exec error: ' + error);
-                    }
-                });
-        },interval_timer);
 
         /* BINH ADDED [END]*/
         setInterval(function() {
@@ -794,7 +520,40 @@ function getDateNow() {
     var today = d.getDate()+ "/"+ (d.getMonth()+1)+"/" +d.getFullYear();
     return today;
 }
+// read data via axilite then display to real Chart
+function getDataAxilite(nf_reg_add, nf_ID){
+      child = exec('rdaxi ' + nf_reg_add,
+          function (error, stdout, stderr) {
+              var NF_byte = 0;
+              var sub_string = stdout.split('=');
+              if(sub_string.length < 2){
+                  //console.log("No data to send!!!")
+                  var send_data = [nf_ID,new Date().getTime(),0];
+                  io.emit('realtime Chart', send_data);
+              } else {
+                  var sub_string1 = sub_string[1].split('\n');
+                  var sub_string2 = sub_string1[0].split('x');
+                  var value = sub_string2[1].split('');
 
+                  var reverse_value = value.reverse();
+
+                  for (var k = 0; k < reverse_value.length; k++) {
+                      NF_byte += hex2dec(reverse_value[k])* Math.pow(16,k);
+                  }
+
+                  NF_byte = NF_byte*GbpS_ratio;
+                  var send_data = [];
+                  send_data.push(nf_ID);
+                  send_data.push(new Date().getTime());
+                  send_data.push(NF_byte);
+                  io.emit('realtime Chart', send_data);
+              }
+              //console.log("NF1TX_byte GBpS:" + sub_string);
+              if (error !== null) {
+                  console.log('exec error: ' + error);
+              }
+          });
+}
 http.listen(3003, function(){
     console.log('listening on *:3003');
 });
