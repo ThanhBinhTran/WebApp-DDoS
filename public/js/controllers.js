@@ -210,6 +210,16 @@ angular.module('myApp.controllers', []).
        $('div#page-wrapper').append('<script src="/socket.io/socket.io.js"></script>'+
                                     '<script src="sb-admin-2/js/plugins/event/event.js"></script>');
      });
+  })
+
+  .controller('notificationCtrl', function($scope){
+    $scope.$on('$viewContentLoaded', function()
+     {
+      $scope.$parent.name = 'Notification';
+       $('div#page-wrapper div:last').nextAll('script').remove();
+       $('div#page-wrapper').append('<script src="/socket.io/socket.io.js"></script>'+
+                                    '<script src="sb-admin-2/js/plugins/notification/notification.js"></script>');
+     });
   });
 
 // remember to remove ; before add new controller :D

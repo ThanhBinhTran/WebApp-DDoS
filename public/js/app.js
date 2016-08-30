@@ -82,9 +82,15 @@ config(function ($routeProvider, $locationProvider) {
     }).
 
 //added event page
-    when('/event',{
-      templateUrl: 'partials/event',
+    when('/events',{
+      templateUrl: 'partials/events',
       controller: 'eventCtrl'
+    }).
+
+//added notification page
+    when('/notifications',{
+      templateUrl: 'partials/notifications',
+      controller: 'notificationCtrl'
     }).
 
 //added history page

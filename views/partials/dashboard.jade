@@ -1,42 +1,27 @@
 .row
-    .col-lg-3.col-md-6
-        .panel.panel-primary
+    .col-lg-4.col-md-1
+        .panel.panel-red
           .panel-heading
             .row
               .col-xs-3
-                i.fa.fa-th-list.fa-3x
+                i.fa.fa-bullhorn.fa-2x
               .col-xs-9.text-right
-                #new_schedule.huge 00
+                #new_events
                 div New Events!
-          a(href='event#')
+          a(href='events#')
             .panel-footer
               span.pull-left View Details
               span.pull-right
                 i.fa.fa-arrow-circle-right
               .clearfix
-      .col-lg-3.col-md-6
-        .panel.panel-green
-          .panel-heading
-            .row
-              .col-xs-3
-                i.fa.fa-calendar.fa-3x
-              .col-xs-9.text-right
-                #new_schedule.huge 00
-                div New Tasks!
-          a(href='schedule#')
-            .panel-footer
-              span.pull-left View Details
-              span.pull-right
-                i.fa.fa-arrow-circle-right
-              .clearfix
-      .col-lg-3.col-md-6
+      .col-lg-4.col-md-1
         .panel.panel-yellow
           .panel-heading
             .row
               .col-xs-3
-                i.fa.fa-bullhorn.fa-3x
+                i.fa.fa-bell.fa-2x
               .col-xs-9.text-right
-                .huge 00
+                #new_notifications
                 div New Notifications!
           a(href='notifications#')
             .panel-footer
@@ -44,14 +29,13 @@
               span.pull-right
                 i.fa.fa-arrow-circle-right
               .clearfix
-      .col-lg-3.col-md-6
-        .panel.panel-red
+      .col-lg-4.col-md-1
+        .panel.panel-green
           .panel-heading
             .row
               .col-xs-3
-                i.fa.fa-bell.fa-3x
+                i.fa.fa-history.fa-2x
               .col-xs-9.text-right
-                #dashboard_scan.huge 00
                 div HISTORY!
           a(href='history#')
             .panel-footer
@@ -59,10 +43,8 @@
               span.pull-right
                 i.fa.fa-arrow-circle-right
               .clearfix
+.row
     include realtime.jade
-
-
-
 
 //      .col-lg-4
 //        .panel.panel-default

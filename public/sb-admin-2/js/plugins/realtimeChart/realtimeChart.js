@@ -1,8 +1,8 @@
 
 
 var socket = io();
-var select_option = '<fieldset>	<legend style="font-size: 15px" >Network Interface</legend>';
-select_option += '<table style="width:50%"><tr> <td>NF0: </td>';
+var select_option = '<table style="width:50%"><tr> <td>NF0: </td>';
+//var select_option = '<table class="table table-striped table-hover"><tr> <td>NF0: </td>';
 select_option += '<td><input type="checkbox" value="cb_NF0_RX" id="cb_NF0_RX"  > RX </td>';
 select_option += '<td><input type="checkbox" value="cb_NF0_TX" id="cb_NF0_TX" checked="checked" > TX </td>';
 select_option += '<td><input type="checkbox" value="cb_NF0_DROP" id="cb_NF0_DROP"  > RX drop </td>';
@@ -25,8 +25,9 @@ select_option += '</table></fieldset><br>';
 $('#select-options').html(select_option);
 
 var value_section = '<fieldset>	<legend style="font-size: 15px" >Network history</legend>';
-value_section += '<table border="1" style="width:50%; border: 1px solid black">';
-value_section += '<tr> <th> Interface </th> <th> RX Speed </th> <th> TX Speed </th> <th> RX DROP Speed </th></tr>';
+//value_section += '<table border="1" style="width:50%; border: 1px solid black">';
+value_section += '<table class="table table-striped table-hover">';
+value_section += '<th> Interface </th> <th> RX Speed </th> <th> TX Speed </th> <th> RX DROP Speed </th>';
 value_section += '<tr> <td>NF0</td>  <td id="NF0_RX_Speed"> </td>  <td id="NF0_TX_Speed"> </td> <td id="NF0_DROP_Speed"> </td></tr>';
 value_section += '<tr> <td>NF1</td>  <td id="NF1_RX_Speed"> </td>  <td id="NF1_TX_Speed"> </td> <td id="NF1_DROP_Speed"> </td></tr>';
 value_section += '<tr> <td>NF2</td>  <td id="NF2_RX_Speed"> </td>  <td id="NF2_TX_Speed"> </td> <td id="NF2_DROP_Speed"> </td></tr>';
@@ -113,6 +114,9 @@ $(function() {
             });
             $(nf_speed).html(nf_data[nf_data.length-1][1] + ' Gbps' );
         }
+	else{
+		$(nf_speed).html('-- Gbps');
+	}
     }
 
     $("#demo").freshslider({
@@ -214,7 +218,7 @@ socket.on('realtime Chart',function(new_data) {
    pushDataSET(data_set, '#cb_NF1_DROP', NF1_DROP_data, '#NF1_DROP_Speed', "NF1 Drop", "#093145");
    pushDataSET(data_set, '#cb_NF2_DROP', NF2_DROP_data, '#NF2_DROP_Speed', "NF2 Drop", "#093145");
    pushDataSET(data_set, '#cb_NF3_DROP', NF3_DROP_data, '#NF3_DROP_Speed', "NF3 Drop", "#093145");
-
+    
     options.xaxis.tickSize = [data_entries/15,"second"];
     $.plot($('#moving-chart'),data_set,options);
 });
@@ -228,6 +232,7 @@ var options = {
             fill: false
         }
     },
+
     xaxis: {
         mode: "time",
         tickSize: [2, "second"],

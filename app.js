@@ -3,9 +3,6 @@ var express = require('express'),
     methodOverride = require('method-override'),
     errorHandler = require('errorhandler'),
     morgan = require('morgan'),
-    //routes = require('./routes/index'),
-    // api = require('./routes/api'),
-    //http = require('http'),
     path = require('path');
 
     var exec = require('child_process').exec,
@@ -21,18 +18,7 @@ app.use(methodOverride());
 //app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 //*******________**********
-/*
-   require('./routes/manga/manga').add_routes(app);
-
-   app.get('/', routes.index);
-//app.get('/partials/:name', routes.partials);
-
-app.get('*', routes.test);
-app.get('/api/name', api.name);
-//app.get('/tmip/:name', routes.tmip);
-*/
 var router = express.Router();
-// home page route (http://localhost:8080)
 router.param('name', function(req, res, next, name) {
     // do validation on name here
     // blah blah validation
@@ -65,13 +51,11 @@ router.get('/', function(req, res) {
     res.render('index');
 });
 
-// about page route (http://localhost:8080/about)
 router.get('*', function(req, res) {
     res.render('index');
 });
 
 
-// apply the routes to our application
 app.use('/', router);
 
 
@@ -88,7 +72,7 @@ var db = mysql.createConnection({
     host: 'localhost',
     port: 3306,
     user: 'root',
-    pass: 'root',
+    pass: '',
     database: 'DDoS_db'
 });
 
@@ -99,11 +83,11 @@ db.connect(function(err){
   }
   console.log('MySQL: Connection established');
 });
-var notes = []
-var sumary_detail = []
-var isInitNotes = false
-var isSeeMore = false
-var socketCount = 1 // The var is config the number internal function for 1 client. Two client, two function, ...
+var notes = [];
+var sumary_detail = [];
+var isInitNotes = false;
+var isSeeMore = false;
+var socketCount = 1 ;// The var is config the number internal function for 1 client. Two client, two function, ...
 var scan_by_admin = 1; // The var is use to unit_test by deverloper.
 var number_realtimechart = 1 ; // The var is config the number interval function for server. It's mean, When the number client is more than 2, the function is one, only one.
 
@@ -117,106 +101,43 @@ var today_scan = d.getDate()+ "/"+ (d.getMonth()+1)+"/" +d.getFullYear(); // use
 io.on('connection', function(socket){
     console.log('a user connected');
     socketCount = 1;
-    /*  socket.on('chat message', function(msg){
-        console.log('message: ' + msg);
-        });
-        */
-    socket.on('chat message', function(msg){
-        io.emit('chat message', msg);
-    });
-    socket.on('Search',function(msg){
-        sumary_detail = []
-        db.query('SELECT * FROM `scan_sumary_detail` WHERE (time LIKE "%'+msg+'%" OR file LIKE "%'+msg+'%" OR status LIKE "%'+msg+'%" OR virus_name LIKE "%'+msg+'%")')
-        .on('result', function(data){
-            sumary_detail.push(data)
-        })
-    .on('end', function(){
-        socket.emit('view sumary detail', sumary_detail)
-    })
-    notes = [];
-    db.query('SELECT * FROM `scan_sumary` WHERE (time LIKE "%'+msg+'%" OR known_viruses LIKE "%'+msg+'%" OR engine_version LIKE "%'+msg+'%" OR systen_time LIKE "%'+msg+'%")')
-        .on('result', function(data){
-            // Push results onto the notes array
-            //console.log(notes);
-            notes.push(data)
-
-        })
-    .on('end', function(){
-        // Only emit notes after query has been completed
-        socket.emit('initial notes', notes)
-    })
-    });
-    if (! isSeeMore){
-        sumary_detail = [];
-        db.query('SELECT * FROM `scan_sumary_detail`')
-            .on('result', function(data){
-                sumary_detail.push(data)
-            })
-        .on('end', function(){
-            socket.emit('view sumary detail', sumary_detail)
-        })
-    }
-
-    if (! isInitNotes) {
-        // Initial app start, run db query
-
-        notes = [];
-        db.query('SELECT * FROM `scan_sumary`')
-            .on('result', function(data){
-                // Push results onto the notes array
-                //console.log(notes);
-                notes.push(data)
-
-            })
-        .on('end', function(){
-            // Only emit notes after query has been completed
-            socket.emit('initial notes', notes)
-        })
-
-        //isInitNotes = true
-    } else {
-        // Initial notes already exist, send out
-        socket.emit('initial notes', notes)
-    }
-
+    
     if (number_realtimechart == 1) {
 
- //       /* BINH ADDED [START] */
- //       var nf0_rx_reg_add = '77600054'
- //       var nf1_rx_reg_add = '77600058'
- //       var nf2_rx_reg_add = '7760005c'
- //       var nf3_rx_reg_add = '77600060'
-//
- //       var nf0_tx_reg_add = '77600064'
- //       var nf1_tx_reg_add = '77600068'
- //       var nf2_tx_reg_add = '7760006c'
-  //      var nf3_tx_reg_add = '77600070'
 /* BINH ADDED [START] */
-        var nf0_rx_reg_add = '77600010'
-        var nf1_rx_reg_add = '77600014'
-        var nf2_rx_reg_add = '77600018'
-        var nf3_rx_reg_add = '7760001a'
+        var nf0_rx_reg_add = '77600010';
+        var nf1_rx_reg_add = '77600014';
+        var nf2_rx_reg_add = '77600018';
+        var nf3_rx_reg_add = '7760001a';
 
-        var nf0_tx_reg_add = '77600020'
-        var nf1_tx_reg_add = '77600024'
-        var nf2_tx_reg_add = '77600028'
-        var nf3_tx_reg_add = '7760002a'
+        var nf0_tx_reg_add = '77600020';
+        var nf1_tx_reg_add = '77600024';
+        var nf2_tx_reg_add = '77600028';
+        var nf3_tx_reg_add = '7760002a';
 
-        var nf0_tx_ID = 1
-        var nf1_tx_ID = 2
-        var nf2_tx_ID = 3
-        var nf3_tx_ID = 4
+        var nf0_rx_drop_reg_add = '77600020';
+        var nf1_rx_drop_reg_add = '77600024';
+        var nf2_rx_drop_reg_add = '77600028';
+        var nf3_rx_drop_reg_add = '7760002a';
 
-        var nf0_rx_ID = 5
-        var nf1_rx_ID = 6
-        var nf2_rx_ID = 7
-        var nf3_rx_ID = 8
+        var nf0_tx_ID = 1;
+        var nf1_tx_ID = 2;
+        var nf2_tx_ID = 3;
+        var nf3_tx_ID = 4;
 
-        //set interval of data query
-        var interval_timer = 1000000
+        var nf0_rx_ID = 5;
+        var nf1_rx_ID = 6;
+        var nf2_rx_ID = 7;
+        var nf3_rx_ID = 8;
 
-        // through-put *8*10/(1000*1000*1000) <=> 16 000 000 clock *8bit *160Mhz /1G
-        var GbpS_ratio = 8*10/(1000*1000*1000)
+        var nf0_rx_drop_ID = 9;
+        var nf1_rx_drop_ID = 10;
+        var nf2_rx_drop_ID = 11;
+        var nf3_rx_drop_ID = 12;
+
+       //set interval of data query
+        var interval_timer = 2000;
+
         //GET SERVER TIME
         setInterval(function() {
                 var send_data = [];
@@ -226,122 +147,27 @@ io.on('connection', function(socket){
         },interval_timer);
 
         //TX
-        setInterval( getDataAxilite(nf0_tx_reg_add, nf0_tx_reg_add ),interval_timer);
-        setInterval( getDataAxilite(nf1_tx_reg_add, nf1_tx_reg_add ),interval_timer);
-        setInterval( getDataAxilite(nf2_tx_reg_add, nf2_tx_reg_add ),interval_timer);
-        setInterval( getDataAxilite(nf3_tx_reg_add, nf3_tx_reg_add ),interval_timer);
+        setInterval( function(){getDataAxilite(nf0_tx_reg_add, nf0_tx_ID );},interval_timer);
+        setInterval( function(){getDataAxilite(nf1_tx_reg_add, nf1_tx_ID );},interval_timer);
+        setInterval( function(){getDataAxilite(nf2_tx_reg_add, nf2_tx_ID );},interval_timer);
+        setInterval( function(){getDataAxilite(nf3_tx_reg_add, nf3_tx_ID );},interval_timer);
 
         //RX
-        setInterval( getDataAxilite(nf0_rx_reg_add, nf0_rx_reg_add ),interval_timer);
-        setInterval( getDataAxilite(nf1_rx_reg_add, nf1_rx_reg_add ),interval_timer);
-        setInterval( getDataAxilite(nf2_rx_reg_add, nf2_rx_reg_add ),interval_timer);
-        setInterval( getDataAxilite(nf3_rx_reg_add, nf3_rx_reg_add ),interval_timer);
+        setInterval( function(){getDataAxilite(nf0_rx_reg_add, nf0_rx_ID );},interval_timer);
+        setInterval( function(){getDataAxilite(nf1_rx_reg_add, nf1_rx_ID );},interval_timer);
+        setInterval( function(){getDataAxilite(nf2_rx_reg_add, nf2_rx_ID );},interval_timer);
+        setInterval( function(){getDataAxilite(nf3_rx_reg_add, nf3_rx_ID );},interval_timer);
+
+        //RX
+        setInterval( function(){getDataAxilite(nf0_rx_drop_reg_add, nf0_rx_drop_ID );},interval_timer);
+        setInterval( function(){getDataAxilite(nf1_rx_drop_reg_add, nf1_rx_drop_ID );},interval_timer);
+        setInterval( function(){getDataAxilite(nf2_rx_drop_reg_add, nf2_rx_drop_ID );},interval_timer);
+        setInterval( function(){getDataAxilite(nf3_rx_drop_reg_add, nf3_rx_drop_ID );},interval_timer);
 
 
         /* BINH ADDED [END]*/
-        setInterval(function() {
-            var data_schedule = [];
-
-            db.query('SELECT * FROM `schedule` where status="waiting" and date="'+ today +'"')
-            .on('result', function(data){
-                data_schedule.push(data);
-            })
-        .on('end', function(){
-            //console.log("schedule"+data_schedule.length);
-            for(var i = 0; i< data_schedule.length; i++) {
-                var now = new Date();
-                var schedule_time = new Date(data_schedule[i].date +" "+ data_schedule[i].time);
-                //console.log(schedule_time);
-                //console.log(now);
-                if( now >= schedule_time) {
-                    // Run some command to start ClamAV software
-                    if(isSchedule_running == 1) {
-                        console.log("The schedule is rejected by another schedule is running!!!")
-            var query_status_rejected = 'UPDATE schedule SET status="rejected" WHERE id='+data_schedule[i].id;
-        db.query(query_status_rejected);
-        continue;
-                    }
-
-                    id_schedule = data_schedule[i].id;
-                    var query_status_running = 'UPDATE schedule SET status="running" WHERE id='+data_schedule[i].id;
-                    db.query(query_status_running);
-
-                    console.log("Schedule is running...")
-                        var command = '/home/netfpga/thainguyen/working_space_HW/clamav_bbf/run.sh '+ data_schedule[i].scan_link;
-                    console.log(command);
-                    schedule = exec(command,
-                            //schedule = exec('ls',
-                             function (error, stdout, stderr) {
-                                 isSchedule_running = 1;
-                                 console.log(stdout);
-                                 if (error !== null) {
-                                     console.log('exec error_schedule: ' + error);
-                                 } else {
-                                     isSchedule_running = 0;
-                                     var query_status_completed = 'UPDATE schedule SET status="completed" WHERE id='+ id_schedule;
-                                     db.query(query_status_completed);
-
-                                     var query = 'INSERT INTO notification (name,link,time,date) VALUES ("New Scan","/scansummary","'+getTimeNow() +'","'+getDateNow()+'")';
-                                     db.query(query);
-
-                                     console.log("Bingo!!!");
-                                 }
-                             });
-                            }
-                            }
-                            });
-        },interval_timer);
         number_realtimechart--;
     }
-    // Schedule Feature
-    // Every 1s, check schedule and scan number. Then send to dashboad.js
-    if(socketCount == 1) {
-        setInterval(function() {
-            var data_schedule = [];
-            db.query('SELECT * FROM `schedule` where status="waiting" and date="'+ today +'"')
-            .on('result', function(data){
-                data_schedule.push(data);
-            })
-        .on('end', function(){
-            //console.log("schedule"+data_schedule.length);
-            socket.emit('update number schedule client', data_schedule.length);
-        });
-
-        var data_scan = [];
-        db.query('SELECT * FROM `scan_sumary` where (time LIKE "%'+ today_scan +'%")')
-            .on('result', function(data){
-                data_scan.push(data);
-            })
-        .on('end', function(){
-            //console.log("scan_"+ data_scan.length);
-            socket.emit('update number scan client', data_scan.length);
-        })
-
-        var notification_data = [];
-        db.query('SELECT * FROM `notification`')
-            .on('result', function(data){
-                // Push results onto the notes array
-
-                notification_data.push(data);
-                //console.log(notification_data.length);
-            })
-        .on('end', function(){
-            // Only emit notes after query has been completed
-            //console.log(notification_data.length);
-            socket.emit('update notification', notification_data)
-        })
-
-        },interval_timer);
-        socketCount--;
-    }
-    /*
-     * update number of SCHEDULE and SCAN
-
-     * check schedule - if YES, run it
-     * time = 1000
-     */
-
-
 
     // Update feature
 
@@ -430,58 +256,39 @@ io.on('connection', function(socket){
         }
     });
 
-    //Schedule Feature
-    socket.on('new schedule', function(schedule_data){
-        console.log(schedule_data.date);
-        console.log(schedule_data.link);
-        var data_schedule =[];
-        db.query('SELECT * FROM `schedule` where date="'+schedule_data.date+'" and time="'+ schedule_data.time +'"')
-        .on('result', function(data){
-            data_schedule.push(data);
-        })
-    .on('end', function(){
-        if(data_schedule.length > 0) {
-            socket.emit('new schedule', "Failed!!! This time has been scheduled!!!");
-        }
-        else {
-            var query = 'INSERT INTO schedule (date,time,request_id,scan_link,status) VALUES ("'+ schedule_data.date+'","'+ schedule_data.time +'",1,"'+schedule_data.link +'","waiting")';
-            db.query(query);
+    //Events Feature
+    socket.on('event', function(data){
+	console.log("event start ");
+        db.query('SELECT * FROM events where status = "new"',function(err,rows){
+		if(err) throw err;
 
-            query = 'INSERT INTO notification (name,link,time,date) VALUES ("New Schedule","/schedule","'+getTimeNow() +'","'+getDateNow()+'")';
-            db.query(query);
-            socket.emit('new schedule', "success");
-        }
+	        socket.emit('new event results',rows);
+	        console.log(rows);
+        });
+        db.query('SELECT * FROM events where status = "dismiss"',function(err,rows){
+	        if(err) throw err;
 
-    })
+	        socket.emit('dismiss event results',rows);
+	        console.log(rows);
+	});
     });
 
     //Events Feature
-    socket.on('event', function(data){
-        console.log("events is coming-----------");
-        var result_rows = [];
+    socket.on('notification', function(data){
+	console.log("notification start ");
+        db.query('SELECT * FROM notifications where status = "new"',function(err,rows){
+		if(err) throw err;
 
-        db.query('SELECT * FROM events',function(err,rows){
-        if(err) throw err;
+	        socket.emit('new notification results',rows);
+	        console.log(rows);
+        });
+        db.query('SELECT * FROM notifications where status = "dismiss"',function(err,rows){
+	        if(err) throw err;
 
-        console.log('Data received from Db:\n');
-        console.log(rows);
-      });
-
+	        socket.emit('dismiss notification results',rows);
+	        console.log(rows);
+	});
     });
-
-// run scan by command line
-if( scan_by_admin == 1) {
-    console.log("Run scan by admin");
-    //tx = exec('/home/netfpga/thainguyen/working_space_HW/clamav_bbf/run.sh /home/netfpga/thainguyen/test/test_600MB.elf',
-    tx = exec('',
-            function (error, stdout, stderr) {
-                console.log(stdout);
-                if (error !== null) {
-                    console.log('exec error: ' + error);
-                }
-            });
-    scan_by_admin--;
-}
 });
 
 function hex2dec( value ) {
@@ -520,15 +327,19 @@ function getDateNow() {
     var today = d.getDate()+ "/"+ (d.getMonth()+1)+"/" +d.getFullYear();
     return today;
 }
+
 // read data via axilite then display to real Chart
 function getDataAxilite(nf_reg_add, nf_ID){
       child = exec('rdaxi ' + nf_reg_add,
           function (error, stdout, stderr) {
               var NF_byte = 0;
+              // through-put *8*10/(1000*1000*1000) <=> 16 000 000 clock *8bit *160Mhz /1G
+              var GbpS_ratio = 8*10/(1000*1000*1000);
               var sub_string = stdout.split('=');
               if(sub_string.length < 2){
-                  //console.log("No data to send!!!")
-                  var send_data = [nf_ID,new Date().getTime(),0];
+                  console.log("No data to send!!!")
+                  //var send_data = [nf_ID,new Date().getTime(),0];
+                  var send_data = [nf_ID,new Date().getTime(),new Date().getTime()%10];
                   io.emit('realtime Chart', send_data);
               } else {
                   var sub_string1 = sub_string[1].split('\n');
