@@ -101,7 +101,7 @@ var today_scan = d.getDate()+ "/"+ (d.getMonth()+1)+"/" +d.getFullYear(); // use
 io.on('connection', function(socket){
     console.log('a user connected');
     socketCount = 1;
-    
+
     if (number_realtimechart == 1) {
 
 /* BINH ADDED [START] */
@@ -136,7 +136,7 @@ io.on('connection', function(socket){
         var nf3_rx_drop_ID = 12;
 
        //set interval of data query
-        var interval_timer = 1000;
+        var interval_timer = 5000;
 
         //GET SERVER TIME
         setInterval(function() {

@@ -5,29 +5,29 @@ var select_option = '<table style="width:50%"><tr> <td>NF0: </td>';
 //var select_option = '<table class="table table-striped table-hover"><tr> <td>NF0: </td>';
 select_option += '<td><input type="checkbox" value="cb_NF0_RX" id="cb_NF0_RX"  > RX </td>';
 select_option += '<td><input type="checkbox" value="cb_NF0_TX" id="cb_NF0_TX" checked="checked" > TX </td>';
-select_option += '<td><input type="checkbox" value="cb_NF0_DROP" id="cb_NF0_DROP"  > RX drop </td>';
+select_option += '<td><input type="checkbox" value="cb_NF0_DROP" id="cb_NF0_DROP"  > Drop </td>';
 
 select_option += '<td>NF1: </td>';
 select_option += '<td><input type="checkbox" value="cb_NF1_RX" id="cb_NF1_RX" > RX </td>';
 select_option += '<td><input type="checkbox" value="cb_NF1_TX" id="cb_NF1_TX" > TX </td>';
-select_option += '<td><input type="checkbox" value="cb_NF1_DROP" id="cb_NF1_DROP"  > RX drop</td></tr>';
+select_option += '<td><input type="checkbox" value="cb_NF1_DROP" id="cb_NF1_DROP"  > Drop</td></tr>';
 
 select_option += '<tr><td>NF2: </td>';
 select_option += '<td><input type="checkbox" value="cb_NF2_RX" id="cb_NF2_RX" > RX </td>';
 select_option += '<td><input type="checkbox" value="cb_NF2_TX" id="cb_NF2_TX" > TX </td>';
-select_option += '<td><input type="checkbox" value="cb_NF2_DROP" id="cb_NF2_DROP"  > RX drop </td>';
+select_option += '<td><input type="checkbox" value="cb_NF2_DROP" id="cb_NF2_DROP"  > Drop </td>';
 
 select_option += '<td>NF3: </td>';
 select_option += '<td><input type="checkbox" value="cb_NF3_RX" id="cb_NF3_RX" > RX </td>';
 select_option += '<td><input type="checkbox" value="cb_NF3_TX" id="cb_NF3_TX" > TX </td>';
-select_option += '<td><input type="checkbox" value="cb_NF3_DROP" id="cb_NF3_DROP"  > RX drop </td></tr>';
+select_option += '<td><input type="checkbox" value="cb_NF3_DROP" id="cb_NF3_DROP"  > Drop </td></tr>';
 select_option += '</table></fieldset><br>';
 $('#select-options').html(select_option);
 
 var value_section = '<fieldset>	<legend style="font-size: 15px" >Network history</legend>';
 //value_section += '<table border="1" style="width:50%; border: 1px solid black">';
 value_section += '<table class="table table-striped table-hover">';
-value_section += '<th> Interface </th> <th> RX Speed </th> <th> TX Speed </th> <th> RX DROP Speed </th>';
+value_section += '<th> Interface </th> <th> RX Speed </th> <th> TX Speed </th> <th> DROP Speed </th>';
 value_section += '<tr> <td>NF0</td>  <td id="NF0_RX_Speed"> </td>  <td id="NF0_TX_Speed"> </td> <td id="NF0_DROP_Speed"> </td></tr>';
 value_section += '<tr> <td>NF1</td>  <td id="NF1_RX_Speed"> </td>  <td id="NF1_TX_Speed"> </td> <td id="NF1_DROP_Speed"> </td></tr>';
 value_section += '<tr> <td>NF2</td>  <td id="NF2_RX_Speed"> </td>  <td id="NF2_TX_Speed"> </td> <td id="NF2_DROP_Speed"> </td></tr>';
@@ -37,9 +37,14 @@ value_section += '</table></fieldset><br>';
 $('#value-section').html(value_section);
 
 // date time picker
-//var date_time_picker = '<input id="datetimepicker" type="text" value="" >';
-//$('#date-time-picker').html(date_time_picker);
-//$("#datetimepicker").datetimepicker();
+var radio_selection = 'Switch Unit of Mesurement:<div class="btn-group" data-toggle="buttons">';
+radio_selection += '<label class="btn btn-success btn-sm active">';
+radio_selection += '<input type="radio" name="options" id="speed_gbps" checked> Gigabit per second</label>';
+radio_selection += '<label class="btn btn-success btn-sm">';
+radio_selection += '<input type="radio" name="options" id="speed_pps" > Packet per second</label></div>';
+    //radio_selection += '<div class="radio-inline"><input type="radio" id="speed_gbps" "name="optradio"> Gbps</div>';
+    //radio_selection += '<div class="radio-inline"><input type="radio" id="speed_pps" name="optradio"> Packet per second</div>';
+$('#radio-selection').html(radio_selection);
 
 var time_line  = '<form oninput="x.value=parseInt(display_time.value)">';
     time_line += '<input type="range" id="display_time"  min="30" max="180" step="10" value="40">';
@@ -107,15 +112,26 @@ $(function() {
 
     function pushDataSET(data_set, cb_nf_interface, nf_data, nf_speed, nf_label, nf_color) {
         if($(cb_nf_interface).prop('checked')) {
-            data_set.push({
-                label: nf_label,
-                data: nf_data,
-                color: nf_color,
-            });
-            $(nf_speed).html(nf_data[nf_data.length-1][1] + ' Gbps' );
+            if($(speed_gbps).prop('checked')){
+              data_set.push({
+                  label: nf_label,
+                  data: nf_data,
+                  color: nf_color,
+              });
+              $(nf_speed).html(nf_data[nf_data.length-1][1] + ' Gbps' );
+            }
+            else if($(speed_pps).prop('checked')){
+              data_set.push({
+                  label: nf_label,
+                  data: nf_data,
+                  color: nf_color,
+              });
+              $(nf_speed).html(nf_data[nf_data.length-1][1] + ' Pps' );
+            }
+
         }
 	else{
-		$(nf_speed).html('-- Gbps');
+		$(nf_speed).html('');
 	}
     }
 
@@ -218,8 +234,14 @@ socket.on('realtime Chart',function(new_data) {
    pushDataSET(data_set, '#cb_NF1_DROP', NF1_DROP_data, '#NF1_DROP_Speed', "NF1 Drop", "#093145");
    pushDataSET(data_set, '#cb_NF2_DROP', NF2_DROP_data, '#NF2_DROP_Speed', "NF2 Drop", "#093145");
    pushDataSET(data_set, '#cb_NF3_DROP', NF3_DROP_data, '#NF3_DROP_Speed', "NF3 Drop", "#093145");
-    
+
     options.xaxis.tickSize = [data_entries/15,"second"];
+    if($(speed_gbps).prop('checked')){
+      options.yaxis.axisLabel = "Speed( Gbps )";
+    }
+    else if($(speed_pps).prop('checked')){
+      options.yaxis.axisLabel = "Speed( Pps )";
+    }
     $.plot($('#moving-chart'),data_set,options);
 });
 
@@ -232,7 +254,6 @@ var options = {
             fill: false
         }
     },
-
     xaxis: {
         mode: "time",
         tickSize: [2, "second"],
@@ -246,6 +267,8 @@ var options = {
     yaxis: {
         min: 0,
         max: 10,
+        //autorange: 'reversed',
+        //range: [0, 10]
         tickSize: 1,
         tickFormatter: function (v, axis) {
             if (v % 1 == 0) {
@@ -258,7 +281,7 @@ var options = {
         axisLabelUseCanvas: true,
         axisLabelFontSizePixels: 18,
         axisLabelFontFamily: 'Verdana, Arial',
-        axisLabelPadding: 6
+        axisLabelPadding: 6,
     },
     legend: {
         labelBoxBorderColor: "#fff"
