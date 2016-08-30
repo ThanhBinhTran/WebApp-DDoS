@@ -136,7 +136,7 @@ io.on('connection', function(socket){
         var nf3_rx_drop_ID = 12;
 
        //set interval of data query
-        var interval_timer = 2000;
+        var interval_timer = 1000;
 
         //GET SERVER TIME
         setInterval(function() {

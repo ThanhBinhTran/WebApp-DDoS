@@ -86,3 +86,15 @@ INSERT INTO `events` VALUES
     (5,'Attack','from: 5','dismiss','9:5:53','30/2/2017');
 /*!40000 ALTER TABLE `events` ENABLE KEYS */;
 UNLOCK TABLES;
+
+DROP TABLE IF EXISTS `history`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `history` (
+  `id` int(100) NOT NULL AUTO_INCREMENT,
+  `packet_per_second` int(100) NOT NULL,
+  `time` varchar(50) NOT NULL,
+  `date` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
