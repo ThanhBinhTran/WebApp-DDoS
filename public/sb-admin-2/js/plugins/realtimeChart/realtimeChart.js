@@ -24,7 +24,7 @@ select_option += '<td><input type="checkbox" value="cb_NF3_DROP" id="cb_NF3_DROP
 select_option += '</table></fieldset><br>';
 $('#select-options').html(select_option);
 
-var value_section = '<fieldset>	<legend style="font-size: 15px" >Network history</legend>';
+var value_section = '<fieldset>	<legend style="font-size: 15px" ></legend>';
 //value_section += '<table border="1" style="width:50%; border: 1px solid black">';
 value_section += '<table class="table table-striped table-hover">';
 value_section += '<th> Interface </th> <th> RX Speed </th> <th> TX Speed </th> <th> DROP Speed </th>';
@@ -131,7 +131,7 @@ $(function() {
 
         }
 	else{
-		$(nf_speed).html('');
+		$(nf_speed).html('---');
 	}
     }
 
@@ -141,7 +141,7 @@ $(function() {
     text: true,
     min: 30,
     max: 180,
-    unit: " second", // the unit which slider is considering
+    unit: " seconds", // the unit which slider is considering
     enabled: true, // true or false
     value: 40, // a number if unranged , or 2 elements array contains low and high value if ranged
     onchange:function(value){
