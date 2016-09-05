@@ -9,8 +9,8 @@ function build_table() {
 		table_update += '<th>STT</th>';
 		table_update += '<th>Name</th>';
 		table_update += '<th>Description</th>';
-                table_update += '<th>Uploaded date</th>';
-                table_update += '<th>Status</th>';
+		table_update += '<th>Uploaded date</th>';
+		table_update += '<th>Status</th>';
 		table_update += '<th>Action</th>';
 
 		table_update += '</tr>';
@@ -42,9 +42,11 @@ function build_table() {
 
 
 		table_update += '</table>';
-		table_update += '<div id="dialog" hidden> <img src="sb-admin-2/js/plugins/update/image/loading.gif"> </div>'
+		//table_update += '<div id="dialog" hidden> <img src="sb-admin-2/js/plugins/update/image/loading.gif"> </div>'
 		//table_update += '<button type="" onclick="OnDialog(7622119);" > Open Dialog </button>';
 		//table_update += '<button type="" onclick="OnDialog();" > Close Dialog </button>';
+		//table_update += '<label class="btn btn-default btn-file">Browse...<input type="file" id="file_name"style="display: none;"> </label>';
+
 	$('#update_contain').html(table_update);
 	$(document).ready(function() {$('#update_data_table').dataTable();});
 }
@@ -78,6 +80,7 @@ else {
 // Update bitfile when user click to button
 
 function OnDialog(status) {
+	console.log(file_name);
 if(status == 7622119) {
 	$("#dialog").dialog({
 		autoOpen: false,
@@ -139,5 +142,18 @@ function update(bitfile_id) {
 		}
 
 	});
+}
+
+function readSingleFile(e) {
+  var file = e.target.files[0];
+  if (!file) {
+    return;
+  }
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var contents = e.target.result;
+    displayContents(contents);
+  };
+  reader.readAsText(file);
 }
 // Dialog section
