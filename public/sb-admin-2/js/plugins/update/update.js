@@ -20,7 +20,7 @@ function build_table() {
 		table_update += '<td> With HopCount and Port Ingess/Egress inside</td>';
                 table_update += '<td> 2015</td>';
 		table_update += '<td id="Full_bitstream" class="scanner_running">'+ runningstatus1+' </td>';
-		table_update += '<td><button type="" onclick="update(1);" > Update </button> </td>';
+		table_update += '<td><button type="button" class="btn btn-primary" onclick="update(1);" > Update </button> </td>';
 		table_update += '</tr>';
 
 		table_update += '<tr>';
@@ -29,7 +29,7 @@ function build_table() {
 		table_update += '<td> IE filter 198.12.0.0, 192.168.0.0</td>';
                 table_update += '<td> 2015</td>';
 		table_update += '<td> <span id="partial_bitstream_v01" class="scanner_running">'+ runningstatus2+' </span>  </td>';
-		table_update += '<td> <button type="" onclick="update(2);"> Update </button></td>';
+		table_update += '<td> <button type="button" class="btn btn-primary" onclick="update(2);"> Update </button></td>';
 		table_update += '</tr>';
 
 		table_update += '<tr>';
@@ -37,8 +37,8 @@ function build_table() {
 		table_update += '<td> Partial IE 2  </td>';
 		table_update += '<td> IE accept 192.168.0.0, 198.12.0.0 </td>';
 		table_update += '<td> 2016</td>';
-                table_update += '<td> <div id="partial_bitstream_v01" class="scanner_running"> '+runningstatus3+'</div> </td>';
-		table_update += '<td> <button type="" onclick="update(3);"> Update </button> </td>';
+    table_update += '<td> <div id="partial_bitstream_v01" class="scanner_running"> '+runningstatus3+'</div> </td>';
+		table_update += '<td> <button type="button" class="btn btn-primary" onclick="update(3);"> Update </button> </td>';
 
 
 		table_update += '</table>';
@@ -48,8 +48,28 @@ function build_table() {
 		//table_update += '<label class="btn btn-default btn-file">Browse...<input type="file" id="file_name"style="display: none;"> </label>';
 
 	$('#update_contain').html(table_update);
-	$(document).ready(function() {$('#update_data_table').dataTable();});
+
 }
+
+var bitfiles_table;
+//get bitfiles information
+socket.emit('get bitfile information','');
+
+socket.on('bitfile records',function(result_rows) {
+	bitfiles_table = '<table id="bitfles_table" class="table table-striped table-hover">';
+	bitfiles_table += '<th>version</th><th>Name</th><th>Description</th><th>Create date</th><th>Uploaded date</th><th>Status</th><th>Action</th>';
+	for (var i = 0; i < result_rows.length; i++) {
+	bitfiles_table +='<tr><td>' + result_rows[i].version + '</td><td>'
+												 + result_rows[i].name + '</td><td>'
+												 + result_rows[i].create_datetime + '</td><td>'
+												 + result_rows[i].last_Upload_datetime + '</td><td>'
+												 + result_rows[i].Description + '</td><td>'
+												 + 'N/A</td><td>'
+												 + '<button type="button" class="btn btn-success" onclick="update('+result_rows[i].version+');"> Update </button> </td></tr>';
+	};
+	bitfiles_table += '</table>';
+	$('#bitfiles-table').html(bitfiles_table);
+});
 
 //build table in the first time
 

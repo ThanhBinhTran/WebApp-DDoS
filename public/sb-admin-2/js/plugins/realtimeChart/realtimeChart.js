@@ -37,13 +37,11 @@ value_section += '</table></fieldset><br>';
 $('#value-section').html(value_section);
 
 // date time picker
-var radio_selection = 'Switch Unit of Mesurement:<div class="btn-group" data-toggle="buttons">';
+var radio_selection = '<label for="comment"> Switch Unit of Mesurement </label>  <div class="btn-group" data-toggle="buttons">';
 radio_selection += '<label class="btn btn-success btn-sm active">';
 radio_selection += '<input type="radio" name="options" id="speed_gbps" checked> Gigabit per second</label>';
 radio_selection += '<label class="btn btn-success btn-sm">';
 radio_selection += '<input type="radio" name="options" id="speed_pps" > Packet per second</label></div>';
-    //radio_selection += '<div class="radio-inline"><input type="radio" id="speed_gbps" "name="optradio"> Gbps</div>';
-    //radio_selection += '<div class="radio-inline"><input type="radio" id="speed_pps" name="optradio"> Packet per second</div>';
 $('#radio-selection').html(radio_selection);
 
 var time_line  = '<form oninput="x.value=parseInt(display_time.value)">';
@@ -181,10 +179,10 @@ socket.on('realtime Chart',function(new_data) {
      *    new_data[0] == 7  nf2 rx
      *    new_data[0] == 8  nf3 rx
 
-     *    new_data[0] == 9   nf0 rx
-     *    new_data[0] == 10  nf1 rx
-     *    new_data[0] == 11  nf2 rx
-     *    new_data[0] == 12  nf3 rx
+     *    new_data[0] == 9   nf0 drop
+     *    new_data[0] == 10  nf1 drop
+     *    new_data[0] == 11  nf2 drop
+     *    new_data[0] == 12  nf3 drop
      * new_data[1]: Time
      * new_data[2]: Data
      * new_data[3]: Options for flot //

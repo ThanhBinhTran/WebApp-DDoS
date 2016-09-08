@@ -105,20 +105,35 @@ io.on('connection', function(socket){
   if (number_realtimechart == 1) {
 
     /* BINH ADDED [START] */
-    var nf0_rx_reg_add = '77600010';
-    var nf1_rx_reg_add = '77600014';
-    var nf2_rx_reg_add = '77600018';
-    var nf3_rx_reg_add = '7760001a';
+    var nf0_rx_Gbps_reg_add = '77600010';
+    var nf1_rx_Gbps_reg_add = '77600014';
+    var nf2_rx_Gbps_reg_add = '77600018';
+    var nf3_rx_Gbps_reg_add = '7760001a';
 
-    var nf0_tx_reg_add = '77600020';
-    var nf1_tx_reg_add = '77600024';
-    var nf2_tx_reg_add = '77600028';
-    var nf3_tx_reg_add = '7760002a';
+    var nf0_tx_Gbps_reg_add = '77600020';
+    var nf1_tx_Gbps_reg_add = '77600024';
+    var nf2_tx_Gbps_reg_add = '77600028';
+    var nf3_tx_Gbps_reg_add = '7760002a';
 
-    var nf0_rx_drop_reg_add = '77600020';
-    var nf1_rx_drop_reg_add = '77600024';
-    var nf2_rx_drop_reg_add = '77600028';
-    var nf3_rx_drop_reg_add = '7760002a';
+    var nf0_drop_Gbps_reg_add = '77600020';
+    var nf1_drop_Gbps_reg_add = '77600024';
+    var nf2_drop_Gbps_reg_add = '77600028';
+    var nf3_drop_Gbps_reg_add = '7760002a';
+
+    var nf0_rx_Pps_reg_add = '77600010';
+    var nf1_rx_Pps_reg_add = '77600014';
+    var nf2_rx_Pps_reg_add = '77600018';
+    var nf3_rx_Pps_reg_add = '7760001a';
+
+    var nf0_tx_Pps_reg_add = '77600020';
+    var nf1_tx_Pps_reg_add = '77600024';
+    var nf2_tx_Pps_reg_add = '77600028';
+    var nf3_tx_Pps_reg_add = '7760002a';
+
+    var nf0_drop_Pps_reg_add = '77600020';
+    var nf1_drop_Pps_reg_add = '77600024';
+    var nf2_drop_Pps_reg_add = '77600028';
+    var nf3_drop_Pps_reg_add = '7760002a';
 
     var nf0_tx_ID = 1;
     var nf1_tx_ID = 2;
@@ -130,13 +145,13 @@ io.on('connection', function(socket){
     var nf2_rx_ID = 7;
     var nf3_rx_ID = 8;
 
-    var nf0_rx_drop_ID = 9;
-    var nf1_rx_drop_ID = 10;
-    var nf2_rx_drop_ID = 11;
-    var nf3_rx_drop_ID = 12;
+    var nf0_drop_ID = 9;
+    var nf1_drop_ID = 10;
+    var nf2_drop_ID = 11;
+    var nf3_drop_ID = 12;
 
     //set interval of data query
-    var interval_timer = 10000000;
+    var interval_timer = 10000;
 
     //GET SERVER TIME
     setInterval(function() {
@@ -146,30 +161,63 @@ io.on('connection', function(socket){
       io.emit('realtime Chart', send_data);
     },interval_timer);
 
+    /* get speed of gigabit per seconds */
     //TX
-    setInterval( function(){getDataAxilite(nf0_tx_reg_add, nf0_tx_ID );},interval_timer);
-    setInterval( function(){getDataAxilite(nf1_tx_reg_add, nf1_tx_ID );},interval_timer);
-    setInterval( function(){getDataAxilite(nf2_tx_reg_add, nf2_tx_ID );},interval_timer);
-    setInterval( function(){getDataAxilite(nf3_tx_reg_add, nf3_tx_ID );},interval_timer);
+    setInterval( function(){GetSpeed_Gbps(nf0_tx_Gbps_reg_add, nf0_tx_ID );},interval_timer);
+    setInterval( function(){GetSpeed_Gbps(nf1_tx_Gbps_reg_add, nf1_tx_ID );},interval_timer);
+    setInterval( function(){GetSpeed_Gbps(nf2_tx_Gbps_reg_add, nf2_tx_ID );},interval_timer);
+    setInterval( function(){GetSpeed_Gbps(nf3_tx_Gbps_reg_add, nf3_tx_ID );},interval_timer);
 
     //RX
-    setInterval( function(){getDataAxilite(nf0_rx_reg_add, nf0_rx_ID );},interval_timer);
-    setInterval( function(){getDataAxilite(nf1_rx_reg_add, nf1_rx_ID );},interval_timer);
-    setInterval( function(){getDataAxilite(nf2_rx_reg_add, nf2_rx_ID );},interval_timer);
-    setInterval( function(){getDataAxilite(nf3_rx_reg_add, nf3_rx_ID );},interval_timer);
+    setInterval( function(){GetSpeed_Gbps(nf0_rx_Gbps_reg_add, nf0_rx_ID );},interval_timer);
+    setInterval( function(){GetSpeed_Gbps(nf1_rx_Gbps_reg_add, nf1_rx_ID );},interval_timer);
+    setInterval( function(){GetSpeed_Gbps(nf2_rx_Gbps_reg_add, nf2_rx_ID );},interval_timer);
+    setInterval( function(){GetSpeed_Gbps(nf3_rx_Gbps_reg_add, nf3_rx_ID );},interval_timer);
+
+    //DROP
+    setInterval( function(){GetSpeed_Gbps(nf0_drop_Gbps_reg_add, nf0_drop_ID );},interval_timer);
+    setInterval( function(){GetSpeed_Gbps(nf1_drop_Gbps_reg_add, nf1_drop_ID );},interval_timer);
+    setInterval( function(){GetSpeed_Gbps(nf2_drop_Gbps_reg_add, nf2_drop_ID );},interval_timer);
+    setInterval( function(){GetSpeed_Gbps(nf3_drop_Gbps_reg_add, nf3_drop_ID );},interval_timer);
+
+    /*get speed of packet per seconds */
+    //TX
+    setInterval( function(){GetSpeed_Pps(nf0_tx_Pps_reg_add, nf0_tx_ID );},interval_timer);
+    setInterval( function(){GetSpeed_Pps(nf1_tx_Pps_reg_add, nf1_tx_ID );},interval_timer);
+    setInterval( function(){GetSpeed_Pps(nf2_tx_Pps_reg_add, nf2_tx_ID );},interval_timer);
+    setInterval( function(){GetSpeed_Pps(nf3_tx_Pps_reg_add, nf3_tx_ID );},interval_timer);
 
     //RX
-    setInterval( function(){getDataAxilite(nf0_rx_drop_reg_add, nf0_rx_drop_ID );},interval_timer);
-    setInterval( function(){getDataAxilite(nf1_rx_drop_reg_add, nf1_rx_drop_ID );},interval_timer);
-    setInterval( function(){getDataAxilite(nf2_rx_drop_reg_add, nf2_rx_drop_ID );},interval_timer);
-    setInterval( function(){getDataAxilite(nf3_rx_drop_reg_add, nf3_rx_drop_ID );},interval_timer);
+    setInterval( function(){GetSpeed_Pps(nf0_rx_Pps_reg_add, nf0_rx_ID );},interval_timer);
+    setInterval( function(){GetSpeed_Pps(nf1_rx_Pps_reg_add, nf1_rx_ID );},interval_timer);
+    setInterval( function(){GetSpeed_Pps(nf2_rx_Pps_reg_add, nf2_rx_ID );},interval_timer);
+    setInterval( function(){GetSpeed_Pps(nf3_rx_Pps_reg_add, nf3_rx_ID );},interval_timer);
 
+    //DROP
+    setInterval( function(){GetSpeed_Pps(nf0_drop_Pps_reg_add, nf0_drop_ID );},interval_timer);
+    setInterval( function(){GetSpeed_Pps(nf1_drop_Pps_reg_add, nf1_drop_ID );},interval_timer);
+    setInterval( function(){GetSpeed_Pps(nf2_drop_Pps_reg_add, nf2_drop_ID );},interval_timer);
+    setInterval( function(){GetSpeed_Pps(nf3_drop_Pps_reg_add, nf3_drop_ID );},interval_timer);
 
     /* BINH ADDED [END]*/
     number_realtimechart--;
   }
 
   // Update feature
+
+  //query data then send bitfiles information to client
+
+  socket.on('get bitfile information',function(data) {
+    var queryStr = 'SELECT * FROM bitfile';
+
+    console.log("get bitfile information <->");
+    db.query(queryStr, function(err,rows){
+      if(err) throw err;
+
+      socket.emit('bitfile records',rows);
+      console.log(rows);
+    });
+  });
 
   socket.on('check bitfile running',function(checkbit) {
     console.log(checkbit);
@@ -259,37 +307,116 @@ io.on('connection', function(socket){
 
   //Events Feature
   socket.on('event', function(data){
+
+    var queryStr = 'SELECT * FROM events where status = "new"';
+
     console.log("event start ");
-    db.query('SELECT * FROM events where status = "new"',function(err,rows){
+    db.query(queryStr, function(err,rows){
       if(err) throw err;
 
       socket.emit('new event results',rows);
-      console.log(rows);
+      //console.log(rows);
     });
-    db.query('SELECT * FROM events where status = "dismiss"',function(err,rows){
+
+    queryStr = 'SELECT * FROM events where status = "dismiss"';
+    db.query(queryStr, function(err,rows){
       if(err) throw err;
 
       socket.emit('dismiss event results',rows);
-      console.log(rows);
+      //console.log(rows);
     });
   });
 
-  //Events Feature
-  socket.on('notification', function(data){
-    console.log("notification start ");
-    db.query('SELECT * FROM notifications where status = "new"',function(err,rows){
+  socket.on('dismiss all event', function(data){
+    //query all new alerts
+    var queryStr = 'SELECT * FROM events where status = "new"';
+    console.log("dismiss all event");
+    db.query(queryStr, function(err,rows){
       if(err) throw err;
+      //console.log(rows);
+      //update status to dismiss
+      for (var i = 0; i < rows.length; i++) {
+        queryStr = 'UPDATE events SET status = "dismiss" WHERE id=' + rows[i].id;
+        db.query(queryStr);
+      };
+    });
+  });
+  //Events Feature END
 
+  //Notifications Feature
+  socket.on('notification', function(data){
+    var queryStr = 'SELECT * FROM notifications where status = "new"';
+    console.log("notification start ");
+    db.query(queryStr, function(err,rows){
+      if(err) throw err;
       socket.emit('new notification results',rows);
       console.log(rows);
     });
-    db.query('SELECT * FROM notifications where status = "dismiss"',function(err,rows){
+
+    queryStr = 'SELECT * FROM notifications where status = "dismiss"';
+    db.query(queryStr, function(err,rows){
       if(err) throw err;
 
       socket.emit('dismiss notification results',rows);
       console.log(rows);
     });
   });
+
+  socket.on('dismiss all notification', function(data){
+    //query all new alerts
+    var queryStr = 'SELECT * FROM notifications where status = "new"';
+    console.log("dismiss all notifications");
+    db.query(queryStr, function(err,rows){
+      if(err) throw err;
+      //console.log(rows);
+      //update status to dismiss
+      for (var i = 0; i < rows.length; i++) {
+        queryStr = 'UPDATE notifications SET status = "dismiss" WHERE id=' + rows[i].id;
+        db.query(queryStr);
+      };
+    });
+  });
+  // notifications Feature END
+
+  //history Feature
+  socket.on('history', function(data){
+    console.log("history_query: " + data);
+    var date = data.split('to');           //the first date is start date, the second date is end date
+    var queryStr = 'SELECT * FROM history WHERE datetime >= \'' + date[0] + '\' && datetime <= \'' + date[1] + '\'';
+
+   db.query( queryStr,function(err,rows){
+      if(err) throw err;
+
+      socket.emit('history results',rows);
+      console.log(rows);
+    });
+  });
+
+  /*dashboard Feature  */
+  /* get new alerts number*/
+  socket.on('new_alerts', function(data){
+    console.log("new_alerts");
+    var queryStr = 'SELECT * FROM events where status = "new"';
+
+    db.query(queryStr, function(err,rows){
+      if(err) throw err;
+      socket.emit('new_alerts results',rows);
+      console.log(rows);
+    });
+  });
+
+  /* get new notifications number*/
+  socket.on('new_notifications', function(data){
+    console.log("new_notifications");
+    var queryStr = 'SELECT * FROM notifications where status = "new"';
+    db.query(queryStr, function(err,rows){
+      if(err) throw err;
+      socket.emit('new_notifications results',rows);
+      console.log(rows);
+    });
+  });
+
+//end of functions
 });
 
 function hex2dec( value ) {
@@ -325,20 +452,20 @@ function getTimeNow() {
 // This format is used to upload to database. So It is important.
 function getDateNow() {
   var d = new Date();
-  var today = d.getDate()+ "/"+ (d.getMonth()+1)+"/" +d.getFullYear();
+  var today = d.getFullYear() + "/"+ d.getMonth() + "/"+ d.getDate() ;
   return today;
 }
 
-// read data via axilite then display to real Chart
-function getDataAxilite(nf_reg_add, nf_ID){
-  child = exec('rdaxi ' + nf_reg_add,
+// get speed of Gbps via axilite then display to real Chart
+function GetSpeed_Gbps(nf_Gbps_reg_add, nf_ID){
+  child = exec('rdaxi ' + nf_Gbps_reg_add,
   function (error, stdout, stderr) {
     var NF_byte = 0;
     // through-put *8*10/(1000*1000*1000) <=> 16 000 000 clock *8bit *160Mhz /1G
     var GbpS_ratio = 8*10/(1000*1000*1000);
     var sub_string = stdout.split('=');
     if(sub_string.length < 2){
-      console.log("No data to send!!!")
+      //console.log("No data to send!!!")
       //var send_data = [nf_ID,new Date().getTime(),0];
       var send_data = [nf_ID,new Date().getTime(),new Date().getTime()%10];
       io.emit('realtime Chart', send_data);
@@ -366,6 +493,66 @@ function getDataAxilite(nf_reg_add, nf_ID){
     }
   });
 }
+
+// get speed of Pps via axilite then display to real Chart
+function GetSpeed_Pps(nf_Gbps_reg_add, nf_ID){
+  child = exec('rdaxi ' + nf_Gbps_reg_add,
+  function (error, stdout, stderr) {
+    var NF_byte ;
+    var sub_string = stdout.split('=');
+    if(sub_string.length < 2){
+      //console.log("No data to send!!!")
+      //var send_data = [nf_ID,new Date().getTime(),0];
+      // updated database for alerts
+/*
+      var nf_id = (nf_ID + 1)% 4;
+      if(((nf_ID >= 9)  &&  (nf_ID <= 12))  && (NF_byte > 0)){
+            query = 'INSERT INTO events (`datetime`,`name`,`desc`,`status`) VALUES ("' +
+                                            getDateNow() + ' ' + getTimeNow() + '", "Acttack detected", "Acttack come to NF'+nf_id+' ", "new")';
+            console.log(query);
+            db.query(query);
+            io.emit('new_alerts added','');
+
+      }
+*/
+      var send_data = [nf_ID, new Date().getTime(), new Date().getTime()%10];
+      io.emit('realtime Chart', send_data);
+    } else {
+      var sub_string1 = sub_string[1].split('\n');
+      var sub_string2 = sub_string1[0].split('x');
+      var value = sub_string2[1].split('');
+
+      var reverse_value = value.reverse();
+
+      for (var k = 0; k < reverse_value.length; k++) {
+        NF_byte += hex2dec(reverse_value[k])* Math.pow(16,k);
+      }
+      var send_data = [];
+      var query;
+      send_data.push(nf_ID);
+      send_data.push(new Date().getTime());
+      send_data.push(NF_byte);
+      io.emit('realtime Chart', send_data);
+
+      // updated database for alerts
+      var nf_id = (nf_ID + 1)% 4;
+      if(((nf_ID == nf0_drop_ID ) || (nf_ID == nf1_drop_ID ) || (nf_ID == nf2_drop_ID )|| (nf_ID == nf3_drop_ID ))
+          && (NF_byte > 0)){
+            query = 'INSERT INTO events (`datetime`,`name`,`desc`,`status`) VALUES ("' +
+                                            getDateNow() + ' ' + getTimeNow() + '", "Acttack detected", "Acttack come to NF'+nf_id+' ", "new")';
+            db.query(query);
+            socket.emit('new_alerts added','');
+
+      }
+
+    }
+    //console.log("NF1TX_byte GBpS:" + sub_string);
+    if (error !== null) {
+      console.log('exec error: ' + error);
+    }
+  });
+}
+
 http.listen(3003, function(){
   console.log('listening on *:3003');
 });
