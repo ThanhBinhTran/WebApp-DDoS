@@ -206,11 +206,10 @@ io.on('connection', function(socket){
   // Update feature
 
   //query data then send bitfiles information to client
+  socket.on('get bitfiles information',function(data) {
+    var queryStr = 'SELECT * FROM bitfile ORDER BY version DESC';
 
-  socket.on('get bitfile information',function(data) {
-    var queryStr = 'SELECT * FROM bitfile';
-
-    console.log("get bitfile information <->");
+    console.log("get bitfiles information <->");
     db.query(queryStr, function(err,rows){
       if(err) throw err;
 
@@ -219,8 +218,8 @@ io.on('connection', function(socket){
     });
   });
 
-  socket.on('check bitfile running',function(checkbit) {
-    console.log(checkbit);
+  socket.on('check bitfile running',function() {
+    console.log("Check bitfile running");
     child = exec('rdaxi 0x78200000', function (error, stdout, stderr) {
       var data;
       console.log(stdout);
@@ -228,21 +227,21 @@ io.on('connection', function(socket){
       var sub_string = stdout.split('=');
       if(sub_string.length < 2){
         console.log("Failed!!");
-        socket.emit('check bitfile running',"ver1_running");
+        socket.emit('version running',"1.3");
       } else {
         var sub_string1 = sub_string[1].split('\n');
         if(sub_string1[0] == '0x11061830'){ //Vu_PCIs_with_virus
           data = 'ver1';
-          socket.emit('check bitfile running', "ver1_running");
+          socket.emit('version running', "1.1");
         }
         else if(sub_string1[0] == '0x11191730'){ // Vu_PCIs_without_virus
           data = 'ver2';
-          socket.emit('check bitfile running', "ver2_running");
+          socket.emit('version running', "1.2");
         }
         else if(sub_string1[0] == 'waiting info from Designer') //
-          socket.emit('check bitfile running',"ver3_running");
+          socket.emit('version running',"1.3");
         else {
-          socket.emit('check bitfile running',"ver3_running");
+          socket.emit('version running',"1.3");
           console.log(sub_string1[0]);
         }
       }

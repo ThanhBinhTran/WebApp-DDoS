@@ -1,168 +1,77 @@
 var socket = io();
 
-var runningstatus1 = "";
-var runningstatus2 = "";
-var runningstatus3 = "";
-
-function build_table() {
-	var table_update = '<table id="update_data_table" class="table table-striped table-hover">';
-		table_update += '<th>STT</th>';
-		table_update += '<th>Name</th>';
-		table_update += '<th>Description</th>';
-		table_update += '<th>Uploaded date</th>';
-		table_update += '<th>Status</th>';
-		table_update += '<th>Action</th>';
-
-		table_update += '</tr>';
-		table_update += '<tr>';
-		table_update += '<td> 1 </td>';
-		table_update += '<td> Full bitstream </td>';
-		table_update += '<td> With HopCount and Port Ingess/Egress inside</td>';
-                table_update += '<td> 2015</td>';
-		table_update += '<td id="Full_bitstream" class="scanner_running">'+ runningstatus1+' </td>';
-		table_update += '<td><button type="button" class="btn btn-primary" onclick="update(1);" > Update </button> </td>';
-		table_update += '</tr>';
-
-		table_update += '<tr>';
-		table_update += '<td> 2 </td>';
-		table_update += '<td> Partial IE 1</td>';
-		table_update += '<td> IE filter 198.12.0.0, 192.168.0.0</td>';
-                table_update += '<td> 2015</td>';
-		table_update += '<td> <span id="partial_bitstream_v01" class="scanner_running">'+ runningstatus2+' </span>  </td>';
-		table_update += '<td> <button type="button" class="btn btn-primary" onclick="update(2);"> Update </button></td>';
-		table_update += '</tr>';
-
-		table_update += '<tr>';
-		table_update += '<td> 3 </td>';
-		table_update += '<td> Partial IE 2  </td>';
-		table_update += '<td> IE accept 192.168.0.0, 198.12.0.0 </td>';
-		table_update += '<td> 2016</td>';
-    table_update += '<td> <div id="partial_bitstream_v01" class="scanner_running"> '+runningstatus3+'</div> </td>';
-		table_update += '<td> <button type="button" class="btn btn-primary" onclick="update(3);"> Update </button> </td>';
-
-
-		table_update += '</table>';
-		//table_update += '<div id="dialog" hidden> <img src="sb-admin-2/js/plugins/update/image/loading.gif"> </div>'
-		//table_update += '<button type="" onclick="OnDialog(7622119);" > Open Dialog </button>';
-		//table_update += '<button type="" onclick="OnDialog();" > Close Dialog </button>';
-		//table_update += '<label class="btn btn-default btn-file">Browse...<input type="file" id="file_name"style="display: none;"> </label>';
-
-	$('#update_contain').html(table_update);
-
-}
-
 var bitfiles_table;
+var status_bitfiles = [];
 //get bitfiles information
-socket.emit('get bitfile information','');
+socket.emit('get bitfiles information','');
 
 socket.on('bitfile records',function(result_rows) {
+
 	bitfiles_table = '<table id="bitfles_table" class="table table-striped table-hover">';
 	bitfiles_table += '<th>version</th><th>Name</th><th>Description</th><th>Create date</th><th>Uploaded date</th><th>Status</th><th>Action</th>';
+  console.log("BUILDING TABLE " + result_rows.length);
 	for (var i = 0; i < result_rows.length; i++) {
-	bitfiles_table +='<tr><td>' + result_rows[i].version + '</td><td>'
+		 status_bitfiles.push(result_rows[i].version);
+		 console.log(status_bitfiles);
+     bitfiles_table +='<tr><td>' + result_rows[i].version + '</td><td>'
 												 + result_rows[i].name + '</td><td>'
-												 + result_rows[i].create_datetime + '</td><td>'
+												 + result_rows[i].Description+ '</td><td>'
+												 + result_rows[i].create_datetime  + '</td><td>'
 												 + result_rows[i].last_Upload_datetime + '</td><td>'
-												 + result_rows[i].Description + '</td><td>'
-												 + 'N/A</td><td>'
+												 + '<label id="status_' + status_bitfiles[i] + '" style="color: red"></label></td><td>'
 												 + '<button type="button" class="btn btn-success" onclick="update('+result_rows[i].version+');"> Update </button> </td></tr>';
 	};
 	bitfiles_table += '</table>';
 	$('#bitfiles-table').html(bitfiles_table);
 });
 
-//build table in the first time
+//check which bitfile is running
+socket.emit('check bitfile running','');
 
-var nuoc = 1;
-if(nuoc == 1 ) {
-	socket.emit('check bitfile running','requet to update bitfile in the first time');
-	socket.on('check bitfile running',function(data) {
-		if(data == "ver1_running" ) {
-			runningstatus1 = "Running";
-			runningstatus2 = "";
-			runningstatus3 = "";
-		} else if (data == "ver2_running"){
-			runningstatus1 = "";
-			runningstatus2 = "Running";
-			runningstatus3 = "";
-		} else {
-			runningstatus1 = "";
-			runningstatus2 = "";
-			runningstatus3 = "Running";
+//get version of bitfile which is running
+socket.on('version running',function(data) {
+	console.log ("version running from server is " + data);
+	for(var i = 0 ; i < status_bitfiles.length; i++){
+		console.log(i + "print status bitfiles " + status_bitfiles[i]);
+		if(status_bitfiles[i] == data){
+			document.getElementById('status_'+status_bitfiles[i]).innerHTML = 'Running';
+		}else {
+			document.getElementById('status_'+status_bitfiles[i]).innerHTML = '';
 		}
-		build_table();
-	});
-	//build_table();
-}
-else {
-	alert("Why not me!!!")
-}
+	}
+	console.log(bitfiles_table);
+});
+
 // Update bitfile when user click to button
 
 function OnDialog(status) {
-	console.log(file_name);
-if(status == 7622119) {
-	$("#dialog").dialog({
-		autoOpen: false,
-		width: 450,
-		height:'auto',
-		//position: "top",
-	    buttons: {
-		"OK": function () {
-		    $(this).dialog("close");
-		}
-	    }
-	 });
+	//console.log(file_name);
+	if(status == 7622119) {
+		$("#dialog").dialog({
+			autoOpen: false,
+			width: 450,
+			height:'auto',
+			//position: "top",
+		    buttons: {
+			"OK": function () {
+			    $(this).dialog("close");
+			}
+		    }
+		 });
 
-//$('#dialog').dialog('option', 'position', 'center');
-	  $( "#dialog" ).dialog("open");
-	  $(".ui-dialog-titlebar").hide();
-} else {
-	 $( "#dialog" ).dialog("close");
-}
-
-}
-function update(bitfile_id) {
-	//alert(bitfile_id);
-	OnDialog(7622119);
-// send request
-	if( bitfile_id == 1){
-		socket.emit('update bitfile','ver1');
-	} else if (bitfile_id == 2 ) {
-		socket.emit('update bitfile','ver2');
-	} else if( bitfile_id == 3 ) {
-		socket.emit('update bitfile','ver3');
+	//$('#dialog').dialog('option', 'position', 'center');
+		  $( "#dialog" ).dialog("open");
+		  $(".ui-dialog-titlebar").hide();
+	} else {
+		 $( "#dialog" ).dialog("close");
 	}
-
-//receive response and update table
-	//socket.emit('update bitfile',1);
-	socket.on('update bitfile client', function(data) {
-		//alert(data);
-		OnDialog("");
-		if(data == 'ver1_updated'){
-			ver1 = "Running";
-			ver2 = "";
-			ver3 = "";
-			build_table();
-		} else if (data == 'ver2_updated'){
-			ver1 = "";
-			ver2 = "Running";
-			ver3 = "";
-			build_table();
-		} else if (data == 'ver3_updated'){
-			ver1 = "";
-			ver2 = "";
-			ver3 = "Running";
-			build_table();
-		} else if(data == 'error'){
- 			ver1 = "N/A";
-			ver2 = "N/A";
-			ver3 = "N/A";
-			build_table();
-		}
-
-	});
 }
+
+function update(version) {
+	console.log("UPDATE BITFILE WITH VERSION " + version);
+	socket.emit('update bitfile','version');
+}
+
 
 function readSingleFile(e) {
   var file = e.target.files[0];
