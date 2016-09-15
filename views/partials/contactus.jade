@@ -1,0 +1,45 @@
+.row
+    .col-lg-12.col-md-1
+        .panel.panel-success
+          .panel-heading
+           h2 Contact us <small> Feel free to contact us</small>
+           p
+            .panel-body
+            .row
+              .col-xs-3
+                  div.control-group
+                  label.control-label(for='name') Full Name
+                  div.controls
+                  input(id='name', name='name', type='text', placeholder='DDoS user', required)
+                  
+                  div.control-group
+                  label.control-label(for='email') E-Mail Address
+                  div.controls
+                  .span.glyphicon.glyphicon-envelope
+                  input(id='email', name='email', type='email', placeholder='abc@hcmut.edu.com',required)
+                  div.control-group
+              .col-xs-5
+                  div.control-group
+                  label.control-label(for='message') Message
+                  div.controls
+                  textarea(id='message', name='message', rows="8", cols="40", placeholder='Message', required)
+                  p
+                  btn.btn-success.btn-sm Send message
+
+              .col-xs-4
+                span.glyphicon.glyphicon-globe.glyphicon-sm.fa-1x
+                strong     Our office      
+                p
+                strong Hochiminh City University Of Technology
+                p
+                strong Address: 
+                | 268 Ly Thuong Kiet Str, Dist 10, Ho Chi Minh City
+                p
+                strong Phone:
+                | (84-8) 38.647.256
+                p 
+                strong Full Name:
+                | Tran Ngoc Thinh
+                p
+                strong Email:
+                a(href='mailto:mail@hcmut.edu.vn') mail@hcmut.edu.vn

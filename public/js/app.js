@@ -99,6 +99,12 @@ config(function ($routeProvider, $locationProvider) {
       controller: 'historyCtrl'
     }).
 
+//added contact us page
+    when('/contactus',{
+      templateUrl: 'partials/contactus',
+      controller: 'contactusCtrl'
+    }).
+
     when('/manga/test',{
       templateUrl: 'manga/list/1',
       controller: 'adminCtrl'
