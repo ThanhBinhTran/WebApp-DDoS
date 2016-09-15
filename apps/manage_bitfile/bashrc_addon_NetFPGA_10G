@@ -1,0 +1,7 @@
+source /opt/Xilinx/13.4/ISE_DS/settings64.sh
+export NF_ROOT=/home/netfpga/netfpga10g
+export NF_DESIGN_DIR=${NF_ROOT}/projects/reference_switch
+export NF_WORK_DIR=/tmp/${USER}
+export PYTHONPATH=${NF_ROOT}/lib/python:${NF_DESIGN_DIR}/lib/Python:${NF_ROOT}/tools/scripts:
+export LD_LIBRARY_PATH=${NF_ROOT}/lib/java/NetFPGAFrontEnd/bin:${LD_LIBRARY_PATH}
+export LM_LICENSE_FILE=2100@127.0.0.1

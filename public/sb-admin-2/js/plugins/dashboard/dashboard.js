@@ -18,11 +18,17 @@ socket.on('new_alerts added',function(data){
 	alerts = alerts +1;
  	$('#new_alerts').html(alerts);
 });
-//send event
+
+//send notifications
 socket.emit('new_notifications', '');
 
-//receive new event data
+//receive new notifications data
 socket.on('new_notifications results',function(result_rows){
 	notifications = result_rows.length;
+ 	$('#new_notifications').html(notifications);
+});
+
+socket.on('new_notifications added',function(data){
+	notifications = notifications +1;
  	$('#new_notifications').html(notifications);
 });
