@@ -169,7 +169,7 @@ io.on('connection', function(socket){
     var outgoing_nf_history = [];
 
     //set interval of data query
-    var interval_timer = 1000;
+    var interval_timer = 100000;
 
     //GET SERVER TIME
     setInterval(function() {
@@ -275,15 +275,15 @@ io.on('connection', function(socket){
       console.log(stdout);
       if (error !== null) {
         console.log(error);
-        var query = 'INSERT INTO `notifications` (`datetime`, `name`, `desc`, `status`) VALUES ( ' +
-                    getDateNow() + ' ' + getTimeNow() + '", "Update + ' + filename +' failed", " '+ error + '", "new")';
+        var query = 'INSERT INTO `notifications` (`datetime`, `name`, `desc`, `status`) VALUES ( \'' +
+                    getDateNow() + ' ' + getTimeNow() + '\', "Update ' + filename +' failed", " '+ error + '", "new")';
         socket.emit('update bitfile done', "error");
       } else {
-        var query = 'INSERT INTO `notifications` (`datetime`, `name`, `desc`, `status`) VALUES ( ' +
-                    getDateNow() + ' ' + getTimeNow() + '", "Updated +' + filename +' successfull", " Update bitfile successfull", "new")';
-        db.query(query);
+        var query = 'INSERT INTO `notifications` (`datetime`, `name`, `desc`, `status`) VALUES ( \'' +
+                    getDateNow() + ' ' + getTimeNow() + '\', "Updated ' + filename +' successfull", " Update bitfile successfull", "new")';
         socket.emit('update bitfile done', "success");
       }
+      db.query(query);
       io.emit('new_notifications added',''); //update dashboard
     });
   });
