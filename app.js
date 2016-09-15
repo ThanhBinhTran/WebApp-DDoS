@@ -165,7 +165,6 @@ io.on('connection', function(socket){
     var nf2_drop_ID_Pps = 31;
     var nf3_drop_ID_Pps = 32;
 
-    var datetime_history    = [];
     var incoming_nf_history = [];
     var outgoing_nf_history = [];
 
@@ -199,24 +198,29 @@ io.on('connection', function(socket){
     setInterval( function(){GetSpeed_Gbps(nf2_drop_Gbps_reg_add, nf2_drop_ID_Gbps );},interval_timer);
     setInterval( function(){GetSpeed_Gbps(nf3_drop_Gbps_reg_add, nf3_drop_ID_Gbps );},interval_timer);
 
+    /* initialization data for history*/
+    for(var i = 0; i < 4; i ++){
+      outgoing_nf_history[i] = [i,i];
+      incoming_nf_history[i] = [4-i, 4-i];
+    }
     /*get speed of packet per seconds */
     //TX
-    setInterval( function(){GetSpeed_Pps(nf0_tx_Pps_reg_add, nf0_tx_ID_Pps );},interval_timer);
-    setInterval( function(){GetSpeed_Pps(nf1_tx_Pps_reg_add, nf1_tx_ID_Pps );},interval_timer);
-    setInterval( function(){GetSpeed_Pps(nf2_tx_Pps_reg_add, nf2_tx_ID_Pps );},interval_timer);
-    setInterval( function(){GetSpeed_Pps(nf3_tx_Pps_reg_add, nf3_tx_ID_Pps );},interval_timer);
+    setInterval( function(){GetSpeed_Pps(nf0_tx_Pps_reg_add, nf0_tx_ID_Pps, incoming_nf_history, outgoing_nf_history);},interval_timer);
+    setInterval( function(){GetSpeed_Pps(nf1_tx_Pps_reg_add, nf1_tx_ID_Pps, incoming_nf_history, outgoing_nf_history);},interval_timer);
+    setInterval( function(){GetSpeed_Pps(nf2_tx_Pps_reg_add, nf2_tx_ID_Pps, incoming_nf_history, outgoing_nf_history);},interval_timer);
+    setInterval( function(){GetSpeed_Pps(nf3_tx_Pps_reg_add, nf3_tx_ID_Pps, incoming_nf_history, outgoing_nf_history);},interval_timer);
 
     //RX
-    setInterval( function(){GetSpeed_Pps(nf0_rx_Pps_reg_add, nf0_rx_ID_Pps );},interval_timer);
-    setInterval( function(){GetSpeed_Pps(nf1_rx_Pps_reg_add, nf1_rx_ID_Pps );},interval_timer);
-    setInterval( function(){GetSpeed_Pps(nf2_rx_Pps_reg_add, nf2_rx_ID_Pps );},interval_timer);
-    setInterval( function(){GetSpeed_Pps(nf3_rx_Pps_reg_add, nf3_rx_ID_Pps );},interval_timer);
+    setInterval( function(){GetSpeed_Pps(nf0_rx_Pps_reg_add, nf0_rx_ID_Pps, incoming_nf_history, outgoing_nf_history );},interval_timer);
+    setInterval( function(){GetSpeed_Pps(nf1_rx_Pps_reg_add, nf1_rx_ID_Pps, incoming_nf_history, outgoing_nf_history );},interval_timer);
+    setInterval( function(){GetSpeed_Pps(nf2_rx_Pps_reg_add, nf2_rx_ID_Pps, incoming_nf_history, outgoing_nf_history );},interval_timer);
+    setInterval( function(){GetSpeed_Pps(nf3_rx_Pps_reg_add, nf3_rx_ID_Pps, incoming_nf_history, outgoing_nf_history );},interval_timer);
 
     //DROP
-    setInterval( function(){GetSpeed_Pps(nf0_drop_Pps_reg_add, nf0_drop_ID_Pps );},interval_timer);
-    setInterval( function(){GetSpeed_Pps(nf1_drop_Pps_reg_add, nf1_drop_ID_Pps );},interval_timer);
-    setInterval( function(){GetSpeed_Pps(nf2_drop_Pps_reg_add, nf2_drop_ID_Pps );},interval_timer);
-    setInterval( function(){GetSpeed_Pps(nf3_drop_Pps_reg_add, nf3_drop_ID_Pps );},interval_timer);
+    setInterval( function(){GetSpeed_Pps(nf0_drop_Pps_reg_add, nf0_drop_ID_Pps, incoming_nf_history, outgoing_nf_history );},interval_timer);
+    setInterval( function(){GetSpeed_Pps(nf1_drop_Pps_reg_add, nf1_drop_ID_Pps, incoming_nf_history, outgoing_nf_history );},interval_timer);
+    setInterval( function(){GetSpeed_Pps(nf2_drop_Pps_reg_add, nf2_drop_ID_Pps, incoming_nf_history, outgoing_nf_history );},interval_timer);
+    setInterval( function(){GetSpeed_Pps(nf3_drop_Pps_reg_add, nf3_drop_ID_Pps, incoming_nf_history, outgoing_nf_history );},interval_timer);
 
     /* BINH ADDED [END]*/
     number_realtimechart--;
@@ -475,7 +479,7 @@ function GetSpeed_Gbps(nf_Gbps_reg_add, nf_ID){
 }
 
 // get speed of Pps via axilite then display to real Chart
-function GetSpeed_Pps(nf_Pps_reg_add, nf_ID){
+function GetSpeed_Pps(nf_Pps_reg_add, nf_ID, incoming_data, drop_data){
   child = exec('rdaxi ' + nf_Pps_reg_add,
   function (error, stdout, stderr) {
     var NF_byte = 0;
@@ -510,18 +514,18 @@ function GetSpeed_Pps(nf_Pps_reg_add, nf_ID){
       else if( nf_ID == 31 || nf_ID == 23) nf_id = 2;
       else if( nf_ID == 32 || nf_ID == 24) nf_id = 3;
 
-      if(nf_ID == 21)      {incoming_nf_history[0] = [NF_byte,getDateNow() + ' ' + getTimeNow()];}
-      else if(nf_ID == 22) {incoming_nf_history[1] = [NF_byte,getDateNow() + ' ' + getTimeNow()];}
-      else if(nf_ID == 23) {incoming_nf_history[2] = [NF_byte,getDateNow() + ' ' + getTimeNow()];}
-      else if(nf_ID == 24) {incoming_nf_history[3] = [NF_byte,getDateNow() + ' ' + getTimeNow()];}
+      if(nf_ID == 21)      {incoming_data[0] = [NF_byte,getDateNow() + ' ' + getTimeNow()];}
+      else if(nf_ID == 22) {incoming_data[1] = [NF_byte,getDateNow() + ' ' + getTimeNow()];}
+      else if(nf_ID == 23) {incoming_data[2] = [NF_byte,getDateNow() + ' ' + getTimeNow()];}
+      else if(nf_ID == 24) {incoming_data[3] = [NF_byte,getDateNow() + ' ' + getTimeNow()];}
 
       //drop data
-      else if(nf_ID == 29) {outgoing_nf_history[0] = [NF_byte,getDateNow() + ' ' + getTimeNow()];}
-      else if(nf_ID == 30) {outgoing_nf_history[1] = [NF_byte,getDateNow() + ' ' + getTimeNow()];}
-      else if(nf_ID == 31) {outgoing_nf_history[2] = [NF_byte,getDateNow() + ' ' + getTimeNow()];}
-      else if(nf_ID == 32) {outgoing_nf_history[3] = [NF_byte,getDateNow() + ' ' + getTimeNow()];}
+      else if(nf_ID == 29) {drop_data[0] = [NF_byte,getDateNow() + ' ' + getTimeNow()];}
+      else if(nf_ID == 30) {drop_data[1] = [NF_byte,getDateNow() + ' ' + getTimeNow()];}
+      else if(nf_ID == 31) {drop_data[2] = [NF_byte,getDateNow() + ' ' + getTimeNow()];}
+      else if(nf_ID == 32) {drop_data[3] = [NF_byte,getDateNow() + ' ' + getTimeNow()];}
       //UPDATE EVENTS IF ATTACKING detected; IDs FROM 29 TO 32 USE FOR DROP
-      if(((nf_ID >= 29 && nf_ID <= 31)  && (NF_byte > 0) && (incoming_nf_history[0] != ) ){
+      if((nf_ID >= 29 && nf_ID <= 31)  && (NF_byte > 0) ){
 
         query = 'INSERT INTO events (`datetime`,`name`,`desc`,`status`) VALUES ("' +
                                             getDateNow() + ' ' + getTimeNow() + '", "Acttack detected", "Acttack come to NF'+nf_id+' ", "new")';
@@ -531,27 +535,27 @@ function GetSpeed_Pps(nf_Pps_reg_add, nf_ID){
       }
 
       //records to history
-      if((nf_ID == 21 || nf_ID == 29) && (incoming_nf_history[0][1] == outgoing_nf_history[0][1]))
-        query = 'INSERT INTO `history` (`datetime`,`nf_interface`,`packet_per_second`) VALUES ("' +
-                                          getDateNow() + ' ' + getTimeNow() + '", "' + nf_id +'", "'+incoming_nf_history[0][0]+'","' + outgoing_nf_history[0][0]+')';
+      if((nf_id == 0) && (incoming_data[0][1] == drop_data[0][1])){
+        query = 'INSERT INTO `history` (`datetime`,`nf_interface`,`packet_per_second`,`packet_drop_per_second`) VALUES (\'' +
+                                          getDateNow() + ' ' + getTimeNow() + '\', ' + nf_id +', '+incoming_data[0][0]+',' + drop_data[0][0]+')';
         console.log(query);
         db.query(query);
       }
-      else if((nf_ID == 22 || nf_ID == 30) && (incoming_nf_history[1][1] == outgoing_nf_history[1][1]))
-        query = 'INSERT INTO `history` (`datetime`,`nf_interface`,`packet_per_second`) VALUES ("' +
-                                          getDateNow() + ' ' + getTimeNow() + '", "' + nf_id +'", "'+incoming_nf_history[1][0]+'","' + outgoing_nf_history[1][0]+')';
+      else if((nf_id == 1) && (incoming_data[1][1] == drop_data[1][1])){
+        query = 'INSERT INTO `history` (`datetime`,`nf_interface`,`packet_per_second`,`packet_drop_per_second`) VALUES (\'' +
+                                          getDateNow() + ' ' + getTimeNow() + '\', ' + nf_id +', '+incoming_data[1][0]+',' + drop_data[1][0]+')';
         console.log(query);
         db.query(query);
       }
-      else if((nf_ID == 23 || nf_ID == 31) && (incoming_nf_history[2][1] == outgoing_nf_history[2][1]))
-        query = 'INSERT INTO `history` (`datetime`,`nf_interface`,`packet_per_second`) VALUES ("' +
-                                          getDateNow() + ' ' + getTimeNow() + '", "' + nf_id +'", "'+incoming_nf_history[2][0]+'","' + outgoing_nf_history[2][0]+')';
+      else if((nf_id == 2) && (incoming_data[2][1] == drop_data[2][1])){
+        query = 'INSERT INTO `history` (`datetime`,`nf_interface`,`packet_per_second`,`packet_drop_per_second`) VALUES (\'' +
+                                          getDateNow() + ' ' + getTimeNow() + '\', ' + nf_id +', '+incoming_data[2][0]+',' + drop_data[2][0]+')';
         console.log(query);
         db.query(query);
       }
-      else if((nf_ID == 24 || nf_ID == 32) && (incoming_nf_history[3][1] == outgoing_nf_history[3][1]))
-        query = 'INSERT INTO `history` (`datetime`,`nf_interface`,`packet_per_second`) VALUES ("' +
-                                          getDateNow() + ' ' + getTimeNow() + '", "' + nf_id +'", "'+incoming_nf_history[3][0]+'","' + outgoing_nf_history[3][0]+')';
+      else if((nf_id == 3) && (incoming_data[3][1] == drop_data[3][1])){
+        query = 'INSERT INTO `history` (`datetime`,`nf_interface`,`packet_per_second`,`packet_drop_per_second`) VALUES (\'' +
+                                          getDateNow() + ' ' + getTimeNow() + '\', ' + nf_id +', '+incoming_data[3][0]+',' + drop_data[3][0]+')';
         console.log(query);
         db.query(query);
       }
