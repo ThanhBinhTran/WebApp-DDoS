@@ -105,35 +105,35 @@ io.on('connection', function(socket){
   if (number_realtimechart == 1) {
 
     /* BINH ADDED [START] */
-    var nf0_rx_Gbps_reg_add = '77600010';
-    var nf1_rx_Gbps_reg_add = '77600014';
-    var nf2_rx_Gbps_reg_add = '77600018';
-    var nf3_rx_Gbps_reg_add = '7760001c';
+    var nf0_rx_Gbps_add   = '7760006c';
+    var nf1_rx_Gbps_add   = '77600068';
+    var nf2_rx_Gbps_add   = '77600064';
+    var nf3_rx_Gbps_add   = '77600060';
 
-    var nf0_tx_Gbps_reg_add = '77600020';
-    var nf1_tx_Gbps_reg_add = '77600024';
-    var nf2_tx_Gbps_reg_add = '77600028';
-    var nf3_tx_Gbps_reg_add = '7760002c';
+    var nf0_tx_Gbps_add   = '7760005c';
+    var nf1_tx_Gbps_add   = '77600058';
+    var nf2_tx_Gbps_add   = '77600054';
+    var nf3_tx_Gbps_add   = '77600050';
 
-    var nf0_drop_Gbps_reg_add = '77600030';
-    var nf1_drop_Gbps_reg_add = '77600034';
-    var nf2_drop_Gbps_reg_add = '77600038';
-    var nf3_drop_Gbps_reg_add = '7760003c';
+    var nf0_drop_Gbps_add = '77600034';
+    var nf1_drop_Gbps_add = '77600048';
+    var nf2_drop_Gbps_add = '77600044';
+    var nf3_drop_Gbps_add = '77600040';
 
-    var nf0_rx_Pps_reg_add = '77600040';
-    var nf1_rx_Pps_reg_add = '77600044';
-    var nf2_rx_Pps_reg_add = '77600048';
-    var nf3_rx_Pps_reg_add = '7760004a';
+    var nf0_rx_Pps_add    = '7760003c';
+    var nf1_rx_Pps_add    = '77600038';
+    var nf2_rx_Pps_add    = '77600034';
+    var nf3_rx_Pps_add    = '77600030';
 
-    var nf0_tx_Pps_reg_add = '77600050';
-    var nf1_tx_Pps_reg_add = '77600054';
-    var nf2_tx_Pps_reg_add = '77600058';
-    var nf3_tx_Pps_reg_add = '7760005a';
+    var nf0_tx_Pps_add    = '7760002c';
+    var nf1_tx_Pps_add    = '77600028';
+    var nf2_tx_Pps_add    = '77600028';
+    var nf3_tx_Pps_add    = '7760002a';
 
-    var nf0_drop_Pps_reg_add = '77600060';
-    var nf1_drop_Pps_reg_add = '77600064';
-    var nf2_drop_Pps_reg_add = '77600068';
-    var nf3_drop_Pps_reg_add = '7760006a';
+    var nf0_drop_Pps_add  = '7760001c';
+    var nf1_drop_Pps_add  = '77600018';
+    var nf2_drop_Pps_add  = '77600014';
+    var nf3_drop_Pps_add  = '77600010';
 
     var nf0_tx_ID_Gbps = 1;
     var nf1_tx_ID_Gbps = 2;
@@ -169,7 +169,7 @@ io.on('connection', function(socket){
     var outgoing_nf_history = [];
 
     //set interval of data query
-    var interval_timer = 100000;
+    var interval_timer = 1000;
 
     //GET SERVER TIME
     setInterval(function() {
@@ -181,22 +181,22 @@ io.on('connection', function(socket){
 
     /* get speed of gigabit per seconds */
     //TX
-    setInterval( function(){GetSpeed_Gbps(nf0_tx_Gbps_reg_add, nf0_tx_ID_Gbps );},interval_timer);
-    setInterval( function(){GetSpeed_Gbps(nf1_tx_Gbps_reg_add, nf1_tx_ID_Gbps );},interval_timer);
-    setInterval( function(){GetSpeed_Gbps(nf2_tx_Gbps_reg_add, nf2_tx_ID_Gbps );},interval_timer);
-    setInterval( function(){GetSpeed_Gbps(nf3_tx_Gbps_reg_add, nf3_tx_ID_Gbps );},interval_timer);
+    setInterval( function(){GetSpeed_Gbps(nf0_tx_Gbps_add, nf0_tx_ID_Gbps );},interval_timer);
+    setInterval( function(){GetSpeed_Gbps(nf1_tx_Gbps_add, nf1_tx_ID_Gbps );},interval_timer);
+    setInterval( function(){GetSpeed_Gbps(nf2_tx_Gbps_add, nf2_tx_ID_Gbps );},interval_timer);
+    setInterval( function(){GetSpeed_Gbps(nf3_tx_Gbps_add, nf3_tx_ID_Gbps );},interval_timer);
 
     //RX
-    setInterval( function(){GetSpeed_Gbps(nf0_rx_Gbps_reg_add, nf0_rx_ID_Gbps );},interval_timer);
-    setInterval( function(){GetSpeed_Gbps(nf1_rx_Gbps_reg_add, nf1_rx_ID_Gbps );},interval_timer);
-    setInterval( function(){GetSpeed_Gbps(nf2_rx_Gbps_reg_add, nf2_rx_ID_Gbps );},interval_timer);
-    setInterval( function(){GetSpeed_Gbps(nf3_rx_Gbps_reg_add, nf3_rx_ID_Gbps );},interval_timer);
+    setInterval( function(){GetSpeed_Gbps(nf0_rx_Gbps_add, nf0_rx_ID_Gbps );},interval_timer);
+    setInterval( function(){GetSpeed_Gbps(nf1_rx_Gbps_add, nf1_rx_ID_Gbps );},interval_timer);
+    setInterval( function(){GetSpeed_Gbps(nf2_rx_Gbps_add, nf2_rx_ID_Gbps );},interval_timer);
+    setInterval( function(){GetSpeed_Gbps(nf3_rx_Gbps_add, nf3_rx_ID_Gbps );},interval_timer);
 
     //DROP
-    setInterval( function(){GetSpeed_Gbps(nf0_drop_Gbps_reg_add, nf0_drop_ID_Gbps );},interval_timer);
-    setInterval( function(){GetSpeed_Gbps(nf1_drop_Gbps_reg_add, nf1_drop_ID_Gbps );},interval_timer);
-    setInterval( function(){GetSpeed_Gbps(nf2_drop_Gbps_reg_add, nf2_drop_ID_Gbps );},interval_timer);
-    setInterval( function(){GetSpeed_Gbps(nf3_drop_Gbps_reg_add, nf3_drop_ID_Gbps );},interval_timer);
+    setInterval( function(){GetSpeed_Gbps(nf0_drop_Gbps_add, nf0_drop_ID_Gbps );},interval_timer);
+    setInterval( function(){GetSpeed_Gbps(nf1_drop_Gbps_add, nf1_drop_ID_Gbps );},interval_timer);
+    setInterval( function(){GetSpeed_Gbps(nf2_drop_Gbps_add, nf2_drop_ID_Gbps );},interval_timer);
+    setInterval( function(){GetSpeed_Gbps(nf3_drop_Gbps_add, nf3_drop_ID_Gbps );},interval_timer);
 
     /* initialization data for history*/
     for(var i = 0; i < 4; i ++){
@@ -205,22 +205,22 @@ io.on('connection', function(socket){
     }
     /*get speed of packet per seconds */
     //TX
-    setInterval( function(){GetSpeed_Pps(nf0_tx_Pps_reg_add, nf0_tx_ID_Pps, incoming_nf_history, outgoing_nf_history);},interval_timer);
-    setInterval( function(){GetSpeed_Pps(nf1_tx_Pps_reg_add, nf1_tx_ID_Pps, incoming_nf_history, outgoing_nf_history);},interval_timer);
-    setInterval( function(){GetSpeed_Pps(nf2_tx_Pps_reg_add, nf2_tx_ID_Pps, incoming_nf_history, outgoing_nf_history);},interval_timer);
-    setInterval( function(){GetSpeed_Pps(nf3_tx_Pps_reg_add, nf3_tx_ID_Pps, incoming_nf_history, outgoing_nf_history);},interval_timer);
+    setInterval( function(){GetSpeed_Pps(nf0_tx_Pps_add, nf0_tx_ID_Pps, incoming_nf_history, outgoing_nf_history);},interval_timer);
+    setInterval( function(){GetSpeed_Pps(nf1_tx_Pps_add, nf1_tx_ID_Pps, incoming_nf_history, outgoing_nf_history);},interval_timer);
+    setInterval( function(){GetSpeed_Pps(nf2_tx_Pps_add, nf2_tx_ID_Pps, incoming_nf_history, outgoing_nf_history);},interval_timer);
+    setInterval( function(){GetSpeed_Pps(nf3_tx_Pps_add, nf3_tx_ID_Pps, incoming_nf_history, outgoing_nf_history);},interval_timer);
 
     //RX
-    setInterval( function(){GetSpeed_Pps(nf0_rx_Pps_reg_add, nf0_rx_ID_Pps, incoming_nf_history, outgoing_nf_history );},interval_timer);
-    setInterval( function(){GetSpeed_Pps(nf1_rx_Pps_reg_add, nf1_rx_ID_Pps, incoming_nf_history, outgoing_nf_history );},interval_timer);
-    setInterval( function(){GetSpeed_Pps(nf2_rx_Pps_reg_add, nf2_rx_ID_Pps, incoming_nf_history, outgoing_nf_history );},interval_timer);
-    setInterval( function(){GetSpeed_Pps(nf3_rx_Pps_reg_add, nf3_rx_ID_Pps, incoming_nf_history, outgoing_nf_history );},interval_timer);
+    setInterval( function(){GetSpeed_Pps(nf0_rx_Pps_add, nf0_rx_ID_Pps, incoming_nf_history, outgoing_nf_history );},interval_timer);
+    setInterval( function(){GetSpeed_Pps(nf1_rx_Pps_add, nf1_rx_ID_Pps, incoming_nf_history, outgoing_nf_history );},interval_timer);
+    setInterval( function(){GetSpeed_Pps(nf2_rx_Pps_add, nf2_rx_ID_Pps, incoming_nf_history, outgoing_nf_history );},interval_timer);
+    setInterval( function(){GetSpeed_Pps(nf3_rx_Pps_add, nf3_rx_ID_Pps, incoming_nf_history, outgoing_nf_history );},interval_timer);
 
     //DROP
-    setInterval( function(){GetSpeed_Pps(nf0_drop_Pps_reg_add, nf0_drop_ID_Pps, incoming_nf_history, outgoing_nf_history );},interval_timer);
-    setInterval( function(){GetSpeed_Pps(nf1_drop_Pps_reg_add, nf1_drop_ID_Pps, incoming_nf_history, outgoing_nf_history );},interval_timer);
-    setInterval( function(){GetSpeed_Pps(nf2_drop_Pps_reg_add, nf2_drop_ID_Pps, incoming_nf_history, outgoing_nf_history );},interval_timer);
-    setInterval( function(){GetSpeed_Pps(nf3_drop_Pps_reg_add, nf3_drop_ID_Pps, incoming_nf_history, outgoing_nf_history );},interval_timer);
+    setInterval( function(){GetSpeed_Pps(nf0_drop_Pps_add, nf0_drop_ID_Pps, incoming_nf_history, outgoing_nf_history );},interval_timer);
+    setInterval( function(){GetSpeed_Pps(nf1_drop_Pps_add, nf1_drop_ID_Pps, incoming_nf_history, outgoing_nf_history );},interval_timer);
+    setInterval( function(){GetSpeed_Pps(nf2_drop_Pps_add, nf2_drop_ID_Pps, incoming_nf_history, outgoing_nf_history );},interval_timer);
+    setInterval( function(){GetSpeed_Pps(nf3_drop_Pps_add, nf3_drop_ID_Pps, incoming_nf_history, outgoing_nf_history );},interval_timer);
 
     /* BINH ADDED [END]*/
     number_realtimechart--;
@@ -440,8 +440,8 @@ function getDateNow() {
 }
 
 // get speed of Gbps via axilite then display to real Chart
-function GetSpeed_Gbps(nf_Gbps_reg_add, nf_ID){
-  child = exec('rdaxi ' + nf_Gbps_reg_add,
+function GetSpeed_Gbps(nf_Gbps_add, nf_ID){
+  child = exec('rdaxi ' + nf_Gbps_add,
   function (error, stdout, stderr) {
     var NF_byte = 0;
     // through-put *8*10/(1000*1000*1000) <=> 16 000 000 clock *8bit *160Mhz /1G
@@ -479,8 +479,8 @@ function GetSpeed_Gbps(nf_Gbps_reg_add, nf_ID){
 }
 
 // get speed of Pps via axilite then display to real Chart
-function GetSpeed_Pps(nf_Pps_reg_add, nf_ID, incoming_data, drop_data){
-  child = exec('rdaxi ' + nf_Pps_reg_add,
+function GetSpeed_Pps(nf_Pps_add, nf_ID, incoming_data, drop_data){
+  child = exec('rdaxi ' + nf_Pps_add,
   function (error, stdout, stderr) {
     var NF_byte = 0;
     var sub_string = stdout.split('=');
