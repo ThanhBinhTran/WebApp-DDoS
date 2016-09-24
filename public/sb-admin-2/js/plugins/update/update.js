@@ -46,6 +46,13 @@ socket.on('version running',function(data) {
 	if(mismatch){
 		console.log("Mismatch or notfound bitfile");
 		var bitfile_notFound = '<div class="alert alert-danger"><strong > Error! </strong> Bitfile not found or mismatch version. Please check again</div>';
+		    bitfile_notFound +=  '<div id="myModal" class="reveal-modal">\
+														     <h5>ERROR</h5>\
+														     <p>Bitfile not found or mismatch version. Please check again</p>\
+														     <div style = "clear:both"></div>\
+															   <a class="close-reveal-modal">&#215;</a>\
+														  </div>';
+
 		$('#bitfile-notFound').html(bitfile_notFound);
 	}
 	console.log(bitfiles_table);

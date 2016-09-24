@@ -238,10 +238,12 @@ socket.on('realtime Chart',function(new_data) {
     else if(new_data[0] == 2){ pushData(NF1_TX_Gbps, new_data[1],new_data[2]);}
     else if(new_data[0] == 3){ pushData(NF2_TX_Gbps, new_data[1],new_data[2]);}
     else if(new_data[0] == 4){ pushData(NF3_TX_Gbps, new_data[1],new_data[2]);}
+
     else if(new_data[0] == 5){ pushData(NF0_RX_Gbps, new_data[1],new_data[2]);}
     else if(new_data[0] == 6){ pushData(NF1_RX_Gbps, new_data[1],new_data[2]);}
     else if(new_data[0] == 7){ pushData(NF2_RX_Gbps, new_data[1],new_data[2]);}
     else if(new_data[0] == 8){ pushData(NF3_RX_Gbps, new_data[1],new_data[2]);}
+
     else if(new_data[0] == 9){ pushData(NF0_DROP_Gbps, new_data[1],new_data[2]);}
     else if(new_data[0] == 10){pushData(NF1_DROP_Gbps, new_data[1],new_data[2]);}
     else if(new_data[0] == 11){pushData(NF2_DROP_Gbps, new_data[1],new_data[2]);}
@@ -252,10 +254,12 @@ socket.on('realtime Chart',function(new_data) {
     else if(new_data[0] == 22){pushData(NF1_TX_Pps, new_data[1],new_data[2]);}
     else if(new_data[0] == 23){pushData(NF2_TX_Pps, new_data[1],new_data[2]);}
     else if(new_data[0] == 24){pushData(NF3_TX_Pps, new_data[1],new_data[2]);}
+
     else if(new_data[0] == 25){pushData(NF0_RX_Pps, new_data[1],new_data[2]);}
     else if(new_data[0] == 26){pushData(NF1_RX_Pps, new_data[1],new_data[2]);}
     else if(new_data[0] == 27){pushData(NF2_RX_Pps, new_data[1],new_data[2]);}
     else if(new_data[0] == 28){pushData(NF3_RX_Pps, new_data[1],new_data[2]);}
+    
     else if(new_data[0] == 29){pushData(NF0_DROP_Pps, new_data[1],new_data[2]);}
     else if(new_data[0] == 30){pushData(NF1_DROP_Pps, new_data[1],new_data[2]);}
     else if(new_data[0] == 31){pushData(NF2_DROP_Pps, new_data[1],new_data[2]);}
@@ -319,7 +323,7 @@ var options = {
         axisLabelPadding: 10
     },
     yaxis: {
-        //min: 0,
+        min: 0,
         //max: 10,
         autorange: 'reversed',
         //range: [0, 10]
