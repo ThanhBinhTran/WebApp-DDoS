@@ -105,6 +105,12 @@ config(function ($routeProvider, $locationProvider) {
       controller: 'contactusCtrl'
     }).
 
+//added test form page
+    when('/testform',{
+      templateUrl: 'partials/testform',
+      controller: 'testformCtrl'
+    }).
+
     when('/manga/test',{
       templateUrl: 'manga/list/1',
       controller: 'adminCtrl'

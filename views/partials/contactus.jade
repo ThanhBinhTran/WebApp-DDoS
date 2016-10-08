@@ -1,45 +1,45 @@
 .row
-    .col-lg-12.col-md-1
-        .panel.panel-success
-          .panel-heading
-           h2 Contact us <small> Feel free to contact us</small>
-           p
-            .panel-body
-            .row
-              .col-xs-3
-                  div.control-group
-                  label.control-label(for='name') Full Name
-                  div.controls
-                  input(id='name', name='name', type='text', placeholder='DDoS user', required)
-                  
-                  div.control-group
-                  label.control-label(for='email') E-Mail Address
-                  div.controls
-                  .span.glyphicon.glyphicon-envelope
-                  input(id='email', name='email', type='email', placeholder='abc@hcmut.edu.com',required)
-                  div.control-group
-              .col-xs-5
-                  div.control-group
-                  label.control-label(for='message') Message
-                  div.controls
-                  textarea(id='message', name='message', rows="8", cols="40", placeholder='Message', required)
-                  p
-                  btn.btn-success.btn-sm Send message
+  .col-lg-12.col-md-1
+  .panel.panel-success
+    .panel-heading
+      h2 Contact us <small> Feel free to contact us</small>
 
-              .col-xs-4
-                span.glyphicon.glyphicon-globe.glyphicon-sm.fa-1x
-                strong     Our office      
-                p
-                strong Hochiminh City University Of Technology
-                p
-                strong Address: 
-                | 268 Ly Thuong Kiet Str, Dist 10, Ho Chi Minh City
-                p
-                strong Phone:
-                | (84-8) 38.647.256
-                p 
-                strong Full Name:
-                | Tran Ngoc Thinh
-                p
-                strong Email:
-                a(href='mailto:mail@hcmut.edu.vn') mail@hcmut.edu.vn
+    .panel-body
+      .row
+        .col-lg-3
+          .form-group.has-success
+            label.control-label(for="name") Full Name
+              .form-group.input-group
+                span.input-group-addon.glyphicon.glyphicon-user
+                input.form-control(id='name', name='name', type='text', placeholder='DDoS user', required)
+
+            label.control-label(for="email") Email
+              .form-group.input-group
+                span.input-group-addon.glyphicon.glyphicon-envelope
+                input.form-control(id='email', name='email', type='email', placeholder='user@hcmut.edu.vn',required)
+                        
+        .col-lg-5
+          .form-group
+            label Message
+            textarea.form-control(id='message', name='message', rows="8", placeholder='Message', required)
+            p
+            button.btn.btn-outline.btn-success(type="button") Send message
+            p
+
+        .col-lg-4
+          span.glyphicon.glyphicon-globe
+          strong     Our office      
+          p
+          strong Hochiminh City University Of Technology
+          p
+          strong Address: 
+          | 268 Ly Thuong Kiet Str, Dist 10, Ho Chi Minh City
+          p
+          strong Phone: 
+          | (84-8) 38.647.256
+          p 
+          strong Full Name: 
+          | Tran Ngoc Thinh
+          p
+          strong Email: 
+          a(href='mailto:DDoS@hcmut.edu.vn') DDoS@hcmut.edu.vn

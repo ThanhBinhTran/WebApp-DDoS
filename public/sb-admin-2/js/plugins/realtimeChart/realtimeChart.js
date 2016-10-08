@@ -143,19 +143,19 @@ $(function() {
       }
     }
 
-    $("#timeSel").freshslider({
-      range: false, // true or false
-      step: 10,
-      text: true,
-      min: 30,
-      max: 180,
-      unit: " seconds", // the unit which slider is considering
-      enabled: true, // true or false
-      value: 40, // a number if unranged , or 2 elements array contains low and high value if ranged
-      onchange:function(value){
-          data_entries = value;
-      } // callback function when slider caret's changed, onchange(low, high) for ranged, and onchange(value) for unranged
-    });
+    //$("#timeSel").freshslider({
+    //  range: false, // true or false
+    //  step: 10,
+    //  text: true,
+    //  min: 30,
+    //  max: 180,
+    //  unit: " seconds", // the unit which slider is considering
+    //  enabled: true, // true or false
+    //  value: 40, // a number if unranged , or 2 elements array contains low and high value if ranged
+    //  onchange:function(value){
+    //      data_entries = value;
+    //  } // callback function when slider caret's changed, onchange(low, high) for ranged, and onchange(value) for unranged
+    //});
 
     initArray(NF0_TX_Gbps);
     initArray(NF1_TX_Gbps);

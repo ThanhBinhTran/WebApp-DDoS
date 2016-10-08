@@ -172,7 +172,7 @@ io.on('connection', function(socket){
     var outgoing_nf_history = [];
 
     //set interval of data query
-    var interval_timer = 2000;
+    var interval_timer = 200000;
 
     //GET SERVER TIME
     setInterval(function() {
@@ -270,13 +270,41 @@ io.on('connection', function(socket){
 
   socket.on('update bitfile',function(version) {
 
-    var scriptPath  = './apps/manage_bitfile/download_bitfile.sh';
+    //var scriptPath  = './apps/manage_bitfile/download_bitfile.sh';
+    var scriptPath  = './apps/manage_bitfile/download_bitfile_DDoS_v';
     var bitfilePath = './apps/manage_bitfile/bitfiles/';
     var filename = 'DDoS_' + version + '.bit';
 
     var fd = '#!/bin/bash\n';
         fd +='source /home/netfpga/Working/netfpga/NetFPGA-10G-live-release_5.0.7/bashrc_addon_NetFPGA_10G\n';
         fd += 'sh /home/netfpga/Working/netfpga/NetFPGA-10G-live-release_5.0.7/tools/scripts/impact_run.sh ' + bitfilePath + filename;
+    
+    scriptPath += version + '.sh';
+    console.log('execute cmd:' + scriptPath );
+
+    exec(scriptPath, function (error, stdout, stderr) {
+      console.log(stdout);
+      if (error !== null) {
+        console.log(error);
+        var query = 'INSERT INTO `notifications` (`datetime`, `name`, `desc`, `status`) VALUES ( \'' +
+                    getDateNow() + ' ' + getTimeNow() + '\', "Update ' + filename +' failed", " '+ error + '", "new")';
+        socket.emit('update bitfile done', "error");
+        console.log('update bitfile error');
+      } else {
+        var query = 'INSERT INTO `notifications` (`datetime`, `name`, `desc`, `status`) VALUES ( \'' +
+                    getDateNow() + ' ' + getTimeNow() + '\', "Updated ' + filename +' successfull", " Update bitfile successfull", "new")';
+        socket.emit('update bitfile done', "success");
+        console.log('update bitfile success');
+      }
+      db.query(query);
+      io.emit('new_notifications added',''); //update dashboard
+
+    });
+
+    /*
+    *
+    * for future use
+    *
 
     //write srcipt for download bitfile
     fs.writeFile(scriptPath, fd,  function(err) {
@@ -305,6 +333,7 @@ io.on('connection', function(socket){
       db.query(query);
       io.emit('new_notifications added',''); //update dashboard
     });
+    */
   });
 
   //Events Feature
