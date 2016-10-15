@@ -172,7 +172,7 @@ io.on('connection', function(socket){
     var outgoing_nf_history = [];
 
     //set interval of data query
-    var interval_timer = 2000;
+    var interval_timer = 20000000;
 
     //GET SERVER TIME
     setInterval(function() {
@@ -238,7 +238,7 @@ io.on('connection', function(socket){
       if(err) throw err;
 
       socket.emit('bitfile records',rows);
-      //console.log(rows);
+      console.log(rows);
     });
   });
 
@@ -253,7 +253,8 @@ io.on('connection', function(socket){
       var sub_string = stdout.split('=');
       if(sub_string.length < 2){
         console.log("Failed!!");
-        socket.emit('version running',"0x10001"); //0 mean no version found
+        //socket.emit('version running',"0x10001"); //alone mode for debug
+        socket.emit('version running',"0"); //0 mean no version found
       } else {
         var sub_string1 = sub_string[1].split('\n');
         version_number  = sub_string1[0];
@@ -339,7 +340,7 @@ io.on('connection', function(socket){
   //Events Feature
   socket.on('event', function(data){
 
-    var queryStr = 'SELECT * FROM events where status = "new"';
+    var queryStr = 'SELECT * FROM events where status = "new" ORDER BY datetime DESC';
 
     console.log("event start ");
     db.query(queryStr, function(err,rows){
@@ -349,7 +350,7 @@ io.on('connection', function(socket){
       //console.log(rows);
     });
 
-    queryStr = 'SELECT * FROM events where status = "dismiss"';
+    queryStr = 'SELECT * FROM events where status = "dismiss" ORDER BY datetime DESC';
     db.query(queryStr, function(err,rows){
       if(err) throw err;
 
@@ -376,7 +377,7 @@ io.on('connection', function(socket){
 
   //Notifications Feature
   socket.on('notification', function(data){
-    var queryStr = 'SELECT * FROM notifications where status = "new"';
+    var queryStr = 'SELECT * FROM notifications where status = "new" ORDER BY datetime DESC';
     console.log("notification start ");
     db.query(queryStr, function(err,rows){
       if(err) throw err;
@@ -384,7 +385,7 @@ io.on('connection', function(socket){
       //console.log(rows);
     });
 
-    queryStr = 'SELECT * FROM notifications where status = "dismiss"';
+    queryStr = 'SELECT * FROM notifications where status = "dismiss" ORDER BY datetime DESC';
     db.query(queryStr, function(err,rows){
       if(err) throw err;
 

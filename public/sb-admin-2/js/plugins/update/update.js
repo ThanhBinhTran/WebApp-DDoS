@@ -26,7 +26,7 @@ socket.emit('get bitfiles information','');
 socket.on('bitfile records',function(result_rows) {
 
 	bitfiles_table = '<table id="bitfles_table" class="table table-striped table-hover">';
-	bitfiles_table += '<th>Version</th><th>Name</th><th>Description</th><th>Create date</th><th>Uploaded date</th><th>Status</th><th>Action</th>';
+	bitfiles_table += '<th>Version</th><th>Name</th><th>Description</th><th>Created date</th><th>Uploaded date</th><th>Status</th><th>Action</th>';
   	//console.log("BUILDING TABLE " + result_rows.length);
 	for (var i = 0; i < result_rows.length; i++) {
 		 status_bitfiles.push(result_rows[i].version);
