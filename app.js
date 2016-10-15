@@ -172,7 +172,7 @@ io.on('connection', function(socket){
     var outgoing_nf_history = [];
 
     //set interval of data query
-    var interval_timer = 200000;
+    var interval_timer = 2000;
 
     //GET SERVER TIME
     setInterval(function() {
@@ -253,7 +253,7 @@ io.on('connection', function(socket){
       var sub_string = stdout.split('=');
       if(sub_string.length < 2){
         console.log("Failed!!");
-        socket.emit('version running',"0"); //0 mean no version found
+        socket.emit('version running',"0x10001"); //0 mean no version found
       } else {
         var sub_string1 = sub_string[1].split('\n');
         version_number  = sub_string1[0];
@@ -512,8 +512,8 @@ function GetSpeed_Gbps(nf_Gbps_add, nf_ID){
     if(sub_string.length < 2){
       //console.log("No data to send!!!")
       var send_data = [nf_ID,new Date().getTime(),0];
-      //var send_data = [nf_ID,new Date().getTime(),new Date().getTime()%10];
-      //io.emit('realtime Chart', send_data);
+      //var send_data = [nf_ID,new Date().getTime(),Math.random(10)];
+      io.emit('realtime Chart', send_data);
     } else {
       var sub_string1 = sub_string[1].split('\n');
       var sub_string2 = sub_string1[0].split('x');

@@ -4,9 +4,9 @@ var bitfiles_table;
 var status_bitfiles = [];
 
 var loading_sceen = '<div id="dialog" hidden> <img src="sb-admin-2/js/plugins/update/image/loading.gif"> </div>' +
-					'<button type="button" class="btn btn-success" onclick="OnDialog(true);"> open </button>'  +
-					'<button type="button" class="btn btn-success" onclick="OnDialog(false);"> close </button>' +
-					'<button class="btn btn-success" data-toggle="modal" data-target="#my-modal">Launch Modal</button>' + 
+					//'<button type="button" class="btn btn-success" onclick="OnDialog(true);"> open </button>'  +
+					//'<button type="button" class="btn btn-success" onclick="OnDialog(false);"> close </button>' +
+					//'<button class="btn btn-success" data-toggle="modal" data-target="#my-modal">Launch Modal</button>' + 
 					'<div class="modal" id="my-modal"> <!-- this is modal div -->' + 
 					'<div class="modal-dialog modal-md">' + 
 					'<div class="modal-content">' + 
@@ -64,8 +64,10 @@ socket.on('version running',function(data) {
 	}
 	if(mismatch){
 		console.log("Mismatch or notfound bitfile");
-		var bitfile_notFound = '<div class="alert alert-danger"><strong > Error! </strong>' +
-		                          'Bitfile not found or mismatch version. Please check again</div>';
+		var bitfile_notFound = '<div class="alert alert-danger"><strong > ERROR! </strong></br>' +
+		                          'Bitfile not found or mismatch version.</br>' +
+		                          '  1. Please download bitfile again or</br>' +
+		                          '  2. Register bitfile informations to database</div>';
 
 		$('#bitfile-notFound').html(bitfile_notFound);
 	}

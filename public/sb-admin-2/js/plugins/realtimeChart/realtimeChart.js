@@ -3,24 +3,24 @@
 var socket = io();
 var select_option = '<table style="width:50%"><tr> <td>NF0: </td>';
 //var select_option = '<table class="table table-striped table-hover"><tr> <td>NF0: </td>';
-select_option += '<td><input type="checkbox" value="cb_NF0_RX" id="cb_NF0_RX"  > RX </td>';
+select_option += '<td><input type="checkbox" value="cb_NF0_RX" id="cb_NF0_RX" checked="checked" > RX </td>';
 select_option += '<td><input type="checkbox" value="cb_NF0_TX" id="cb_NF0_TX" checked="checked" > TX </td>';
-select_option += '<td><input type="checkbox" value="cb_NF0_DROP" id="cb_NF0_DROP"  > Drop </td>';
+select_option += '<td><input type="checkbox" value="cb_NF0_DROP" id="cb_NF0_DROP" checked="checked" > Drop </td>';
 
 select_option += '<td>NF1: </td>';
-select_option += '<td><input type="checkbox" value="cb_NF1_RX" id="cb_NF1_RX" > RX </td>';
-select_option += '<td><input type="checkbox" value="cb_NF1_TX" id="cb_NF1_TX" > TX </td>';
-select_option += '<td><input type="checkbox" value="cb_NF1_DROP" id="cb_NF1_DROP"  > Drop</td></tr>';
+select_option += '<td><input type="checkbox" value="cb_NF1_RX" id="cb_NF1_RX" checked="checked"> RX </td>';
+select_option += '<td><input type="checkbox" value="cb_NF1_TX" id="cb_NF1_TX" checked="checked"> TX </td>';
+select_option += '<td><input type="checkbox" value="cb_NF1_DROP" id="cb_NF1_DROP" checked="checked"> Drop</td></tr>';
 
 select_option += '<tr><td>NF2: </td>';
-select_option += '<td><input type="checkbox" value="cb_NF2_RX" id="cb_NF2_RX" > RX </td>';
-select_option += '<td><input type="checkbox" value="cb_NF2_TX" id="cb_NF2_TX" > TX </td>';
-select_option += '<td><input type="checkbox" value="cb_NF2_DROP" id="cb_NF2_DROP"  > Drop </td>';
+select_option += '<td><input type="checkbox" value="cb_NF2_RX" id="cb_NF2_RX" checked="checked"> RX </td>';
+select_option += '<td><input type="checkbox" value="cb_NF2_TX" id="cb_NF2_TX" checked="checked"> TX </td>';
+select_option += '<td><input type="checkbox" value="cb_NF2_DROP" id="cb_NF2_DROP" checked="checked"> Drop </td>';
 
 select_option += '<td>NF3: </td>';
-select_option += '<td><input type="checkbox" value="cb_NF3_RX" id="cb_NF3_RX" > RX </td>';
-select_option += '<td><input type="checkbox" value="cb_NF3_TX" id="cb_NF3_TX" > TX </td>';
-select_option += '<td><input type="checkbox" value="cb_NF3_DROP" id="cb_NF3_DROP"  > Drop </td></tr>';
+select_option += '<td><input type="checkbox" value="cb_NF3_RX" id="cb_NF3_RX" checked="checked"> RX </td>';
+select_option += '<td><input type="checkbox" value="cb_NF3_TX" id="cb_NF3_TX" checked="checked"> TX </td>';
+select_option += '<td><input type="checkbox" value="cb_NF3_DROP" id="cb_NF3_DROP"  checked="checked"> Drop </td></tr>';
 select_option += '</table></fieldset><br>';
 $('#select-options').html(select_option);
 
@@ -143,19 +143,19 @@ $(function() {
       }
     }
 
-    //$("#timeSel").freshslider({
-    //  range: false, // true or false
-    //  step: 10,
-    //  text: true,
-    //  min: 30,
-    //  max: 180,
-    //  unit: " seconds", // the unit which slider is considering
-    //  enabled: true, // true or false
-    //  value: 40, // a number if unranged , or 2 elements array contains low and high value if ranged
-    //  onchange:function(value){
-    //      data_entries = value;
-    //  } // callback function when slider caret's changed, onchange(low, high) for ranged, and onchange(value) for unranged
-    //});
+    $("#timeSel").freshslider({
+      range: false, // true or false
+      step: 10,
+      text: true,
+      min: 30,
+      max: 180,
+      unit: " seconds", // the unit which slider is considering
+      enabled: true, // true or false
+      value: 40, // a number if unranged , or 2 elements array contains low and high value if ranged
+      onchange:function(value){
+          data_entries = value;
+      } // callback function when slider caret's changed, onchange(low, high) for ranged, and onchange(value) for unranged
+    });
 
     initArray(NF0_TX_Gbps);
     initArray(NF1_TX_Gbps);
@@ -277,10 +277,10 @@ socket.on('realtime Chart',function(new_data) {
       pushDataSET(data_set, '#cb_NF2_RX', NF2_RX_Gbps, '#NF2_RX_Speed', "NF2 RX", "#dfa800");
       pushDataSET(data_set, '#cb_NF3_RX', NF3_RX_Gbps, '#NF3_RX_Speed', "NF3 RX", "#050959");
 
-      pushDataSET(data_set, '#cb_NF0_DROP', NF0_DROP_Gbps, '#NF0_DROP_Speed', "NF0 Drop", "#093145");
-      pushDataSET(data_set, '#cb_NF1_DROP', NF1_DROP_Gbps, '#NF1_DROP_Speed', "NF1 Drop", "#093145");
-      pushDataSET(data_set, '#cb_NF2_DROP', NF2_DROP_Gbps, '#NF2_DROP_Speed', "NF2 Drop", "#093145");
-      pushDataSET(data_set, '#cb_NF3_DROP', NF3_DROP_Gbps, '#NF3_DROP_Speed', "NF3 Drop", "#093145");
+      pushDataSET(data_set, '#cb_NF0_DROP', NF0_DROP_Gbps, '#NF0_DROP_Speed', "NF0 Drop", "#770000");
+      pushDataSET(data_set, '#cb_NF1_DROP', NF1_DROP_Gbps, '#NF1_DROP_Speed', "NF1 Drop", "#cf9494");
+      pushDataSET(data_set, '#cb_NF2_DROP', NF2_DROP_Gbps, '#NF2_DROP_Speed', "NF2 Drop", "#002c5a");
+      pushDataSET(data_set, '#cb_NF3_DROP', NF3_DROP_Gbps, '#NF3_DROP_Speed', "NF3 Drop", "#96caff");
       options.yaxis.axisLabel = "Speed( Gbps )";
     }else if($(speed_pps).prop('checked')){
       pushDataSET(data_set, '#cb_NF0_TX', NF0_TX_Pps, '#NF0_TX_Speed', "NF0 TX", "#093145");
@@ -293,10 +293,10 @@ socket.on('realtime Chart',function(new_data) {
       pushDataSET(data_set, '#cb_NF2_RX', NF2_RX_Pps, '#NF2_RX_Speed', "NF2 RX", "#dfa800");
       pushDataSET(data_set, '#cb_NF3_RX', NF3_RX_Pps, '#NF3_RX_Speed', "NF3 RX", "#050959");
 
-      pushDataSET(data_set, '#cb_NF0_DROP', NF0_DROP_Pps, '#NF0_DROP_Speed', "NF0 Drop", "#093145");
-      pushDataSET(data_set, '#cb_NF1_DROP', NF1_DROP_Pps, '#NF1_DROP_Speed', "NF1 Drop", "#093145");
-      pushDataSET(data_set, '#cb_NF2_DROP', NF2_DROP_Pps, '#NF2_DROP_Speed', "NF2 Drop", "#093145");
-      pushDataSET(data_set, '#cb_NF3_DROP', NF3_DROP_Pps, '#NF3_DROP_Speed', "NF3 Drop", "#093145");
+      pushDataSET(data_set, '#cb_NF0_DROP', NF0_DROP_Pps, '#NF0_DROP_Speed', "NF0 Drop", "#770000");
+      pushDataSET(data_set, '#cb_NF1_DROP', NF1_DROP_Pps, '#NF1_DROP_Speed', "NF1 Drop", "#cf9494");
+      pushDataSET(data_set, '#cb_NF2_DROP', NF2_DROP_Pps, '#NF2_DROP_Speed', "NF2 Drop", "#002c5a");
+      pushDataSET(data_set, '#cb_NF3_DROP', NF3_DROP_Pps, '#NF3_DROP_Speed', "NF3 Drop", "#96caff");
       options.yaxis.axisLabel = "Speed( Pps )";
     }
     options.xaxis.tickSize = [data_entries/15,"second"];

@@ -152,8 +152,8 @@ CREATE TABLE `bitfile` (
 LOCK TABLES `bitfile` WRITE;
 /*!40000 ALTER TABLE `bitfile` DISABLE KEYS */;
 INSERT INTO `bitfile` VALUES
-    (1.1, "Full bitstream", "apps/bitfiles/Full_bitstream.bit", '2016/1/15 9:8:53','2016/1/15 9:8:53', "With HopCount and Port Ingess/Egress inside"),
-    (1.2, "Partial IE 1", "apps/bitfiles/Partial_IE_1.bit", '2016/1/15 9:8:53', '2016/1/16 9:8:53', "IE filter 198.12.0.0, 192.168.0.0"),
-    (1.3, "Partial IE 2", "apps/bitfiles/Partial_IE_2.bit", '2016/1/15 9:8:53','2016/1/17 9:8:53', "IE accept 192.168.0.0, 198.12.0.0");
+    (1.1, "Full bitstream v1.1", "apps/bitfiles/Full_bitstream.bit", '2016/1/15 9:8:53','2016/1/15 9:8:53', "With HopCount and Port Ingess/Egress inside"),
+    (1.2, "Full bitstream v1.2", "apps/bitfiles/Partial_IE_1.bit", '2016/1/15 9:8:53', '2016/1/16 9:8:53', "IE filter 198.12.0.0, 192.168.0.0"),
+    (1.3, "Full bitstream v1.3", "apps/bitfiles/Partial_IE_2.bit", '2016/1/15 9:8:53','2016/1/17 9:8:53', "IE accept 192.168.0.0, 198.12.0.0");
 /*!40000 ALTER TABLE `bitfile` ENABLE KEYS */;
 UNLOCK TABLES;
