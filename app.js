@@ -287,17 +287,28 @@ io.on('connection', function(socket){
       console.log(stdout);
       if (error !== null) {
         console.log(error);
+
+        /* raise a notification to user for upload Unsuccessful */ 
         var query = 'INSERT INTO `notifications` (`datetime`, `name`, `desc`, `status`) VALUES ( \'' +
                     getDateNow() + ' ' + getTimeNow() + '\', "Update ' + filename +' failed", " '+ error + '", "new")';
+        db.query(query);
+
         socket.emit('update bitfile done', "error");
         console.log('update bitfile error');
       } else {
+        /* raise a notification to user for upload sucessful */
         var query = 'INSERT INTO `notifications` (`datetime`, `name`, `desc`, `status`) VALUES ( \'' +
                     getDateNow() + ' ' + getTimeNow() + '\', "Updated ' + filename +' successfull", " Update bitfile successfull", "new")';
+        db.query(query);
+
+        /* update "updated date" field of bitfile table */
+        query = 'UPDATE bitfile SET last_Upload_datetime = \'' + getDateNow() + ' ' + getTimeNow() + '\' WHERE version = ' + version ;
+        db.query(query);
+
         socket.emit('update bitfile done', "success");
         console.log('update bitfile success');
       }
-      db.query(query);
+      
       io.emit('new_notifications added',''); //update dashboard
 
     });
