@@ -302,7 +302,8 @@ io.on('connection', function(socket){
         db.query(query);
 
         /* update "updated date" field of bitfile table */
-        query = 'UPDATE bitfile SET last_Upload_datetime = \'' + getDateNow() + ' ' + getTimeNow() + '\' WHERE version = ' + version ;
+        query = 'UPDATE bitfile SET last_Upload_datetime = \'' + getDateNow() + ' ' + getTimeNow() + '\' WHERE version LIKE ' + version ;
+        console.log(query);
         db.query(query);
 
         socket.emit('update bitfile done', "success");
@@ -495,7 +496,7 @@ function getTimeNow() {
 // This format is used to upload to database. So It is important.
 function getDateNow() {
   var d = new Date();
-  var today = d.getFullYear() + "/"+ d.getMonth() + "/"+ d.getDate() ;
+  var today = d.getFullYear() + "/"+ (d.getMonth()+1) + "/"+ d.getDate() ;
   return today;
 }
 

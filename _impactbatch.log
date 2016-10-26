@@ -1,6 +1,6 @@
 iMPACT Version: Jan  6 2012 20:13:43
 
-iMPACT log file Started on Thu Oct 13 15:51:05 2016
+iMPACT log file Started on Wed Oct 26 09:40:39 2016
 
 Preference Table
 Name                 Setting             
@@ -48,11 +48,11 @@ INFO:iMPACT:501 - '1': Added Device xc5vtx240t successfully.
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
 done.
-Elapsed time =      1 sec.
 Elapsed time =      0 sec.
 Elapsed time =      0 sec.
 Elapsed time =      0 sec.
-'1': Loading file './apps/manage_bitfile/bitfiles/DDoS_1.1.bit' ...
+Elapsed time =      0 sec.
+'1': Loading file './apps/manage_bitfile/bitfiles/DDoS_1.3.bit' ...
 done.
 INFO:iMPACT:2257 - Startup Clock has been changed to 'JtagClk' in the bitstream   stored in memory,
    but the original bitstream file remains unchanged.
@@ -64,8 +64,8 @@ INFO:iMPACT:501 - '1': Added Device xc5vtx240t successfully.
 Maximum TCK operating frequency for this device chain: 33000000.
 Validating chain...
 Boundary-scan chain validated successfully.
-1: Device Temperature: Current Reading:   51.36 C, Min. Reading:   47.42 C, Max.Reading:   53.82 C
-1: VCCINT Supply: Current Reading:   0.958 V, Min. Reading:   0.958 V, Max.Reading:   0.990 V
+1: Device Temperature: Current Reading:   55.30 C, Min. Reading:   47.91 C, Max.Reading:   55.30 C
+1: VCCINT Supply: Current Reading:   0.958 V, Min. Reading:   0.955 V, Max.Reading:   0.990 V
 1: VCCAUX Supply: Current Reading:   2.490 V, Min. Reading:   2.490 V, Max.Reading:   2.493 V
 '1': Programming device...
  Match_cycle = NoWait.
@@ -74,7 +74,7 @@ Match cycle: NoWait
 LCK cycle: NoWait
 done.
 INFO:iMPACT:2219 - Status register values:
-INFO:iMPACT - 0011 1111 1111 1110 0000 1000 0110 0000 
+INFO:iMPACT - 0011 1111 1111 1110 0000 1000 0000 0000 
 INFO:iMPACT:579 - '1': Completed downloading bit file to device.
 INFO:iMPACT:188 - '1': Programming completed successfully.
  Match_cycle = NoWait.
